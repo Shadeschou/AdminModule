@@ -1,0 +1,63 @@
+﻿<UserControl
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:TourDeFrance.View"
+             xmlns:viewModel="clr-namespace:AdminModule.ViewModel" 
+
+             mc:Ignorable="d"
+             d:DesignHeight="450" d:DesignWidth="800">
+
+    <Grid Background="{StaticResource MainBackGround}">
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2*" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="10*" />
+            <RowDefinition Height="1*" />
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="0" Style="{StaticResource HeaderTextBlockStyle}">
+            <Viewbox>
+                <TextBlock Text="Awesome Data!" />
+            </Viewbox>
+        </TextBlock>
+
+        <StackPanel Grid.Row="1" Orientation="Horizontal">
+            <TextBlock Text="Sport: " Margin="20,0,0,0" />
+            <TextBlock Text="{Binding Sport.Name}" Margin="20,0,0,0" />
+            <TextBlock Text="{Binding Sport.TournamentTemplate.Tournament.TournamentStage.Name}" Margin="20,0,0,0" />
+            <TextBlock Text="{Binding Sport.TournamentTemplate.Tournament.TournamentStage.Event.Name}" Margin="20,0,0,0" />
+            <TextBlock Text="Distance: " Margin="20,0,0,0" />
+            <TextBlock Text="{Binding Sport.TournamentTemplate.Tournament.TournamentStage.Event.EventProperties.EventProperty[8].Value}" Margin="20,0,0,0" />
+            <TextBlock Text="Date:" Margin="20,0,0,0" />
+            <TextBlock Text="{Binding Sport.TournamentTemplate.Tournament.TournamentStage.Event.StartDate}" Margin="20,0,0,0" />
+        </StackPanel>
+
+        <DataGrid Grid.Row="2" ItemsSource="{Binding Sport.TournamentTemplate.Tournament.TournamentStage.Event.EventParticipant}" AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Name" Binding="{Binding Participant.Name}" />
+                <DataGridTextColumn Header="Gender" Binding="{Binding Participant.Gender}" />
+                <DataGridTextColumn Header="Country ID" Binding="{Binding Participant.CountryFK}" />
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Center">
+            <Button Template="{DynamicResource ButtonBaseControlTemplate}"  Command="{Binding ChangeView}" CommandParameter="MenuView">
+                <Viewbox>
+                    <TextBlock Text="Menu" RenderTransformOrigin="0.882,0.882" />
+                </Viewbox>
+            </Button>
+            <Button Template="{DynamicResource ButtonBaseControlTemplate}" Command="{Binding WriteXML}">
+                <Viewbox>
+                    <TextBlock Text="WriteXML" />
+                </Viewbox>
+            </Button>
+        </StackPanel>
+        
+    </Grid>
+</UserControl>
