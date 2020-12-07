@@ -5,59 +5,100 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:AdminModule"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-
-    Width="800"
-    Height="275"
+    d:DesignHeight="900"
+    d:DesignWidth="1750"
     mc:Ignorable="d">
 
-	<UserControl.Resources>
-		<Style TargetType="Label">
-			<Setter Property="Background" Value="#927A58"></Setter>
-
-		</Style>
-	</UserControl.Resources>
-	<Grid Margin="5,0,0,0">
-		<Grid.ColumnDefinitions>
-			<ColumnDefinition Width="*" />
-			<ColumnDefinition Width="*" />
-			<ColumnDefinition Width="*" />
-			<ColumnDefinition Width="*" />
-			<ColumnDefinition Width="*" />
-			<ColumnDefinition Width="*" />
-
-		</Grid.ColumnDefinitions>
-		<Grid.RowDefinitions>
-			<RowDefinition Height="*" />
-			<RowDefinition Height="*" />
-			<RowDefinition Height="*" />
-			<RowDefinition Height="*" />
-			<RowDefinition Height="*" />
-			<RowDefinition Height="*" />
-		</Grid.RowDefinitions>
-
-		<Label  Grid.Column="0" Content="CompanyID" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="5,0,0,0"   ></Label>
-		<Label  Grid.Column="1" Content="UserNameID" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" ></Label>
-		<Label  Grid.Column="2" Content="Address" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" ></Label>
-		<Label  Grid.Column="3" Content="Phone" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" ></Label>
-		<Label  Grid.Column="4" Content="Mail" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"    ></Label>
-
-		<ListView Grid.Column="0" Grid.Row="1"  Background="AntiqueWhite" Grid.RowSpan="5"  Grid.ColumnSpan="6"    x:Name="listView">
-			<ListView.View>
-				<GridView>
-
-					<GridViewColumn  DisplayMemberBinding="{Binding Id}"       Width="150"/>
-					<GridViewColumn  DisplayMemberBinding="{Binding Name}"  Width="150"/>
-					<GridViewColumn DisplayMemberBinding="{Binding Name}"       Width="150"/>
-					<GridViewColumn DisplayMemberBinding="{Binding Name}"   Width="150"/>
-					<GridViewColumn DisplayMemberBinding="{Binding Name}"          Width="150"/>
-				</GridView>
-			</ListView.View>
-		</ListView>
-
-		<Button Content="Confirm Deletion" Grid.Row="5" Grid.Column="2" Grid.ColumnSpan="2" Margin="0,0,10,0" HorizontalAlignment="Stretch" VerticalAlignment="Center"></Button>
+    <UserControl.Resources></UserControl.Resources>
+    <StackPanel Background="#FCE6C2">
+        <Grid Height="500">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
 
 
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
 
-	</Grid>
+            </Grid.RowDefinitions>
+
+            <Label
+            Grid.Column="0"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Stretch"
+            HorizontalContentAlignment="Center"
+            VerticalContentAlignment="Center"
+            Content="CompanyID" />
+            <Label
+            Grid.Column="1"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Stretch"
+            HorizontalContentAlignment="Center"
+            VerticalContentAlignment="Center"
+            Content="UserNameID" />
+            <Label
+            Grid.Column="2"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Stretch"
+            HorizontalContentAlignment="Center"
+            VerticalContentAlignment="Center"
+            Content="Address" />
+            <Label
+            Grid.Column="3"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Stretch"
+            HorizontalContentAlignment="Center"
+            VerticalContentAlignment="Center"
+            Content="Phone" />
+            <Label
+            Grid.Column="4"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Stretch"
+            HorizontalContentAlignment="Center"
+            VerticalContentAlignment="Center"
+            Content="Mail" />
+
+            <ListView
+            x:Name="listView"
+            Grid.Row="1"
+            Grid.RowSpan="4"
+            Grid.Column="0"
+            Grid.ColumnSpan="5"
+            Background="AntiqueWhite"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Stretch">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Width="50" Header="Name" DisplayMemberBinding="{Binding Id}" />
+                        <GridViewColumn Width="50" DisplayMemberBinding="{Binding Name}" />
+                        <GridViewColumn Width="50" DisplayMemberBinding="{Binding Name}" />
+                        <GridViewColumn Width="50" DisplayMemberBinding="{Binding Name}" />
+                        <GridViewColumn Width="50" DisplayMemberBinding="{Binding Name}" />
+                    </GridView>
+                </ListView.View>
+            </ListView>
+
+            <Button
+            Grid.Row="5"
+            Grid.Column="2"
+         
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Center"
+            Content="Confirm Deletion"
+            Style="{DynamicResource ButtonStyle}" />
+
+
+
+        </Grid>
+    </StackPanel>
+   
 
 </UserControl>
