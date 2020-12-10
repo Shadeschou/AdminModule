@@ -10,10 +10,10 @@
     mc:Ignorable="d">
     <UserControl.Resources></UserControl.Resources>
 
-    <StackPanel Background="#FCE6C2">
+    <StackPanel Background="#FFF">
 
 
-        <Grid Height="500">
+        <Grid Height="900">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
@@ -34,34 +34,33 @@
 
             <!--  Input Field Labes -> These are made to match the DB  -->
             <Label
-                
-                HorizontalAlignment="Center"
+
                 Content="Company Name"
                />
             <Label
                 Grid.Column="1"
-                HorizontalAlignment="Center"
+               
                 Content="Company Phone"
                  />
             <Label
                 Grid.Column="2"
-                HorizontalAlignment="Center"
+                
                 Content="Company Mail"
                />
             <Label
                 Grid.Column="3"
-                HorizontalAlignment="Center"
+                
                 Content="Company Address"
               />
             <Label
                 Grid.Column="4"
-                HorizontalAlignment="Center"
+              
                 Content="Company Main User"
                />
             <Label
                 Grid.Column="5"
                 
-                HorizontalAlignment="Center"
+             
                 Content="Company Label"
                 />
 
@@ -74,8 +73,8 @@
                 HorizontalAlignment="Stretch"
                 HorizontalContentAlignment="Center"
                 VerticalContentAlignment="Center"
-                Background="#FFFDEED6"
-                BorderBrush="#FF2A53CE"
+                
+               
                 
                 FontSize="10"
                 Grid.IsSharedSizeScope="True"
@@ -92,8 +91,8 @@
                 HorizontalAlignment="Stretch"
                 HorizontalContentAlignment="Center"
                 VerticalContentAlignment="Center"
-                Background="#FFFDEED6"
-                BorderBrush="#FF2A53CE"
+                
+              
               
                 FontSize="10"
                 Grid.IsSharedSizeScope="True"
@@ -110,8 +109,8 @@
                 HorizontalAlignment="Stretch"
                 HorizontalContentAlignment="Center"
                 VerticalContentAlignment="Center"
-                Background="#FFFDEED6"
-                BorderBrush="#FF2A53CE"
+               
+             
               
                 FontSize="10"
                 Grid.IsSharedSizeScope="True"
@@ -128,8 +127,7 @@
                 HorizontalAlignment="Stretch"
                 HorizontalContentAlignment="Center"
                 VerticalContentAlignment="Center"
-                Background="#FFFDEED6"
-                BorderBrush="#FF2A53CE"
+               
                 
                 FontSize="10"
                 Grid.IsSharedSizeScope="True"
@@ -147,8 +145,8 @@
                 VerticalAlignment="Stretch"
                 HorizontalContentAlignment="Center"
                 VerticalContentAlignment="Center"
-                Background="#FFFDEED6"
-                BorderBrush="#FF2A53CE" 
+                
+              
                 FontSize="10"
                 Grid.IsSharedSizeScope="True"
                 ScrollViewer.CanContentScroll="True"
@@ -164,8 +162,8 @@
                 HorizontalAlignment="Stretch"
                 HorizontalContentAlignment="Center"
                 VerticalContentAlignment="Center"
-                Background="#FFFDEED6"
-                BorderBrush="#FF2A53CE"
+              
+              
                
                 FontSize="10"
                 Grid.IsSharedSizeScope="True"

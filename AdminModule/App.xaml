@@ -11,18 +11,18 @@
         <!--  Coleurs  -->
         <Color x:Key="BorderLightColor">#DCEEFA</Color>
         <Color x:Key="BorderDarkColor">#C3CCDE</Color>
-        <Color x:Key="ControlLightColor">#EDD8B6</Color>
+        <Color x:Key="ControlLightColor">#6495ED</Color>
         <Color x:Key="ControlMediumColor">#C7ECF0</Color>
-        <Color x:Key="ControlMouseOverColor">#A89981</Color>
-        <Color x:Key="ControlPressedColor">#776C5B</Color>
+        <Color x:Key="ControlMouseOverColor">#6495ED</Color>
+        <Color x:Key="ControlPressedColor">#E95420</Color>
         <Color x:Key="PressedBorderDarkColor">#C5D4DB</Color>
-        <Color x:Key="PressedBorderLightColor">#A89981</Color>
-        <Color x:Key="DisabledControlDarkColor">#5D6770</Color>
-        <Color x:Key="DisabledForegroundColor">#717CB0</Color>
-        <Color x:Key="DisabledBorderDarkColor">#454C6B</Color>
-        <Color x:Key="DefaultBorderBrushLightBrush">#DBB785</Color>
-        <Color x:Key="DefaultBorderBrushDarkColor">#927A58</Color>
-        <Color x:Key="ButtonFocusVisual">#895</Color>
+        <Color x:Key="PressedBorderLightColor">#6495ED</Color>
+        <Color x:Key="DisabledControlDarkColor">#E95420</Color>
+        <Color x:Key="DisabledForegroundColor">#E95420</Color>
+        <Color x:Key="DisabledBorderDarkColor">#E95420</Color>
+        <Color x:Key="DefaultBorderBrushLightBrush">#6495ED</Color>
+        <Color x:Key="DefaultBorderBrushDarkColor">#5D6770</Color>
+        <Color x:Key="ButtonFocusVisual">#5D6770</Color>
 
         <!--  Buttons Style  -->
         <Style x:Key="ButtonStyle" TargetType="Button" >
@@ -129,7 +129,7 @@
             </Setter>
         </Style>
 
-        <!-- -->
+        <!-- TextBox -->
         <Style TargetType="TextBox">
             <Setter Property="FontFamily" Value="Tahoma"></Setter>
             <Setter Property="FontWeight" Value="Bold"></Setter>
@@ -138,6 +138,10 @@
         <Style TargetType="Label">
             <Setter Property="FontFamily" Value="Tahoma"></Setter>
             <Setter Property="FontWeight" Value="Bold"></Setter>
+            <Setter Property="Background" Value="#6495ED"></Setter>
+            <Setter Property="BorderBrush" Value="Aqua"></Setter>
+            <Setter Property="HorizontalAlignment" Value="Stretch"></Setter>
+            <Setter Property="HorizontalContentAlignment" Value="Center"></Setter>
         </Style>
 
 
@@ -152,20 +156,6 @@
         <DataTemplate x:Name="ManageCustomerTemplate" DataType="{x:Type viewModel:ManageCustomerModel}">
             <views:ManageCustomerView DataContext="{Binding}" />
         </DataTemplate>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     </Application.Resources>
 
