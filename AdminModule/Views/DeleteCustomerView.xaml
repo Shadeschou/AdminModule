@@ -5,12 +5,12 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:AdminModule"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    d:DesignHeight="900"
+    d:DesignHeight="1080"
     d:DesignWidth="1750"
     mc:Ignorable="d">
 
     <UserControl.Resources></UserControl.Resources>
-    <StackPanel Background="#FCE6C2">
+    <StackPanel Background="#6495ED">
         <Grid Height="500">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
@@ -72,7 +72,7 @@
             Grid.RowSpan="4"
             Grid.Column="0"
             Grid.ColumnSpan="5"
-            Background="AntiqueWhite"
+            Background="#6495ED"
             HorizontalAlignment="Stretch"
             VerticalAlignment="Stretch">
                 <ListView.View>
@@ -87,7 +87,7 @@
             </ListView>
 
             <Button
-            Grid.Row="5"
+            Grid.Row="4"
             Grid.Column="2"
          
             HorizontalAlignment="Stretch"

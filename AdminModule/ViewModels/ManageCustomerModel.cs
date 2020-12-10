@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace AdminModule.ViewModels
 {
     internal class ManageCustomerModel : BaseViewModel
-
     {
+
     }
 }

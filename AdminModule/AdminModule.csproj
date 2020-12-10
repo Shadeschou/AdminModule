@@ -73,8 +73,8 @@
     <Compile Include="Model\Class1.cs" />
     <Compile Include="Model\Class2.cs" />
     <Compile Include="Model\Customer.cs" />
-    <Compile Include="utilty\BaseCommand.cs" />
-    <Compile Include="utilty\CustomCommand.cs" />
+    <Compile Include="Command\BaseCommand.cs" />
+    <Compile Include="Command\CustomCommand.cs" />
     <Compile Include="ViewModels\AddCustomerModel.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\ManageCustomerModel.cs" />
