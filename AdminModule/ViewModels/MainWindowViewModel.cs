@@ -1,17 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Windows.Input;
+﻿using System.Windows.Input;
 using AdminModule.utility;
-using GalaSoft.MvvmLight.Messaging;
 
 namespace AdminModule.ViewModels
 {
     public class MainWindowViewModel : BaseViewModel
     {
         private BaseViewModel _selectedViewModel;
+
+        public MainWindowViewModel()
+        {
+            CustomCommand = new CustomCommand(this);
+            SelectedViewModel = new ManageCustomerModel();
+        }
+
         public BaseViewModel SelectedViewModel
         {
-            get { return _selectedViewModel; }
+            get => _selectedViewModel;
             set
             {
                 _selectedViewModel = value;
@@ -20,11 +24,5 @@ namespace AdminModule.ViewModels
         }
 
         public ICommand CustomCommand { get; set; }
-
-        public MainWindowViewModel()
-        {
-            SelectedViewModel = new ManageCustomerModel();
-            CustomCommand = new CustomCommand(this);
-        }
     }
 }

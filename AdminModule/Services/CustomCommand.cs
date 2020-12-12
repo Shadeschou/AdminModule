@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Windows;
 using System.Windows.Input;
 using AdminModule.ViewModels;
 
@@ -7,7 +6,7 @@ namespace AdminModule.utility
 {
     public class CustomCommand : ICommand
     {
-        private MainWindowViewModel viewmodel;
+        private readonly MainWindowViewModel viewmodel;
 
         public CustomCommand(MainWindowViewModel viewmodel)
         {
@@ -24,7 +23,7 @@ namespace AdminModule.utility
         {
             switch (parameter.ToString().ToLower())
             {
-                case "add customer" :
+                case "add customer":
                     viewmodel.SelectedViewModel = new AddCustomerModel();
                     break;
                 case "delete customer":
