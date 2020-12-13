@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Qdea.API.Models;
 
-namespace Qdea.Back.Migrations
+namespace Qdea.API.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
     [Migration("20201211192929_DbMigration")]

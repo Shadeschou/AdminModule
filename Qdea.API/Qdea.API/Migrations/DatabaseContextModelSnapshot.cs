@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Qdea.API.Models;
 
-namespace Qdea.Back.Migrations
+namespace Qdea.API.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
     partial class DatabaseContextModelSnapshot : ModelSnapshot
@@ -19,7 +19,7 @@ namespace Qdea.Back.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("ProductVersion", "5.0.0");
 
-            modelBuilder.Entity("Qdea.Back.Domain.Challenge", b =>
+            modelBuilder.Entity("Qdea.API.Domain.Challenge", b =>
                 {
                     b.Property<int>("ChallengeID")
                         .ValueGeneratedOnAdd()
@@ -52,7 +52,7 @@ namespace Qdea.Back.Migrations
                     b.ToTable("Challenges");
                 });
 
-            modelBuilder.Entity("Qdea.Back.Domain.Comment", b =>
+            modelBuilder.Entity("Qdea.API.Domain.Comment", b =>
                 {
                     b.Property<int>("CommentID")
                         .ValueGeneratedOnAdd()
@@ -85,7 +85,7 @@ namespace Qdea.Back.Migrations
                     b.ToTable("Comments");
                 });
 
-            modelBuilder.Entity("Qdea.Back.Domain.Company", b =>
+            modelBuilder.Entity("Qdea.API.Domain.Company", b =>
                 {
                     b.Property<int>("CompanyID")
                         .ValueGeneratedOnAdd()
@@ -112,7 +112,7 @@ namespace Qdea.Back.Migrations
                     b.ToTable("Companies");
                 });
 
-            modelBuilder.Entity("Qdea.Back.Domain.CostSaving", b =>
+            modelBuilder.Entity("Qdea.API.Domain.CostSaving", b =>
                 {
                     b.Property<int>("CostSavingID")
                         .ValueGeneratedOnAdd()
@@ -145,7 +145,7 @@ namespace Qdea.Back.Migrations
                     b.ToTable("CostSavings");
                 });
 
-            modelBuilder.Entity("Qdea.Back.Domain.Idea", b =>
+            modelBuilder.Entity("Qdea.API.Domain.Idea", b =>
                 {
                     b.Property<int>("IdeaID")
                         .ValueGeneratedOnAdd()
@@ -184,7 +184,7 @@ namespace Qdea.Back.Migrations
                     b.ToTable("Ideas");
                 });
 
-            modelBuilder.Entity("Qdea.Back.Domain.IdeaStatus", b =>
+            modelBuilder.Entity("Qdea.API.Domain.IdeaStatus", b =>
                 {
                     b.Property<int>("IdeaStatusID")
                         .ValueGeneratedOnAdd()
@@ -199,7 +199,7 @@ namespace Qdea.Back.Migrations
                     b.ToTable("IdeaStatuses");
                 });
 
-            modelBuilder.Entity("Qdea.Back.Domain.Priority", b =>
+            modelBuilder.Entity("Qdea.API.Domain.Priority", b =>
                 {
                     b.Property<int>("PriorityID")
                         .ValueGeneratedOnAdd()
@@ -214,7 +214,7 @@ namespace Qdea.Back.Migrations
                     b.ToTable("Priorities");
                 });
 
-            modelBuilder.Entity("Qdea.Back.Domain.Result", b =>
+            modelBuilder.Entity("Qdea.API.Domain.Result", b =>
                 {
                     b.Property<int>("ResultID")
                         .ValueGeneratedOnAdd()
@@ -247,7 +247,7 @@ namespace Qdea.Back.Migrations
                     b.ToTable("Results");
                 });
 
-            modelBuilder.Entity("Qdea.Back.Domain.Tag", b =>
+            modelBuilder.Entity("Qdea.API.Domain.Tag", b =>
                 {
                     b.Property<int>("TagID")
                         .ValueGeneratedOnAdd()
@@ -262,7 +262,7 @@ namespace Qdea.Back.Migrations
                     b.ToTable("Tags");
                 });
 
-            modelBuilder.Entity("Qdea.Back.Domain.TagIdea", b =>
+            modelBuilder.Entity("Qdea.API.Domain.TagIdea", b =>
                 {
                     b.Property<int>("TagListID")
                         .ValueGeneratedOnAdd()
@@ -280,7 +280,7 @@ namespace Qdea.Back.Migrations
                     b.ToTable("TagIdeas");
                 });
 
-            modelBuilder.Entity("Qdea.Back.Domain.User", b =>
+            modelBuilder.Entity("Qdea.API.Domain.User", b =>
                 {
                     b.Property<int>("UserID")
                         .ValueGeneratedOnAdd()
@@ -313,7 +313,7 @@ namespace Qdea.Back.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("Qdea.Back.Domain.UserIdea", b =>
+            modelBuilder.Entity("Qdea.API.Domain.UserIdea", b =>
                 {
                     b.Property<int>("UserIdeaID")
                         .ValueGeneratedOnAdd()
@@ -331,7 +331,7 @@ namespace Qdea.Back.Migrations
                     b.ToTable("UserIdeas");
                 });
 
-            modelBuilder.Entity("Qdea.Back.Domain.UserStatus", b =>
+            modelBuilder.Entity("Qdea.API.Domain.UserStatus", b =>
                 {
                     b.Property<int>("UserStatusID")
                         .ValueGeneratedOnAdd()
