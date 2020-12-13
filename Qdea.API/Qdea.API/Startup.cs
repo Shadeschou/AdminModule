@@ -1,20 +1,21 @@
+using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
+using Qdea.API.Data;
+using Qdea.API.Models;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Qdea.API
+
 {
     public class Startup
     {
+
+        readonly string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -22,15 +23,29 @@ namespace Qdea.API
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
+            services.AddCors(c =>
+            {
+                c.AddPolicy("AllowOrigin", options => options.AllowAnyOrigin());
+            });
+
+            services.AddDbContext<DatabaseContext>(opt => opt.UseSqlServer
+                (Configuration.GetConnectionString("QdeaConnection")));
+
             services.AddControllers();
+
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
+            ConfigureScoped(services);
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            app.UseCors(options => options.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -46,6 +61,26 @@ namespace Qdea.API
             {
                 endpoints.MapControllers();
             });
+        }
+
+
+
+
+        public void ConfigureScoped(IServiceCollection service)
+        {
+            service.AddScoped<IChallenges, ChallengesAccess>();
+            service.AddScoped<IComments, CommentsAccess>();
+            service.AddScoped<ICompanies, CompaniesAccess>();
+            service.AddScoped<ICostSavings, CostSavingsAccess>();
+            service.AddScoped<Iideas, IdeasAccess>();
+            service.AddScoped<IIdeaStatuses, IdeaStatusAccess>();
+            service.AddScoped<IPriorities, PrioritiesAccess>();
+            service.AddScoped<IResults, ResultsAccess>();
+            service.AddScoped<ITagIdeas, TagIdeasAccess>();
+            service.AddScoped<ITags, TagsAccess>();
+            service.AddScoped<IUserIdeas, UserIdeasAccess>();
+            service.AddScoped<IUsers, UsersAccess>();
+            service.AddScoped<IUserStatuses, UserStatusesAccess>();
         }
     }
 }

@@ -1,0 +1,64 @@
+using System;
+using System.Linq;
+using Qdea.API.Domain;
+using System.Collections.Generic;
+using Qdea.API.Models;
+
+namespace Qdea.API.Data
+{
+    public interface IPriorities
+    {
+        bool SaveChanges();
+
+        IEnumerable<Priority> GetAllPriorities();
+        Priority GetPriorityById(int id);
+        void CreatePriority(Priority priority);
+        void UpdatePriority(Priority priority);
+        void DeletePriority(Priority priority);
+    }
+
+    public class PrioritiesAccess : IPriorities
+    {
+        private readonly DatabaseContext _access;
+
+        public PrioritiesAccess(DatabaseContext dbAccess)
+        {
+            _access = dbAccess;
+        }
+
+        public void CreatePriority(Priority cmd)
+        {
+            if (cmd == null)
+            {
+                throw new ArgumentNullException(nameof(cmd));
+            }
+
+            _access.Priorities.Add(cmd);
+        }
+
+        public void DeletePriority(Priority priority)
+        {
+            _access.Remove(priority);
+        }
+
+        public IEnumerable<Priority> GetAllPriorities()
+        {
+            return _access.Priorities.ToList();
+        }
+
+        public Priority GetPriorityById(int id)
+        {
+            return _access.Priorities.FirstOrDefault(p => p.PriorityID == id);
+        }
+
+        public bool SaveChanges()
+        {
+            return (_access.SaveChanges() >= 0);
+        }
+
+        public void UpdatePriority(Priority priority)
+        {
+            _access.Update(priority);
+        }
+    }
+}
