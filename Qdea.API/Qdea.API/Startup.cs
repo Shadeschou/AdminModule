@@ -62,6 +62,9 @@ namespace Qdea.API
             service.AddScoped<IUserStatus, UserStatusesAccess>();
             service.AddScoped<IIdeaInteraction, IdeaInteractionsAccess>();
             service.AddScoped<IIdeaInteractionType, IdeaInteractionTypesAccess>();
+            service.AddScoped<IAddedUser, AddedUsersAccess>();
+            service.AddScoped<IImpact, ImpactsAccess>();
+            service.AddScoped<IEffort, EffortsAccess>();
         }
     }
 }
