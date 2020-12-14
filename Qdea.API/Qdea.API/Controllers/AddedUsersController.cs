@@ -1,11 +1,11 @@
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using Qdea.Back.Dtos;
-using Qdea.Back.Data;
+using DataLayer.Dtos;
+using Qdea.API.Data;
 using System.Collections.Generic;
-using Qdea.Back.Domain;
+using Qdea.API.Domain;
 
-namespace Qdea.Back.Controllers
+namespace Qdea.API.Controllers
 {
     [Route("api/impacts")]
     [ApiController]
