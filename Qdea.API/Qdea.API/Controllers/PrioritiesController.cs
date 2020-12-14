@@ -1,20 +1,20 @@
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using DataLayer.Dtos;
-using Qdea.API.Data;
+using Qdea.Back.Dtos;
+using Qdea.Back.Data;
 using System.Collections.Generic;
-using Qdea.API.Domain;
+using Qdea.Back.Domain;
 
-namespace Qdea.API.Controllers
+namespace Qdea.Back.Controllers
 {
     [Route("api/priorities")]
     [ApiController]
     public class PrioritiesController : ControllerBase
     {
-        private readonly IPriorities _repository;
+        private readonly IPriority _repository;
         private readonly IMapper _mapper;
 
-        public PrioritiesController(IPriorities repository, IMapper mapper)
+        public PrioritiesController(IPriority repository, IMapper mapper)
         {
             _repository = repository;
             _mapper = mapper;

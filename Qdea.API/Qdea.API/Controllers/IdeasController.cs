@@ -1,23 +1,23 @@
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using Qdea.API.Data;
+using Qdea.Back.Dtos;
+using Qdea.Back.Data;
 using System.Collections.Generic;
-using DataLayer.Dtos;
-using Qdea.API.Domain;
+using Qdea.Back.Domain;
 
-namespace Qdea.API.Controllers
+namespace Qdea.Back.Controllers
 {
     [Route("api/ideas")]
     [ApiController]
     public class IdeasController : ControllerBase
     {
-        private readonly Iideas _repository;
+        private readonly IIdea _repository;
         private readonly IMapper _mapper;
 
-        public IdeasController(Iideas repository, IMapper mapper)
+        public IdeasController(IIdea repository, IMapper mapper)
         {
-            this._repository = repository;
-                _mapper = mapper;
+            _repository = repository;
+            _mapper = mapper;
         }
 
         [HttpGet]

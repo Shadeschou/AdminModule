@@ -1,26 +1,13 @@
 using AutoMapper;
-using DataLayer.Dtos;
-using Qdea.API.Domain;
-
+using Qdea.Back.Domain;
+using Qdea.Back.Dtos;
 
 namespace Qdea.Back.Profiles
 {
-    public class MappingProfiles : Profile
+    public class DtoMaps : Profile
     {
-        public MappingProfiles()
+        public DtoMaps()
         {
-            CreateMap<Challenge, ChallengeReadDto>();
-            CreateMap<ChallengeCreateDto, Challenge>();
-            CreateMap<ChallengeUpdateDto, Challenge>();
-            CreateMap<Comment, CommentReadDto>();
-            CreateMap<CommentCreateDto, Comment>();
-            CreateMap<CommentUpdateDto, Comment>();
-            CreateMap<Company, CompanyReadDto>();
-            CreateMap<CompanyCreateDto, Company>();
-            CreateMap<CompanyUpdateDto, Company>();
-            CreateMap<CostSaving, CostSavingReadDto>();
-            CreateMap<CostSavingCreateDto, CostSaving> ();
-            CreateMap<CostSavingUpdateDto, CostSaving>();
             CreateMap<Idea, IdeaReadDto>();
             CreateMap<IdeaCreateDto, Idea>();
             CreateMap<IdeaUpdateDto, Idea>();
@@ -30,9 +17,6 @@ namespace Qdea.Back.Profiles
             CreateMap<Priority, PriorityReadDto>();
             CreateMap<PriorityCreateDto, Priority>();
             CreateMap<PriorityUpdateDto, Priority>();
-            CreateMap<Result, ResultReadDto>();
-            CreateMap<ResultCreateDto, Result>();
-            CreateMap<ResultUpdateDto, Result>();
             CreateMap<Tag, TagReadDto>();
             CreateMap<TagCreateDto, Tag>();
             CreateMap<TagUpdateDto, Tag>();
@@ -42,12 +26,21 @@ namespace Qdea.Back.Profiles
             CreateMap<User, UserReadDto>();
             CreateMap<UserCreateDto, User>();
             CreateMap<UserUpdateDto, User>();
-            CreateMap<UserIdea, UserIdeaReadDto>();
-            CreateMap<UserIdeaCreateDto, UserIdea>();
-            CreateMap<UserIdeaUpdateDto, UserIdea>();
             CreateMap<UserStatus, UserStatusReadDto>();
             CreateMap<UserStatusCreateDto, UserStatus>();
             CreateMap<UserStatusUpdateDto, UserStatus>();
+            CreateMap<IdeaInteraction, IdeaInteractionReadDto>();
+            CreateMap<IdeaInteractionCreateDto, IdeaInteraction>();
+            CreateMap<IdeaInteractionUpdateDto, IdeaInteraction>();
+            CreateMap<IdeaInteractionType, IdeaInteractionTypeReadDto>();
+            CreateMap<IdeaInteractionTypeCreateDto, IdeaInteractionType>();
+            CreateMap<IdeaInteractionTypeUpdateDto, IdeaInteractionType>();
+            CreateMap<Impact, ImpactReadDto>();
+            CreateMap<ImpactCreateDto, Impact>();
+            CreateMap<ImpactUpdateDto, Impact>();
+            CreateMap<Effort, EffortReadDto>();
+            CreateMap<EffortCreateDto, Effort>();
+            CreateMap<EffortUpdateDto, Effort>();
         }
     }
 }

@@ -5,17 +5,16 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Qdea.API.Data;
-using Qdea.API.Models;
+using Qdea.Back.Data;
+using Qdea.Back.Models;
 using System;
 
-namespace Qdea.API
-
+namespace Back
 {
     public class Startup
     {
 
-        readonly string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+        //readonly string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -63,24 +62,17 @@ namespace Qdea.API
             });
         }
 
-
-
-
         public void ConfigureScoped(IServiceCollection service)
         {
-            service.AddScoped<IChallenges, ChallengesAccess>();
-            service.AddScoped<IComments, CommentsAccess>();
-            service.AddScoped<ICompanies, CompaniesAccess>();
-            service.AddScoped<ICostSavings, CostSavingsAccess>();
-            service.AddScoped<Iideas, IdeasAccess>();
-            service.AddScoped<IIdeaStatuses, IdeaStatusAccess>();
-            service.AddScoped<IPriorities, PrioritiesAccess>();
-            service.AddScoped<IResults, ResultsAccess>();
-            service.AddScoped<ITagIdeas, TagIdeasAccess>();
-            service.AddScoped<ITags, TagsAccess>();
-            service.AddScoped<IUserIdeas, UserIdeasAccess>();
-            service.AddScoped<IUsers, UsersAccess>();
-            service.AddScoped<IUserStatuses, UserStatusesAccess>();
+            service.AddScoped<IIdea, IdeasAccess>();
+            service.AddScoped<IIdeaStatus, IdeaStatusAccess>();
+            service.AddScoped<IPriority, PrioritiesAccess>();
+            service.AddScoped<ITagIdea, TagIdeasAccess>();
+            service.AddScoped<ITag, TagsAccess>();
+            service.AddScoped<IUser, UsersAccess>();
+            service.AddScoped<IUserStatus, UserStatusesAccess>();
+            service.AddScoped<IIdeaInteraction, IdeaInteractionsAccess>();
+            service.AddScoped<IIdeaInteractionType, IdeaInteractionTypesAccess>();
         }
     }
 }

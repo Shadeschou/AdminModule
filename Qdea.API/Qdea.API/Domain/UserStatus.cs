@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Qdea.API.Domain
+namespace Qdea.Back.Domain
 {
     public class UserStatus
     {
