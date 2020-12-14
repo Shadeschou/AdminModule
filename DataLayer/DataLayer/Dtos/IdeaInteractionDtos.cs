@@ -2,10 +2,11 @@ using System;
 
 namespace DataLayer.Dtos
 {
-    public class ResultReadDto
+    public class IdeaInteractionReadDto
     {
-        public int ResultID { get; set; }
+        public int IdeaInteractionID { get; set; }
         public int IdeaID { get; set; }
+        public int IdeaInteractionTypeID { get; set; }
         public int UserID { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
@@ -13,10 +14,11 @@ namespace DataLayer.Dtos
         public DateTime CreationDate { get; set; }
         public DateTime LastDateTimeEdited { get; set; }
     }
-    public class ResultCreateDto
+    public class IdeaInteractionCreateDto
     {
-        public int ResultID { get; set; }
+        public int IdeaInteractionID { get; set; }
         public int IdeaID { get; set; }
+        public int IdeaInteractionTypeID { get; set; }
         public int UserID { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
@@ -24,10 +26,11 @@ namespace DataLayer.Dtos
         public DateTime CreationDate { get; set; }
         public DateTime LastDateTimeEdited { get; set; }
     }
-    public class ResultUpdateDto
+    public class IdeaInteractionUpdateDto
     {
-        public int ResultID { get; set; }
+        public int IdeaInteractionID { get; set; }
         public int IdeaID { get; set; }
+        public int IdeaInteractionTypeID { get; set; }
         public int UserID { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }

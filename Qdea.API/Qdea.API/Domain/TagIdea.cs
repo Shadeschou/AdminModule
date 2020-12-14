@@ -1,8 +1,8 @@
-﻿using Qdea.Back.Models;
+﻿using Qdea.API.Models;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Qdea.Back.Domain
+namespace Qdea.API.Domain
 {
     public class TagIdea
     {

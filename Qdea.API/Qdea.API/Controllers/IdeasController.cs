@@ -1,11 +1,11 @@
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using Qdea.Back.Dtos;
-using Qdea.Back.Data;
 using System.Collections.Generic;
-using Qdea.Back.Domain;
+using Qdea.API.Data;
+using Qdea.API.Domain;
+using DataLayer.Dtos;
 
-namespace Qdea.Back.Controllers
+namespace Qdea.API.Controllers
 {
     [Route("api/ideas")]
     [ApiController]

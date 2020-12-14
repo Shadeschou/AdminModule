@@ -1,7 +1,7 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace Qdea.Back.Domain
+namespace Qdea.API.Domain
 {
     public class IdeaInteraction
     {

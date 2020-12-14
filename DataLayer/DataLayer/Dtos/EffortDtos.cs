@@ -1,4 +1,4 @@
-namespace Qdea.Back.Dtos
+namespace DataLayer.Dtos
 {
     public class EffortReadDto
     {
