@@ -52,9 +52,6 @@ namespace AdminModule.ViewModels
             // await this call to ensure the application doesn't 
             // prematurely exit.
                 await serviceProvider.GetService<IIntegrationService>().Run();
-          
-            
-           
         }
 
         private void ConfigureServices(ServiceCollection serviceCollection)

@@ -8,7 +8,7 @@ namespace Qdea.API.Models
     {
         public DatabaseContext(DbContextOptions<DatabaseContext> opt) : base(opt)
         {
-
+            
         }
 
         public DbSet<Idea> Ideas { get; set; }
