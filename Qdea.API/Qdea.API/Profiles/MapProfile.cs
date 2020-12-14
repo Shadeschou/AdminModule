@@ -1,8 +1,8 @@
 using AutoMapper;
-using Qdea.Back.Domain;
-using Qdea.Back.Dtos;
+using Qdea.API.Domain;
+using DataLayer.Dtos;
 
-namespace Qdea.Back.Profiles
+namespace Qdea.API.Profiles
 {
     public class DtoMaps : Profile
     {

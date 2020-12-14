@@ -1,8 +1,8 @@
 
 using Microsoft.EntityFrameworkCore;
-using Qdea.Back.Domain;
+using Qdea.API.Domain;
 
-namespace Qdea.Back.Models
+namespace Qdea.API.Models
 {
     public class DatabaseContext : DbContext
     {
