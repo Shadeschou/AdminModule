@@ -1,12 +1,12 @@
 using System;
 using System.Linq;
-using Qdea.API.Domain;
+using Qdea.Back.Domain;
 using System.Collections.Generic;
-using Qdea.API.Models;
+using Qdea.Back.Models;
 
-namespace Qdea.API.Data
+namespace Qdea.Back.Data
 {
-    public interface ITagIdeas
+    public interface ITagIdea
     {
         bool SaveChanges();
 
@@ -17,7 +17,7 @@ namespace Qdea.API.Data
         void DeleteTagIdea(TagIdea tagIdea);
     }
 
-    public class TagIdeasAccess : ITagIdeas
+    public class TagIdeasAccess : ITagIdea
     {
         private readonly DatabaseContext _access;
 

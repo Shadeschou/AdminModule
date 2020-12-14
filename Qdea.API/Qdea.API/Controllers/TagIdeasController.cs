@@ -1,20 +1,20 @@
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using Qdea.API.Data;
+using Qdea.Back.Dtos;
+using Qdea.Back.Data;
 using System.Collections.Generic;
-using DataLayer.Dtos;
-using Qdea.API.Domain;
+using Qdea.Back.Domain;
 
-namespace Qdea.API.Controllers
+namespace Qdea.Back.Controllers
 {
     [Route("api/tagideas")]
     [ApiController]
     public class TagIdeasController : ControllerBase
     {
-        private readonly ITagIdeas _repository;
+        private readonly ITagIdea _repository;
         private readonly IMapper _mapper;
 
-        public TagIdeasController(ITagIdeas repository, IMapper mapper)
+        public TagIdeasController(ITagIdea repository, IMapper mapper)
         {
             _repository = repository;
             _mapper = mapper;

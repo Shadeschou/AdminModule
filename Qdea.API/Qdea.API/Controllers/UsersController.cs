@@ -1,20 +1,20 @@
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using Qdea.API.Data;
+using Qdea.Back.Dtos;
+using Qdea.Back.Data;
 using System.Collections.Generic;
-using DataLayer.Dtos;
-using Qdea.API.Domain;
+using Qdea.Back.Domain;
 
-namespace Qdea.API.Controllers
+namespace Qdea.Back.Controllers
 {
     [Route("api/users")]
     [ApiController]
     public class UsersController : ControllerBase
     {
-        private readonly IUsers _repository;
+        private readonly IUser _repository;
         private readonly IMapper _mapper;
 
-        public UsersController(IUsers repository, IMapper mapper)
+        public UsersController(IUser repository, IMapper mapper)
         {
             _repository = repository;
             _mapper = mapper;
