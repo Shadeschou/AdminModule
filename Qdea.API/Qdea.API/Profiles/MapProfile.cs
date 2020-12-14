@@ -41,6 +41,9 @@ namespace Qdea.Back.Profiles
             CreateMap<Effort, EffortReadDto>();
             CreateMap<EffortCreateDto, Effort>();
             CreateMap<EffortUpdateDto, Effort>();
+            CreateMap<AddedUser, AddedUserReadDto>();
+            CreateMap<AddedUserCreateDto, AddedUser>();
+            CreateMap<AddedUserUpdateDto, AddedUser>();
         }
     }
 }

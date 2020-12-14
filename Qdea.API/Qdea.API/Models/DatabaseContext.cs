@@ -22,5 +22,6 @@ namespace Qdea.Back.Models
         public DbSet<IdeaInteractionType> IdeaInteractionTypes { get; set; }
         public DbSet<Effort> Efforts { get; set; }
         public DbSet<Impact> Impacts { get; set; }
+        public DbSet<AddedUser> AddedUsers { get; set; }
     }
 }
