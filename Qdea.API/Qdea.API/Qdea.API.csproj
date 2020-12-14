@@ -2,6 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
+    <EnableNETAnalyzers>true</EnableNETAnalyzers>
+    <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
   </PropertyGroup>
 
   <ItemGroup>
@@ -23,6 +25,8 @@
   <ItemGroup>
     <ProjectReference Include="..\..\DataLayer\DataLayer\DataLayer.csproj" />
   </ItemGroup>
+	
+	   
 
 
 </Project>

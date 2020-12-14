@@ -7,7 +7,7 @@ namespace AdminModule.ViewModels
 {
     internal class ManageCustomerModel : BaseViewModel
     {
-        private readonly HttpClient _httpClient = new HttpClient();
+       
 
         public ManageCustomerModel()
         {

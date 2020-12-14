@@ -10,7 +10,7 @@ namespace AdminModule.utility
 
         public CustomCommand(MainWindowViewModel viewmodel)
         {
-            this.viewmodel = viewmodel; //hi I guess Gr8
+            this.viewmodel = viewmodel;
         }
 
 

@@ -198,8 +198,10 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Models\Customer.cs" />
+    <Compile Include="Services\APIService\APIService.cs" />
     <Compile Include="Services\BaseCommand.cs" />
     <Compile Include="Services\CustomCommand.cs" />
+    <Compile Include="Services\APIService\IIntegrationService.cs" />
     <Compile Include="ViewModels\AddCustomerModel.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\ManageCustomerModel.cs" />
@@ -271,5 +273,6 @@
       <Name>DataLayer</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
