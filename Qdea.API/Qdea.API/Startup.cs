@@ -5,11 +5,11 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Qdea.Back.Data;
-using Qdea.Back.Models;
+using Qdea.API.Data;
+using Qdea.API.Models;
 using System;
 
-namespace Back
+namespace Qdea.API
 {
     public class Startup
     {

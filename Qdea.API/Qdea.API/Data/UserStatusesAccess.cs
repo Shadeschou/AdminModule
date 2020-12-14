@@ -1,10 +1,10 @@
 using System;
 using System.Linq;
-using Qdea.Back.Domain;
 using System.Collections.Generic;
-using Qdea.Back.Models;
+using Qdea.API.Domain;
+using Qdea.API.Models;
 
-namespace Qdea.Back.Data
+namespace Qdea.API.Data
 {
     public interface IUserStatus
     {
