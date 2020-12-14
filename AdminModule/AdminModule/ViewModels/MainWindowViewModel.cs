@@ -13,16 +13,10 @@ namespace AdminModule.ViewModels
     public class MainWindowViewModel : BaseViewModel
     {
         private BaseViewModel _selectedViewModel;
-        private static APIService _apiService = new APIService();
-
-
         public MainWindowViewModel()
         {
             CustomCommand = new CustomCommand(this);
             SelectedViewModel = new ManageCustomerModel();
-            Startup().GetAwaiter(); 
-            var getContent = _apiService.GetResource();
-
         }
 
         public BaseViewModel SelectedViewModel

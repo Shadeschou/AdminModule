@@ -29,6 +29,7 @@ namespace AdminModule.ViewModels
             {
                 MessageBox.Show("Hi"); 
             }
+
         }
         public async Task PostData()
         {
@@ -36,8 +37,6 @@ namespace AdminModule.ViewModels
             var customerToCreate = new UserCreateDto()
             {
                 Address = "AddressInput",
-                UserID = 2,
-                UserStatusID = 2,
                 Name = "NameInput",
                 PhoneNumber = 1234124,
                 Email = "EmailInput"
@@ -48,8 +47,7 @@ namespace AdminModule.ViewModels
                 var request = new HttpRequestMessage(HttpMethod.Post, "api/users");
                 //Returned object in a newly created response Body. 
                 request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
-
+                request.Content = new StringContent(serializedCustomer);
                 request.Content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
 
                 //we call async to pass through the request
@@ -58,6 +56,7 @@ namespace AdminModule.ViewModels
                 response.EnsureSuccessStatusCode();
                 //We read Content
                 var content = await response.Content.ReadAsStringAsync();
+            
 
                 var createdUser = JsonConvert.DeserializeObject<UserCreateDto>(content);
 
