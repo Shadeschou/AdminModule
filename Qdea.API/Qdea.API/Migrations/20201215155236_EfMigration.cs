@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Qdea.API.Migrations
 {
-    public partial class initialmigration : Migration
+    public partial class EfMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -107,7 +107,7 @@ namespace Qdea.API.Migrations
                     UserStatusID = table.Column<int>(type: "int", nullable: true),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Address = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    PhoneNumber = table.Column<int>(type: "int", nullable: false),
+                    PhoneNumber = table.Column<int>(type: "int", nullable: true),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Password = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
@@ -131,11 +131,11 @@ namespace Qdea.API.Migrations
                     UserID = table.Column<int>(type: "int", nullable: true),
                     PriorityID = table.Column<int>(type: "int", nullable: true),
                     IdeaStatusID = table.Column<int>(type: "int", nullable: true),
+                    ImpactID = table.Column<int>(type: "int", nullable: true),
+                    EffortID = table.Column<int>(type: "int", nullable: true),
                     Title = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Text = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Impact = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Effort = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     DateCreated = table.Column<DateTime>(type: "datetime2", nullable: false),
                     DateLastEdited = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
@@ -143,10 +143,22 @@ namespace Qdea.API.Migrations
                 {
                     table.PrimaryKey("PK_Ideas", x => x.IdeaID);
                     table.ForeignKey(
+                        name: "FK_Ideas_Efforts_EffortID",
+                        column: x => x.EffortID,
+                        principalTable: "Efforts",
+                        principalColumn: "EffortID",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
                         name: "FK_Ideas_IdeaStatuses_IdeaStatusID",
                         column: x => x.IdeaStatusID,
                         principalTable: "IdeaStatuses",
                         principalColumn: "IdeaStatusID",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Ideas_Impacts_ImpactID",
+                        column: x => x.ImpactID,
+                        principalTable: "Impacts",
+                        principalColumn: "ImpactID",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Ideas_Priorities_PriorityID",
@@ -156,6 +168,32 @@ namespace Qdea.API.Migrations
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Ideas_Users_UserID",
+                        column: x => x.UserID,
+                        principalTable: "Users",
+                        principalColumn: "UserID",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "AddedUsers",
+                columns: table => new
+                {
+                    AddedUserID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserID = table.Column<int>(type: "int", nullable: true),
+                    IdeaID = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AddedUsers", x => x.AddedUserID);
+                    table.ForeignKey(
+                        name: "FK_AddedUsers_Ideas_IdeaID",
+                        column: x => x.IdeaID,
+                        principalTable: "Ideas",
+                        principalColumn: "IdeaID",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_AddedUsers_Users_UserID",
                         column: x => x.UserID,
                         principalTable: "Users",
                         principalColumn: "UserID",
@@ -227,6 +265,16 @@ namespace Qdea.API.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_AddedUsers_IdeaID",
+                table: "AddedUsers",
+                column: "IdeaID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_AddedUsers_UserID",
+                table: "AddedUsers",
+                column: "UserID");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_IdeaInteractions_IdeaID",
                 table: "IdeaInteractions",
                 column: "IdeaID");
@@ -242,9 +290,19 @@ namespace Qdea.API.Migrations
                 column: "UserID");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Ideas_EffortID",
+                table: "Ideas",
+                column: "EffortID");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Ideas_IdeaStatusID",
                 table: "Ideas",
                 column: "IdeaStatusID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Ideas_ImpactID",
+                table: "Ideas",
+                column: "ImpactID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Ideas_PriorityID",
@@ -275,13 +333,10 @@ namespace Qdea.API.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Efforts");
+                name: "AddedUsers");
 
             migrationBuilder.DropTable(
                 name: "IdeaInteractions");
-
-            migrationBuilder.DropTable(
-                name: "Impacts");
 
             migrationBuilder.DropTable(
                 name: "TagIdeas");
@@ -296,7 +351,13 @@ namespace Qdea.API.Migrations
                 name: "Tags");
 
             migrationBuilder.DropTable(
+                name: "Efforts");
+
+            migrationBuilder.DropTable(
                 name: "IdeaStatuses");
+
+            migrationBuilder.DropTable(
+                name: "Impacts");
 
             migrationBuilder.DropTable(
                 name: "Priorities");
