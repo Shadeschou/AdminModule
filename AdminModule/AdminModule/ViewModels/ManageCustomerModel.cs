@@ -25,9 +25,31 @@ namespace AdminModule.ViewModels
 
         public ManageCustomerModel()
         {
-            //PatchResource().GetAwaiter();
             GetResource();
+            //PatchResource().GetAwaiter();
+
         }
+        public async Task GetResource()
+        {
+            var response = await APIService._httpClient.GetAsync("api/users");
+            response.EnsureSuccessStatusCode();
+            var content = await response.Content.ReadAsStringAsync();
+            var users = new List<UserReadDto>();
+            MessageBox.Show(users.ToString());
+        }
+        //public async Task GetResource()
+        //{
+        //    //API Default to JSON so we use it. 
+        //    var response = await APIService._httpClient.GetAsync("api/users");
+        //    response.EnsureSuccessStatusCode();
+        //    var content = await response.Content.ReadAsStringAsync();
+        //    Users = new ObservableCollection<UserReadDto>();
+        //    Users = JsonConvert.DeserializeObject<ObservableCollection<UserReadDto>>(content);
+
+        //}
+
+
+
 
         //public async Task PatchResource()
         //{
@@ -53,17 +75,8 @@ namespace AdminModule.ViewModels
         //    MessageBox.Show("DonePatch");
         //}
 
-        
-            public async Task GetResource()
-            {
-                //API Default to JSON so we use it. 
-                var response = await APIService._httpClient.GetAsync("api/users");
-                response.EnsureSuccessStatusCode();
-                var content = await response.Content.ReadAsStringAsync();
-                Users = new ObservableCollection<UserReadDto>();
-                Users= JsonConvert.DeserializeObject<ObservableCollection<UserReadDto>>(content);
-              
-            }
+
+
 
 
     }

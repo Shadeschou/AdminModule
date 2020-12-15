@@ -18,7 +18,7 @@ namespace AdminModule.ViewModels
         {
 
             CustomCommand = new CustomCommand(this);
-            APIService.InitClient();
+          
             
 
         }
