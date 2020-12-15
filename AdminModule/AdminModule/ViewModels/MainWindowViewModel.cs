@@ -19,8 +19,7 @@ namespace AdminModule.ViewModels
             SelectedViewModel = new ManageCustomerModel();
         }
 
-        public BaseViewModel SelectedViewModel
-        {
+        public BaseViewModel SelectedViewModel {
             get => _selectedViewModel;
             set
             {
