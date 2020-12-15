@@ -15,8 +15,11 @@ namespace AdminModule.ViewModels
         private BaseViewModel _selectedViewModel;
         public MainWindowViewModel()
         {
+
             CustomCommand = new CustomCommand(this);
-            SelectedViewModel = new ManageCustomerModel();
+           
+            APIService.InitClient();
+
         }
 
         public BaseViewModel SelectedViewModel

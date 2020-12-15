@@ -23,7 +23,7 @@ namespace AdminModule.ViewModels
 
         public AddCustomerModel()
         {
-            APIService.InitClient();
+           
             PostData();
             if (PostData().GetAwaiter().IsCompleted)
             {

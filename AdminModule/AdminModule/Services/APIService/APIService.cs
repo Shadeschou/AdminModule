@@ -24,8 +24,8 @@ namespace AdminModule.Services
                 BaseAddress = new Uri("http://localhost:46897"), Timeout = new TimeSpan(0, 0, 30)
             };
             // set up HttpClient instance
-            _httpClient.DefaultRequestHeaders.Accept.Clear();
-            _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            _httpClient.DefaultRequestHeaders.Clear();
+
         }
 
         public async Task Run()
