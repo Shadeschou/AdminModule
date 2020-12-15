@@ -5,11 +5,6 @@ namespace DataLayer.Dtos
         public int AddedUserID { get; set; }
         public int UserID { get; set; }
         public int IdeaID { get; set; }
-
-        public override int getPK()
-        {
-            return AddedUserID;
-        }
     }
 
     public class AddedUserCreateDto : Dto
@@ -17,11 +12,6 @@ namespace DataLayer.Dtos
         public int AddedUserID { get; set; }
         public int UserID { get; set; }
         public int IdeaID { get; set; }
-
-        public override int getPK()
-        {
-            return AddedUserID;
-        }
     }
 
     public class AddedUserUpdateDto : Dto
@@ -29,10 +19,5 @@ namespace DataLayer.Dtos
         public int AddedUserID { get; set; }
         public int UserID { get; set; }
         public int IdeaID { get; set; }
-
-        public override int getPK()
-        {
-            return AddedUserID;
-        }
     }
 }

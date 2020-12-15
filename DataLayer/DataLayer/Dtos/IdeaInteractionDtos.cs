@@ -13,11 +13,6 @@ namespace DataLayer.Dtos
         public string TextContent { get; set; }
         public DateTime CreationDate { get; set; }
         public DateTime LastDateTimeEdited { get; set; }
-
-        public override int getPK()
-        {
-            return IdeaInteractionID;
-        }
     }
     public class IdeaInteractionCreateDto : Dto
     {
@@ -30,11 +25,6 @@ namespace DataLayer.Dtos
         public string TextContent { get; set; }
         public DateTime CreationDate { get; set; }
         public DateTime LastDateTimeEdited { get; set; }
-
-        public override int getPK()
-        {
-            return IdeaInteractionID;
-        }
     }
     public class IdeaInteractionUpdateDto : Dto
     {
@@ -47,10 +37,5 @@ namespace DataLayer.Dtos
         public string TextContent { get; set; }
         public DateTime CreationDate { get; set; }
         public DateTime LastDateTimeEdited { get; set; }
-
-        public override int getPK()
-        {
-            return IdeaInteractionID;
-        }
     }
 }
