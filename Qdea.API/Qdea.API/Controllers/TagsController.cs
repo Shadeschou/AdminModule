@@ -52,10 +52,10 @@ namespace Qdea.API.Controllers
             //return Ok(_mapper.Map<TagReadDto>(TagModel));
         }
 
-        [HttpPut("{id}")]
-        public ActionResult UpdateTag(int id, TagUpdateDto tagUpdateDto)
+        [HttpPut]
+        public ActionResult UpdateTag(TagUpdateDto tagUpdateDto)
         {
-            var tagModel = _repository.GetTagById(id);
+            var tagModel = _repository.GetTagById(tagUpdateDto.TagID);
             if (tagModel == null) return NotFound();
             _mapper.Map(tagUpdateDto, tagModel);
             _repository.UpdateTag(tagModel);

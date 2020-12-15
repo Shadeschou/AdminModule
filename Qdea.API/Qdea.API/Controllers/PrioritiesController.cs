@@ -52,10 +52,10 @@ namespace Qdea.API.Controllers
             //return Ok(_mapper.Map<PriorityReadDto>(PriorityModel));
         }
 
-        [HttpPut("{id}")]
-        public ActionResult UpdatePriority(int id, PriorityUpdateDto priorityUpdateDto)
+        [HttpPut]
+        public ActionResult UpdatePriority(PriorityUpdateDto priorityUpdateDto)
         {
-            var priorityModel = _repository.GetPriorityById(id);
+            var priorityModel = _repository.GetPriorityById(priorityUpdateDto.PriorityID);
             if (priorityModel == null) return NotFound();
             _mapper.Map(priorityUpdateDto, priorityModel);
             _repository.UpdatePriority(priorityModel);

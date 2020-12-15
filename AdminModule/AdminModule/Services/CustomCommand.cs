@@ -1,18 +1,20 @@
 ﻿using System;
 using System.Windows.Input;
 using AdminModule.ViewModels;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace AdminModule.utility
 {
     public class CustomCommand : ICommand
     {
         private readonly MainWindowViewModel viewmodel;
+        public ServiceProvider serviceProvider;
 
-        public CustomCommand(MainWindowViewModel viewmodel)
+        public CustomCommand(MainWindowViewModel viewmodel, ServiceProvider serviceProvider)
         {
+            this.serviceProvider = serviceProvider;
             this.viewmodel = viewmodel;
         }
-
 
         public bool CanExecute(object parameter)
         {
@@ -30,7 +32,7 @@ namespace AdminModule.utility
                     viewmodel.SelectedViewModel = new DeleteCustomerModel();
                     break;
                 case "manage customer":
-                    viewmodel.SelectedViewModel = new ManageCustomerModel();
+                    viewmodel.SelectedViewModel = new ManageCustomerModel(serviceProvider);
                     break;
             }
         }

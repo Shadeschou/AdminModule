@@ -52,10 +52,10 @@ namespace Qdea.API.Controllers
             //return Ok(_mapper.Map<CompanyReadDto>(CompanyModel));
         }
 
-        [HttpPut("{id}")]
-        public ActionResult UpdateImpact(int id, ImpactUpdateDto ImpactUpdateDto)
+        [HttpPut]
+        public ActionResult UpdateImpact(ImpactUpdateDto ImpactUpdateDto)
         {
-            var ImpactModel = _repository.GetImpactById(id);
+            var ImpactModel = _repository.GetImpactById(ImpactUpdateDto.ImpactID);
             if (ImpactModel == null) return NotFound();
             _mapper.Map(ImpactUpdateDto, ImpactModel);
             _repository.UpdateImpact(ImpactModel);

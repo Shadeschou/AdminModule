@@ -1,21 +1,36 @@
 namespace DataLayer.Dtos
 {
-    public class TagIdeaReadDto
+    public class TagIdeaReadDto : Dto
     {
         public int TagListID { get; set; }
         public int IdeaID { get; set; }
         public int TagID { get; set; }
+
+        public override int getPK()
+        {
+            return TagListID;
+        }
     }
-    public class TagIdeaCreateDto
+    public class TagIdeaCreateDto : Dto
     {
         public int TagListID { get; set; }
         public int IdeaID { get; set; }
         public int TagID { get; set; }
+
+        public override int getPK()
+        {
+            return TagListID;
+        }
     }
-    public class TagIdeaUpdateDto
+    public class TagIdeaUpdateDto : Dto
     {
         public int TagListID { get; set; }
         public int IdeaID { get; set; }
         public int TagID { get; set; }
+
+        public override int getPK()
+        {
+            return TagListID;
+        }
     }
 }

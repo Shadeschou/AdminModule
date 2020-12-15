@@ -1,97 +1,74 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Dynamic;
-using System.IO;
-using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Xml.Serialization;
 using Newtonsoft.Json;
-using DataLayer.Dtos;
+using System.Collections.Generic;
 
 namespace AdminModule.Services
 {
     public interface IIntegrationService
     {
-        Task Run();
+        Dto GetSingleEntryById<Dto>(string table, int id);
+        List<Dto> GetTable<Dto>(string table);
+        HttpResponseMessage Insert<Dto>(string table, Dto entry);
+        HttpResponseMessage Update<Dto>(string table, Dto dtoToUpdate);
+        HttpResponseMessage Delete(string table, int id);
     }
 
     public class APIService : IIntegrationService
     {
-        public static HttpClient _httpClient { get; set;  }
+        public static HttpClient _httpClient { get; set; }
 
-        public static async Task InitClient()
+        public APIService()
         {
-            _httpClient = new HttpClient
-            {
-                BaseAddress = new Uri("http://localhost:46897") /*Timeout = new TimeSpan(0, 0, 30)*/
-            };
-            // set up HttpClient instance
-            _httpClient.DefaultRequestHeaders.Clear();
+            InitClient();
+        }
+
+        public void InitClient()
+        {
+            _httpClient = new HttpClient { BaseAddress = new Uri("http://localhost:46897/") };
             _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+        }        
 
-
-        }
-
-        public async Task Run()
+        public Dto GetSingleEntryById<Dto>(string table, int id)
         {
-            await InitClient(); 
-            await GetResource();
-           
+            using (var response = _httpClient.GetAsync($"api/{table}/{id}").Result.Content.ReadAsStringAsync())
+            {
+                return JsonConvert.DeserializeObject<Dto>(response.Result);
+            }
         }
 
-        public async Task GetResource()
+        public List<Dto> GetTable<Dto>(string table)
         {
-            var response = await _httpClient.GetAsync("api/users");
-            response.EnsureSuccessStatusCode();
-            var content = await response.Content.ReadAsStringAsync();
-            var movies = new List<UserReadDto>();
-            MessageBox.Show(movies.ToString());
+            using (var response = _httpClient.GetAsync($"api/{table}").Result.Content.ReadAsStringAsync())
+            {
+                return JsonConvert.DeserializeObject<List<Dto>>(response.Result);
+            }
         }
 
-    /*
-      /// <summary>
-      /// We want to be able to Get Data which does not change through our runtime and because we want to 
-      /// be able to use 
-      /// </summary>
-      /// <returns></returns>
-      //public async Task GetResourceThroughHttpRequestMessage()
-      //{
-      //    var request = new HttpRequestMessage(HttpMethod.Get, "api/movies");
-      //    request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-      //    var response = await _httpClient.SendAsync(request);
+        public HttpResponseMessage Insert<Dto>(string table, Dto entry)
+        {
+            using(var response = _httpClient.PostAsJsonAsync<Dto>($"api/{table}", entry))
+            {
+                return response.Result;
+            }
+        }
 
-      //    response.EnsureSuccessStatusCode();
+        public HttpResponseMessage Update<Dto>(string table, Dto dtoToUpdate)
+        {
+            using (var response = _httpClient.PutAsJsonAsync<Dto>($"api/{table}", dtoToUpdate))
+            {
+                return response.Result;
+            }
+        }
 
-      //    var content = await response.Content.ReadAsStringAsync();
-      //    var movies = JsonConvert.DeserializeObject<List<IdeaReadDto>>(content);
-
-      //}
-
-      /// <summary>
-      /// Send Data to be able to show it on the WPF page. 
-      /// </summary>
-      /// <returns></returns>
-
-
-      //private async Task DeleteResource()
-      //{
-      //    var request = new HttpRequestMessage(HttpMethod.Delete,
-      //        "api/movies/5b1c2b4d-48c7-402a-80c3-cc796ad49c6b");
-      //    //we need that in case the API would return content in the case of a failure. 
-      //    request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
-      //    var response = await _httpClient.SendAsync(request);
-      //    response.EnsureSuccessStatusCode();
-
-      //    var content = await response.Content.ReadAsStringAsync();
-      //}
-    */
-
-
-}
+        public HttpResponseMessage Delete(string table, int id)
+        {
+            using(var response = _httpClient.DeleteAsync($"api/{table}/{id}"))
+            {
+                return response.Result;
+            }
+        }
+    }
 }
 

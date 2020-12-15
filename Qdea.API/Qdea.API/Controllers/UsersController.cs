@@ -52,10 +52,10 @@ namespace Qdea.API.Controllers
             //return Ok(_mapper.Map<UserReadDto>(UserModel));
         }
 
-        [HttpPut("{id}")]
-        public ActionResult UpdateUser(int id, UserUpdateDto userUpdateDto)
+        [HttpPut]
+        public ActionResult UpdateUser(UserUpdateDto userUpdateDto)
         {
-            var userModel = _repository.GetUserById(id);
+            var userModel = _repository.GetUserById(userUpdateDto.UserID);
             if (userModel == null) return NotFound();
             _mapper.Map(userUpdateDto, userModel);
             _repository.UpdateUser(userModel);

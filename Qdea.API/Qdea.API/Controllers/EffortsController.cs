@@ -52,10 +52,10 @@ namespace Qdea.API.Controllers
             //return Ok(_mapper.Map<CompanyReadDto>(CompanyModel));
         }
 
-        [HttpPut("{id}")]
-        public ActionResult UpdateEffort(int id, EffortUpdateDto EffortUpdateDto)
+        [HttpPut]
+        public ActionResult UpdateEffort(EffortUpdateDto EffortUpdateDto)
         {
-            var EffortModel = _repository.GetEffortById(id);
+            var EffortModel = _repository.GetEffortById(EffortUpdateDto.EffortID);
             if (EffortModel == null) return NotFound();
             _mapper.Map(EffortUpdateDto, EffortModel);
             _repository.UpdateEffort(EffortModel);

@@ -1,36 +1,48 @@
 namespace DataLayer.Dtos
 {
-    public class UserReadDto
-    {
+    public class UserReadDto : Dto
+    { 
         public int UserID { get; set; }
-        public int CompanyID { get; set; }
         public int UserStatusID { get; set; }
         public string Name { get; set; }
         public string Address { get; set; }
         public int PhoneNumber { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
+
+        public override int getPK()
+        {
+            return UserID;
+        }
     }
-    public class UserCreateDto
+    public class UserCreateDto : Dto
     {
         public int UserID { get; set; }
-        public int CompanyID { get; set; }
         public int UserStatusID { get; set; }
         public string Name { get; set; }
         public string Address { get; set; }
         public int PhoneNumber { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
+
+        public override int getPK()
+        {
+            return UserID;
+        }
     }
-    public class UserUpdateDto
+    public class UserUpdateDto : Dto
     {
         public int UserID { get; set; }
-        public int CompanyID { get; set; }
         public int UserStatusID { get; set; }
         public string Name { get; set; }
         public string Address { get; set; }
         public int PhoneNumber { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
+
+        public override int getPK()
+        {
+            return UserID;
+        }
     }
 }

@@ -1,18 +1,33 @@
 namespace DataLayer.Dtos
 {
-    public class IdeaInteractionTypeReadDto
+    public class IdeaInteractionTypeReadDto : Dto
     {
         public int IdeaInteractionTypeID { get; set; }
         public string Description { get; set; }
+
+        public override int getPK()
+        {
+            return IdeaInteractionTypeID;
+        }
     }
-    public class IdeaInteractionTypeCreateDto
+    public class IdeaInteractionTypeCreateDto : Dto
     {
         public int IdeaInteractionTypeID { get; set; }
         public string Description { get; set; }
+
+        public override int getPK()
+        {
+            return IdeaInteractionTypeID;
+        }
     }
-    public class IdeaInteractionTypeUpdateDto
+    public class IdeaInteractionTypeUpdateDto : Dto
     {
         public int IdeaInteractionTypeID { get; set; }
         public string Description { get; set; }
+
+        public override int getPK()
+        {
+            return IdeaInteractionTypeID;
+        }
     }
 }

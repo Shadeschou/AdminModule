@@ -2,7 +2,7 @@ using System;
 
 namespace DataLayer.Dtos
 {
-    public class IdeaReadDto
+    public class IdeaReadDto : Dto
     {
         public int IdeaID { get; set; }
         public int CompanyID { get; set; }
@@ -14,8 +14,13 @@ namespace DataLayer.Dtos
         public string Text { get; set; }
         public DateTime DateCreated { get; set; }
         public DateTime DateLastEdited { get; set; }
+
+        public override int getPK()
+        {
+            return IdeaID;
+        }
     }
-    public class IdeaCreateDto
+    public class IdeaCreateDto : Dto
     {
         public int IdeaID { get; set; }
         public int CompanyID { get; set; }
@@ -27,8 +32,13 @@ namespace DataLayer.Dtos
         public string Text { get; set; }
         public DateTime DateCreated { get; set; }
         public DateTime DateLastEdited { get; set; }
+
+        public override int getPK()
+        {
+            return IdeaID;
+        }
     }
-    public class IdeaUpdateDto
+    public class IdeaUpdateDto : Dto
     {
         public int IdeaID { get; set; }
         public int CompanyID { get; set; }
@@ -40,5 +50,10 @@ namespace DataLayer.Dtos
         public string Text { get; set; }
         public DateTime DateCreated { get; set; }
         public DateTime DateLastEdited { get; set; }
+
+        public override int getPK()
+        {
+            return IdeaID;
+        }
     }
 }

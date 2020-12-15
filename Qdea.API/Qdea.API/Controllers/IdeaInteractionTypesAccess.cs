@@ -52,10 +52,10 @@ namespace Qdea.API.Controllers
             //return Ok(_mapper.Map<CompanyReadDto>(CompanyModel));
         }
 
-        [HttpPut("{id}")]
-        public ActionResult UpdateIdeaInteractionType(int id, IdeaInteractionTypeUpdateDto IdeaInteractionTypeUpdateDto)
+        [HttpPut]
+        public ActionResult UpdateIdeaInteractionType(IdeaInteractionTypeUpdateDto IdeaInteractionTypeUpdateDto)
         {
-            var IdeaInteractionTypeModel = _repository.GetIdeaInteractionTypeById(id);
+            var IdeaInteractionTypeModel = _repository.GetIdeaInteractionTypeById(IdeaInteractionTypeUpdateDto.IdeaInteractionTypeID);
             if (IdeaInteractionTypeModel == null) return NotFound();
             _mapper.Map(IdeaInteractionTypeUpdateDto, IdeaInteractionTypeModel);
             _repository.UpdateIdeaInteractionType(IdeaInteractionTypeModel);

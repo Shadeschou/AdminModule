@@ -1,29 +1,17 @@
-﻿using System;
-using System.Runtime.CompilerServices;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Input;
-using AdminModule.Services;
+﻿using AdminModule.Services;
 using AdminModule.utility;
 using Microsoft.Extensions.DependencyInjection;
-
 
 namespace AdminModule.ViewModels
 {
     public class MainWindowViewModel : BaseViewModel
     {
         private BaseViewModel _selectedViewModel;
-       
-        public MainWindowViewModel()
+        public ServiceProvider serviceProvider { get; set; }
+        public CustomCommand CustomCommand { get; set; }
+
+        public BaseViewModel SelectedViewModel
         {
-
-            CustomCommand = new CustomCommand(this);
-          
-            
-
-        }
-
-        public BaseViewModel SelectedViewModel {
             get => _selectedViewModel;
             set
             {
@@ -32,23 +20,18 @@ namespace AdminModule.ViewModels
             }
         }
 
-        public ICommand CustomCommand { get; set; }
-
-        //Start of Client 
-        public async Task Startup()
+        public MainWindowViewModel()
         {
-            // create a new ServiceCollection 
+            Startup();            
+        }
+        
+        public void Startup()
+        {
             var serviceCollection = new ServiceCollection();
-
             ConfigureServices(serviceCollection);
-
-            // create a new ServiceProvider
-            var serviceProvider = serviceCollection.BuildServiceProvider();
-
-            // Run our IntegrationService containing all samples and
-            // await this call to ensure the application doesn't 
-            // prematurely exit.
-                await serviceProvider.GetService<IIntegrationService>().Run();
+            serviceProvider = serviceCollection.BuildServiceProvider();
+            //testmethod
+            CustomCommand = new CustomCommand(this, serviceProvider);
         }
 
         private void ConfigureServices(ServiceCollection serviceCollection)
