@@ -25,11 +25,7 @@ namespace AdminModule.ViewModels
         public AddCustomerModel()
         {
            
-            PostData();
-            if (PostData().GetAwaiter().IsCompleted)
-            {
-                MessageBox.Show("Hi"); 
-            }
+            //PostData();
 
         }
         public async Task PostData()

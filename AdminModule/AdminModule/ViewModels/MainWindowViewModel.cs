@@ -13,12 +13,13 @@ namespace AdminModule.ViewModels
     public class MainWindowViewModel : BaseViewModel
     {
         private BaseViewModel _selectedViewModel;
+       
         public MainWindowViewModel()
         {
 
             CustomCommand = new CustomCommand(this);
-           
             APIService.InitClient();
+            
 
         }
 
