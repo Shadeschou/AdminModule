@@ -10,8 +10,8 @@ using Qdea.API.Models;
 namespace Qdea.API.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20201214094554_initialmigration")]
-    partial class initialmigration
+    [Migration("20201215162235_EfMigration")]
+    partial class EfMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -20,6 +20,28 @@ namespace Qdea.API.Migrations
                 .UseIdentityColumns()
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("ProductVersion", "5.0.1");
+
+            modelBuilder.Entity("Qdea.API.Domain.AddedUser", b =>
+                {
+                    b.Property<int>("AddedUserID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
+
+                    b.Property<int?>("IdeaID")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("UserID")
+                        .HasColumnType("int");
+
+                    b.HasKey("AddedUserID");
+
+                    b.HasIndex("IdeaID");
+
+                    b.HasIndex("UserID");
+
+                    b.ToTable("AddedUsers");
+                });
 
             modelBuilder.Entity("Qdea.API.Domain.Effort", b =>
                 {
@@ -52,14 +74,14 @@ namespace Qdea.API.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Effort")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int?>("EffortID")
+                        .HasColumnType("int");
 
                     b.Property<int?>("IdeaStatusID")
                         .HasColumnType("int");
 
-                    b.Property<string>("Impact")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int?>("ImpactID")
+                        .HasColumnType("int");
 
                     b.Property<int?>("PriorityID")
                         .HasColumnType("int");
@@ -75,7 +97,11 @@ namespace Qdea.API.Migrations
 
                     b.HasKey("IdeaID");
 
+                    b.HasIndex("EffortID");
+
                     b.HasIndex("IdeaStatusID");
+
+                    b.HasIndex("ImpactID");
 
                     b.HasIndex("PriorityID");
 
@@ -242,7 +268,7 @@ namespace Qdea.API.Migrations
                     b.Property<string>("Password")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("PhoneNumber")
+                    b.Property<int?>("PhoneNumber")
                         .HasColumnType("int");
 
                     b.Property<int?>("UserStatusID")
@@ -270,11 +296,34 @@ namespace Qdea.API.Migrations
                     b.ToTable("UserStatuses");
                 });
 
+            modelBuilder.Entity("Qdea.API.Domain.AddedUser", b =>
+                {
+                    b.HasOne("Qdea.API.Domain.Idea", "Idea")
+                        .WithMany()
+                        .HasForeignKey("IdeaID");
+
+                    b.HasOne("Qdea.API.Domain.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserID");
+
+                    b.Navigation("Idea");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("Qdea.API.Domain.Idea", b =>
                 {
+                    b.HasOne("Qdea.API.Domain.Effort", "Effort")
+                        .WithMany()
+                        .HasForeignKey("EffortID");
+
                     b.HasOne("Qdea.API.Domain.IdeaStatus", "IdeaStatus")
                         .WithMany()
                         .HasForeignKey("IdeaStatusID");
+
+                    b.HasOne("Qdea.API.Domain.Impact", "Impact")
+                        .WithMany()
+                        .HasForeignKey("ImpactID");
 
                     b.HasOne("Qdea.API.Domain.Priority", "Priority")
                         .WithMany()
@@ -284,7 +333,11 @@ namespace Qdea.API.Migrations
                         .WithMany()
                         .HasForeignKey("UserID");
 
+                    b.Navigation("Effort");
+
                     b.Navigation("IdeaStatus");
+
+                    b.Navigation("Impact");
 
                     b.Navigation("Priority");
 

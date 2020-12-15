@@ -7,7 +7,7 @@ using DataLayer.Dtos;
 
 namespace Qdea.API.Controllers
 {
-    [Route("api/impactss")]
+    [Route("api/impacts")]
     [ApiController]
     public class ImpactsController : ControllerBase
     {
