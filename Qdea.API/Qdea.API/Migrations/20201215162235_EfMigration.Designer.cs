@@ -10,7 +10,7 @@ using Qdea.API.Models;
 namespace Qdea.API.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20201215155236_EfMigration")]
+    [Migration("20201215162235_EfMigration")]
     partial class EfMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

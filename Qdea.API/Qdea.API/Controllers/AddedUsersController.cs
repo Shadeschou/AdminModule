@@ -7,7 +7,7 @@ using Qdea.API.Domain;
 
 namespace Qdea.API.Controllers
 {
-    [Route("api/impacts")]
+    [Route("api/addedusers")]
     [ApiController]
     public class AddedUsersController : ControllerBase
     {
