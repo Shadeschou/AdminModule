@@ -132,6 +132,15 @@
         <Style TargetType="TextBox">
             <Setter Property="FontFamily" Value="Tahoma" />
             <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="Background" Value="#6495ED" />
+            <Setter Property="Margin" Value="2 2 2 50 "/>
+            <Setter Property="HorizontalAlignment" Value="Stretch" />
+            <Setter Property="HorizontalContentAlignment" Value="Center" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+            <Setter Property="SelectionOpacity" Value="0.7" />
+            <Setter Property="Grid.IsSharedSizeScope" Value="True" />
+            <Setter Property="VerticalScrollBarVisibility" Value="Auto" />
+            <Setter Property="UseLayoutRounding" Value="True"> </Setter>
 
         </Style>
         <Style TargetType="Label">

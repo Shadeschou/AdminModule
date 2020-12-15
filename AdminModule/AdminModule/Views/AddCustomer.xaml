@@ -14,66 +14,46 @@
 
         <Grid Height="900">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
+               
+                <ColumnDefinition Width="291*" />
+                <ColumnDefinition Width="292*" />
+                <ColumnDefinition Width="291*" />
+                <ColumnDefinition Width="291*" />
+
 
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
+
                 <RowDefinition Height="*" />
-                <RowDefinition Height="*" />
-                <RowDefinition Height="*" />
-                <RowDefinition Height="*" />
+                <RowDefinition Height="0.5*" />
                 <RowDefinition Height="*" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
 
             <!--  Input Field Labes -> These are made to match the DB  -->
-            <Label Content="Add UserID" />
-            <Label Grid.Column="1" Content="Add UserStatusID" />
-            <Label Grid.Column="2" Content="Add Name" />
-            <Label Grid.Column="3" Content="Add Address" />
-            <Label Grid.Column="4" Content="Phone" />
-            <Label Grid.Column="5" Content="Mail" />
+            <Label
+                Grid.Column="0"
+                Margin="1,1,1.333,1"
+                Content="Add Name" />
+            <Label
+                Grid.Column="1"
+                Margin="0.667,1,1.333,1"
+                Content="Add Address" />
+            <Label
+                Grid.Column="2"
+                Margin="0.667,1"
+                Content="Phone" />
+            <Label
+                Grid.Column="3"
+                Margin="1.333,1,1,1"
+                Content="Mail" />
 
             <!--  Input Fields  -->
             <TextBox
-                x:Name="AddUserID"
-                Grid.Row="1"
-                Grid.Column="0"
-                Margin="2,2.333,2.333,10.333"
-                HorizontalAlignment="Stretch"
-                HorizontalContentAlignment="Center"
-                VerticalContentAlignment="Center"
-                FontSize="10"
-                Grid.IsSharedSizeScope="True"
-                ScrollViewer.CanContentScroll="True"
-                SelectionOpacity="0.7"
-                Text="{Binding UserIDInput}"
-                UseLayoutRounding="True"
-                VerticalScrollBarVisibility="Auto">
-                <TextBox.DataContext>
-                    <ViewModels:AddCustomerModel />
-                </TextBox.DataContext>
-            </TextBox>
-            <TextBox
                 x:Name="AddUserStatusID"
                 Grid.Row="1"
-                Grid.Column="1"
-                Margin="1.667,2.333,1.667,10.333"
-                HorizontalAlignment="Stretch"
-                HorizontalContentAlignment="Center"
-                VerticalContentAlignment="Center"
-                FontSize="10"
-                Grid.IsSharedSizeScope="True"
-                ScrollViewer.CanContentScroll="True"
-                SelectionOpacity="0.7"
-                Text="{Binding UserStatusIDInput}"
-                UseLayoutRounding="True"
-                VerticalScrollBarVisibility="Auto">
+                Grid.Column="0"
+                Text="{Binding NameInput}">
                 <TextBox.DataContext>
                     <ViewModels:AddCustomerModel />
                 </TextBox.DataContext>
@@ -81,18 +61,8 @@
             <TextBox
                 x:Name="AddName"
                 Grid.Row="1"
-                Grid.Column="2"
-                Margin="2.333,2.333,2,10.333"
-                HorizontalAlignment="Stretch"
-                HorizontalContentAlignment="Center"
-                VerticalContentAlignment="Center"
-                FontSize="10"
-                Grid.IsSharedSizeScope="True"
-                ScrollViewer.CanContentScroll="True"
-                SelectionOpacity="0.7"
-                Text="{Binding NameInput}"
-                UseLayoutRounding="True"
-                VerticalScrollBarVisibility="Auto">
+                Grid.Column="1"
+                Text="{Binding AddressInput}">
                 <TextBox.DataContext>
                     <ViewModels:AddCustomerModel />
                 </TextBox.DataContext>
@@ -100,38 +70,8 @@
             <TextBox
                 x:Name="AddAddress"
                 Grid.Row="1"
-                Grid.Column="3"
-                Margin="2,2.333,2.333,10.333"
-                HorizontalAlignment="Stretch"
-                HorizontalContentAlignment="Center"
-                VerticalContentAlignment="Center"
-                FontSize="10"
-                Grid.IsSharedSizeScope="True"
-                ScrollViewer.CanContentScroll="True"
-                SelectionOpacity="0.7"
-                Text="{Binding AddressInput}"
-                UseLayoutRounding="True"
-                VerticalScrollBarVisibility="Auto">
-                <TextBox.DataContext>
-                    <ViewModels:AddCustomerModel />
-                </TextBox.DataContext>
-            </TextBox>
-            <TextBox
-                x:Name="AddPhone"
-                Grid.Row="1"
-                Grid.Column="4"
-                Margin="1.667,2.333,1.667,10.333"
-                HorizontalAlignment="Stretch"
-                VerticalAlignment="Stretch"
-                HorizontalContentAlignment="Center"
-                VerticalContentAlignment="Center"
-                FontSize="10"
-                Grid.IsSharedSizeScope="True"
-                ScrollViewer.CanContentScroll="True"
-                SelectionOpacity="0.7"
-                Text="{Binding PhoneNumberInput}"
-                UseLayoutRounding="True"
-                VerticalScrollBarVisibility="Auto">
+                Grid.Column="2"
+                Text="{Binding PhoneNumberInput}">
                 <TextBox.DataContext>
                     <ViewModels:AddCustomerModel />
                 </TextBox.DataContext>
@@ -139,18 +79,8 @@
             <TextBox
                 x:Name="AddMail"
                 Grid.Row="1"
-                Grid.Column="5"
-                Margin="2.333,2.333,2,10.333"
-                HorizontalAlignment="Stretch"
-                HorizontalContentAlignment="Center"
-                VerticalContentAlignment="Center"
-                FontSize="10"
-                Grid.IsSharedSizeScope="True"
-                ScrollViewer.CanContentScroll="True"
-                SelectionOpacity="0.7"
-                Text="{Binding EmailInput}"
-                UseLayoutRounding="True"
-                VerticalScrollBarVisibility="Auto">
+                Grid.Column="3"
+                Text="{Binding EmailInput}">
                 <TextBox.DataContext>
                     <ViewModels:AddCustomerModel />
                 </TextBox.DataContext>
@@ -159,18 +89,17 @@
             <!--  Buttons  -->
             <Button
                 x:Name="AddButton"
-                Grid.Row="4"
-                Grid.ColumnSpan="3"
-                Margin="0,0,10,0"
+                Grid.Row="3"
+                Grid.ColumnSpan="2"
                 Content="Add"
                 Style="{StaticResource ButtonStyle}" />
             <Button
                 x:Name="ResetButton"
-                Grid.Row="4"
-                Grid.Column="3"
-                Grid.ColumnSpan="3"
+                Grid.Row="3"
+                Grid.Column="2"
+                Grid.ColumnSpan="2"
                 Content="Reset"
-                Style="{StaticResource ButtonStyle}" />
+                Style="{StaticResource ButtonStyle}"/>
 
 
         </Grid>

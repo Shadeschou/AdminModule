@@ -4,20 +4,21 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:local="clr-namespace:AdminModule.ViewModels"
     d:DesignHeight="1080"
     d:DesignWidth="1750"
     mc:Ignorable="d">
 
-    <UserControl.Resources></UserControl.Resources>
+    <UserControl.Resources>
+      
+    </UserControl.Resources>
     <StackPanel Background="#6495ED">
         <Grid Height="500">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-
+                <ColumnDefinition Width="431*" />
+                <ColumnDefinition Width="446*" />
+                <ColumnDefinition Width="435*" />
+                <ColumnDefinition Width="437*" />
 
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
@@ -29,70 +30,64 @@
 
             </Grid.RowDefinitions>
 
+
             <Label
+                x:Name="NameLabel"
                 Grid.Column="0"
                 HorizontalAlignment="Stretch"
                 VerticalAlignment="Stretch"
                 HorizontalContentAlignment="Center"
                 VerticalContentAlignment="Center"
-                Content="CompanyID" />
+                Content="Name" Margin="1,1,1.333,1" />
             <Label
                 Grid.Column="1"
                 HorizontalAlignment="Stretch"
                 VerticalAlignment="Stretch"
                 HorizontalContentAlignment="Center"
                 VerticalContentAlignment="Center"
-                Content="UserNameID" />
+                Content="Address" Margin="0.667,1,1.333,1" />
             <Label
                 Grid.Column="2"
                 HorizontalAlignment="Stretch"
                 VerticalAlignment="Stretch"
                 HorizontalContentAlignment="Center"
                 VerticalContentAlignment="Center"
-                Content="Address" />
+                Content="Mail" Margin="0.667,1" />
             <Label
                 Grid.Column="3"
                 HorizontalAlignment="Stretch"
                 VerticalAlignment="Stretch"
                 HorizontalContentAlignment="Center"
                 VerticalContentAlignment="Center"
-                Content="Phone" />
-            <Label
-                Grid.Column="4"
-                HorizontalAlignment="Stretch"
-                VerticalAlignment="Stretch"
-                HorizontalContentAlignment="Center"
-                VerticalContentAlignment="Center"
-                Content="Mail" />
+                Content="Phone" Margin="1.333,1,1,1" />
 
             <ListView
                 x:Name="listView"
-                Grid.Row="1"
-                Grid.RowSpan="4"
+                Grid.RowSpan="5"
                 Grid.Column="0"
-                Grid.ColumnSpan="5"
+                Grid.ColumnSpan="4"
                 Background="#6495ED"
                 HorizontalAlignment="Stretch"
                 VerticalAlignment="Stretch">
                 <ListView.View>
                     <GridView>
-                        <GridViewColumn Width="50" Header="Name" DisplayMemberBinding="{Binding Id}" />
-                        <GridViewColumn Width="50" DisplayMemberBinding="{Binding Name}" />
-                        <GridViewColumn Width="50" DisplayMemberBinding="{Binding Name}" />
-                        <GridViewColumn Width="50" DisplayMemberBinding="{Binding Name}" />
-                        <GridViewColumn Width="50" DisplayMemberBinding="{Binding Name}" />
+                        <GridViewColumn Header="Name" DisplayMemberBinding="{ Binding}" />
+                        <GridViewColumn Header="Address " Width="444" DisplayMemberBinding="{Binding AddressInput}" />
+                        <GridViewColumn  Header="Mail" Width="440" DisplayMemberBinding="{Binding EmailInput }" />
+                        <GridViewColumn Header="Phone" Width="425" DisplayMemberBinding="{Binding PhoneNumberInput}" />
                     </GridView>
                 </ListView.View>
             </ListView>
 
             <Button
                 Grid.Row="4"
-                Grid.Column="2"
+                Grid.Column="0"
+                Grid.ColumnSpan="4"
 
                 HorizontalAlignment="Stretch"
                 VerticalAlignment="Center"
                 Content="Confirm Deletion"
-                Style="{DynamicResource ButtonStyle}" />
+                Style="{DynamicResource ButtonStyle}"/>
 
 
         </Grid>

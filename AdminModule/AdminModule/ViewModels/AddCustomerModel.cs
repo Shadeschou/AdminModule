@@ -1,5 +1,6 @@
 ﻿using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -23,12 +24,8 @@ namespace AdminModule.ViewModels
 
         public AddCustomerModel()
         {
-            APIService.InitClient();
-            PostData();
-            if (PostData().GetAwaiter().IsCompleted)
-            {
-                MessageBox.Show("Hi"); 
-            }
+           
+            //PostData();
 
         }
         public async Task PostData()
@@ -39,31 +36,35 @@ namespace AdminModule.ViewModels
                 Address = "AddressInput",
                 Name = "NameInput",
                 PhoneNumber = 1234124,
-                Email = "EmailInput"
+                Email = "EmailInput",
+                UserStatusID = 1
+
             };
 
             var serializedCustomer = JsonConvert.SerializeObject(customerToCreate);
+            var content = new StringContent(serializedCustomer,Encoding.UTF8,"application/json");
+            var response = await APIService._httpClient.PostAsync("api/users",content );
+            // var request = new HttpRequestMessage(HttpMethod.Post, "api/users");
+            //Returned object in a newly created response Body. 
+            /*
+            request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            request.Content = new StringContent(serializedCustomer);
+            request.Content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+            */
+            //we call async to pass through the request
+            //we ensure success response.
+            response.EnsureSuccessStatusCode();
+            //We read Content
+            var contentReturn = await response.Content.ReadAsStringAsync();
+        
 
-                var request = new HttpRequestMessage(HttpMethod.Post, "api/users");
-                //Returned object in a newly created response Body. 
-                request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                request.Content = new StringContent(serializedCustomer);
-                request.Content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
-
-                //we call async to pass through the request
-                var response = await APIService._httpClient.SendAsync(request);
-                //we ensure success response.
-                response.EnsureSuccessStatusCode();
-                //We read Content
-                var content = await response.Content.ReadAsStringAsync();
-            
-
-                var createdUser = JsonConvert.DeserializeObject<UserCreateDto>(content);
-
-          
+            var createdUser = JsonConvert.DeserializeObject<UserCreateDto>(contentReturn);
+        
 
 
-    }
+
+
+        }
 
 
     }

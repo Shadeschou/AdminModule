@@ -13,14 +13,17 @@ namespace AdminModule.ViewModels
     public class MainWindowViewModel : BaseViewModel
     {
         private BaseViewModel _selectedViewModel;
+       
         public MainWindowViewModel()
         {
+
             CustomCommand = new CustomCommand(this);
-            SelectedViewModel = new ManageCustomerModel();
+          
+            
+
         }
 
-        public BaseViewModel SelectedViewModel
-        {
+        public BaseViewModel SelectedViewModel {
             get => _selectedViewModel;
             set
             {
