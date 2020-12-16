@@ -202,8 +202,6 @@
     <Compile Include="Services\BaseCommand.cs" />
     <Compile Include="Services\CustomCommand.cs" />
     <Compile Include="Services\TextInputToVisibilityConverter.cs" />
-    <Compile Include="Services\WatermarkAdorner.cs" />
-    <Compile Include="Services\WatermarkService.cs" />
     <Compile Include="ViewModels\AddCustomerModel.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\ManageCustomerModel.cs" />
@@ -274,9 +272,6 @@
       <Project>{6ace9a31-33e1-4b65-87ad-60634f60b1a4}</Project>
       <Name>DataLayer</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Services\AdornerXAML For Waterm.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
