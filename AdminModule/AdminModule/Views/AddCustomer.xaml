@@ -7,6 +7,7 @@
     xmlns:local="clr-namespace:AdminModule.Services"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:services="clr-namespace:AdminModule.Services"
+    xmlns:adorners="http://gu.se/Adorners"
     d:DesignHeight="720"
     d:DesignWidth="1280"
     mc:Ignorable="d">
@@ -56,48 +57,29 @@
 
 
 
-            <TextBlock
-                Grid.Row="1"
-                Margin="1,30,1,1"
-                HorizontalAlignment="Center"
-                VerticalAlignment="Stretch"
-        
-                Text="Input Name"
-                Visibility="{Binding ElementName=NameInputField, Path=Text.IsEmpty, Converter={StaticResource BooleanToVisibilityConverter}}" />
-            <TextBox
+                <TextBox
+                adorners:Watermark.Text="Write something here"
+               
+                adorners:Watermark.VisibleWhen="EmptyAndNotKeyboardFocused"
                 Focusable="True"
                 Name="NameInputField"
                 Grid.Row="1"
                 Background="Transparent"
                 Text="{Binding NameInput}" />
-
-            <TextBlock
-                Grid.Row="1"
-                Grid.Column="1"
-              
-                Margin="1,30,1,1"
-                HorizontalAlignment="Center"
-                VerticalAlignment="Stretch"
-                Text="Enter Address"
-                Visibility="{Binding ElementName=AddressInputField, Path=Text.IsEmpty, Converter={StaticResource BooleanToVisibilityConverter}}" />
-            <TextBox
+                <TextBox
+                    adorners:Watermark.Text="Write something here"
+               
+                    adorners:Watermark.VisibleWhen="EmptyAndNotKeyboardFocused"
                 Focusable="True"
                 Name="AddressInputField"
                 Grid.Row="1"
                 Grid.Column="1"
                 Background="Transparent"
-                Text="{Binding NameInput}" />
-
-            <TextBlock
-                Grid.Row="1"
-            
-                Grid.Column="2"
-                Margin="1,30,1,1"
-                HorizontalAlignment="Center"
-                VerticalAlignment="Stretch"
-                Text="Input PhoneNo"
-                Visibility="{Binding ElementName=PhoneNoInputField, Path=Text.IsEmpty, Converter={StaticResource BooleanToVisibilityConverter}}" />
-            <TextBox
+                Text="{Binding Ad}" />
+                <TextBox
+                    adorners:Watermark.Text="Write something here"
+               
+                    adorners:Watermark.VisibleWhen="EmptyAndNotKeyboardFocused"
                 Focusable="True"
                 Name="PhoneNoInputField"
                 Grid.Row="1"
@@ -106,16 +88,10 @@
                 Text="{Binding NameInput}" />
 
 
-            <TextBlock
-                Grid.Row="1"
-                Grid.Column="3"
-                Margin="1,30,1,1"
-                HorizontalAlignment="Center"
-              
-                VerticalAlignment="Stretch"
-                Text="Input Mail"
-                Visibility="{Binding ElementName=MailInputField, Path=Text.IsEmpty, Converter={StaticResource BooleanToVisibilityConverter}}" />
-            <TextBox
+                <TextBox
+                    adorners:Watermark.Text="Write something here"
+               
+                    adorners:Watermark.VisibleWhen="EmptyAndNotKeyboardFocused"
                 Focusable="True"
                 Name="MailInputField"
                 Grid.Row="1"
@@ -124,18 +100,10 @@
                 Text="{Binding NameInput}" />
 
 
-            <TextBlock
-                Grid.Row="1"
-               
-                Grid.Column="4"
-                Margin="1,30,1,1"
-                HorizontalAlignment="Center"
-                VerticalAlignment="Stretch"
-                Text="Input Password"
-                Visibility="{Binding ElementName=PasswordInputField, Path=Text.IsEmpty, Converter={StaticResource BooleanToVisibilityConverter}}" />
-            <TextBox
+                <TextBox
                 
-                Focusable="True"
+                adorners:Watermark.Text="Write something here"
+                adorners:Watermark.VisibleWhen="EmptyAndNotKeyboardFocused"
                 Name="PasswordInputField"
                 Grid.Row="1"
                 Grid.Column="4"
@@ -150,7 +118,7 @@
 
 
 
-            <Grid Grid.Row="2" Grid.ColumnSpan="5">
+                <Grid Grid.Row="2" Grid.ColumnSpan="5">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="2*" />
                     <ColumnDefinition Width="*" />
