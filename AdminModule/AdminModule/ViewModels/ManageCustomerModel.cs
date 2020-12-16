@@ -22,39 +22,35 @@ namespace AdminModule.ViewModels
 
             //HERE BE API TESTS: enjoy
 
-            //requesting user with id no 1, providing the Dto type in which the returned json is automatically converted
-            testSingle();
-
-            //requesting whole idea table, providing Dto type which will be referenced by ObservableCollection
-            testTable();
-
-            //inserting single entry into tags table, providing dto type because it is converted to json for transmit
+            putInTestValues(); //adding some tags into db for testing
+            testGetSingle();
+            testGetTable();
             testInsert();
-
-            //changing the newly added tag
             testUpdate();
-
-            //delete single entry from tags table again
             testDelete();
+        }        
+
+        void testGetSingle()
+        {
+            var tagDto = Api.GetSingleEntryById<TagReadDto>("tags", 1);
+            MessageBox.Show("TagID: " + tagDto.TagID + " TagTitle: " + tagDto.Title, "GetSingle test");
         }
 
-        void testSingle()
+        void testGetTable()
         {
-            var userDto = Api.GetSingleEntryById<UserReadDto>("users", 1);
-            MessageBox.Show("Name: " + userDto.Name + " ID: " + userDto.UserID, "UserDto Test");
-        }
-
-        void testTable()
-        {
-            var ideaList = Api.GetTable<IdeaReadDto>("ideas");
-            MessageBox.Show(ideaList.ToString(), "Too lazy to make this output beautiful...");
+            var tagList = Api.GetTable<TagReadDto>("tags");
+            foreach(TagReadDto tag in tagList) 
+            {
+                MessageBox.Show("TagID: " + tag.TagID + " TagTitle: " + tag.Title, "GetTable test... just click through");
+            }
+            
         }
 
         void testInsert()
         {
             var tagToBeInserted = new TagCreateDto { Title = "this tag has just been inserted" }; //NOT supplying primary key, db will auto increment itself
             var insertResponse = Api.Insert<TagCreateDto>("tags", tagToBeInserted);
-            MessageBox.Show(insertResponse.ToString(), "this should be the whole status message response");
+            MessageBox.Show(insertResponse.ToString(), "too lazy to make this readable... but it worked!");
         }
 
         void testUpdate()
@@ -67,7 +63,7 @@ namespace AdminModule.ViewModels
             //and now update the title
             TagUpdateDto updatingTag = new TagUpdateDto() { TagID = tagToBeUpdated.TagID, Title = "this just updated the title" }; //supplying primary key, so db knows which entry to update with rest of attributes
             var tagUpdateResponse = Api.Update<TagUpdateDto>("tags", updatingTag);
-            MessageBox.Show(tagUpdateResponse.ToString() ,"Updated Tag's response:");
+            MessageBox.Show(tagUpdateResponse.ToString() , "again too lazy to make this readable... but it worked!");
         }
 
         void testDelete()
@@ -84,6 +80,13 @@ namespace AdminModule.ViewModels
             //and now delete it
             var tagDeletionResponseMessage = Api.Delete("tags", tagId);
             MessageBox.Show(tagDeletionResponseMessage.ToString(), "Make this readable? hell naw");
+        }
+
+        void putInTestValues()
+        {
+            Api.Insert<TagCreateDto>("tags", new TagCreateDto() { Title = "first testTag" });
+            Api.Insert<TagCreateDto>("tags", new TagCreateDto() { Title = "second testTag" });
+            Api.Insert<TagCreateDto>("tags", new TagCreateDto() { Title = "third testTag" });
         }
     }
 }
