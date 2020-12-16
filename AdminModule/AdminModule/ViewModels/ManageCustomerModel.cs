@@ -63,7 +63,7 @@ namespace AdminModule.ViewModels
             //and now update the title
             TagUpdateDto updatingTag = new TagUpdateDto() { TagID = tagToBeUpdated.TagID, Title = "this just updated the title" }; //supplying primary key, so db knows which entry to update with rest of attributes
             var tagUpdateResponse = Api.Update<TagUpdateDto>("tags", updatingTag);
-            MessageBox.Show(tagUpdateResponse.ToString() , "again too lazy to make this readable... but it worked!");
+            MessageBox.Show("if this responds a 204: no content, that means it works! \b" + tagUpdateResponse.ToString() , "again too lazy to make this readable... but it worked!");
         }
 
         void testDelete()
@@ -79,7 +79,7 @@ namespace AdminModule.ViewModels
 
             //and now delete it
             var tagDeletionResponseMessage = Api.Delete("tags", tagId);
-            MessageBox.Show(tagDeletionResponseMessage.ToString(), "Make this readable? hell naw");
+            MessageBox.Show("if this responds a 204: no content, that means it works! \b" + tagDeletionResponseMessage.ToString(), "Make this readable? hell naw");
         }
 
         void putInTestValues()
