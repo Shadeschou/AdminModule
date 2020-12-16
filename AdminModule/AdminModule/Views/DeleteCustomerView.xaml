@@ -5,12 +5,14 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:local="clr-namespace:AdminModule.ViewModels"
-    d:DesignHeight="1080"
-    d:DesignWidth="1750"
+    d:DesignHeight="720"
+    d:DesignWidth="1280"
+    MinHeight="460"
+    MinWidth="330"
     mc:Ignorable="d">
 
     <UserControl.Resources>
-      
+
     </UserControl.Resources>
     <StackPanel Background="#6495ED">
         <Grid Height="500">
@@ -60,30 +62,20 @@
                 HorizontalContentAlignment="Center"
                 VerticalContentAlignment="Center"
                 Content="Phone" Margin="1.333,1,1,1" />
+            <DataGrid  Grid.Row="1"  Name="dataGrid1" Margin="12,12,12,0" 
+                      Grid.ColumnSpan="4"
+                      Grid.RowSpan="3"
+                      Style="{DynamicResource DataGridStyle1}"
+                      ItemsSource="{Binding Path=Users}"
+                      AlternatingRowBackground="CornflowerBlue">
 
-            <ListView
-                x:Name="listView"
-                Grid.RowSpan="5"
-                Grid.Column="0"
-                Grid.ColumnSpan="4"
-                Background="#6495ED"
-                HorizontalAlignment="Stretch"
-                VerticalAlignment="Stretch">
-                <ListView.View>
-                    <GridView>
-                        <GridViewColumn Header="Name" DisplayMemberBinding="{ Binding}" />
-                        <GridViewColumn Header="Address " Width="444" DisplayMemberBinding="{Binding AddressInput}" />
-                        <GridViewColumn  Header="Mail" Width="440" DisplayMemberBinding="{Binding EmailInput }" />
-                        <GridViewColumn Header="Phone" Width="425" DisplayMemberBinding="{Binding PhoneNumberInput}" />
-                    </GridView>
-                </ListView.View>
-            </ListView>
+            </DataGrid>
 
             <Button
                 Grid.Row="4"
                 Grid.Column="0"
                 Grid.ColumnSpan="4"
-
+                Command="{Binding GetDataCommand}"
                 HorizontalAlignment="Stretch"
                 VerticalAlignment="Center"
                 Content="Confirm Deletion"

@@ -5,8 +5,8 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Title="MainWindow"
-    Width="1920"
-    Height="1080"
+    Width="1280"
+    Height="720"
     mc:Ignorable="d"
     WindowStartupLocation="CenterScreen"
     
@@ -21,9 +21,9 @@
         </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
-            <RowDefinition Height="52*" />
-            <RowDefinition Height="229*" />
-            <RowDefinition Height="139*" />
+            <RowDefinition Height="0.5*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
         <Button
@@ -54,14 +54,15 @@
             Grid.RowSpan="2"
             Grid.Column="0"
             Grid.ColumnSpan="3"
-            VerticalAlignment="Stretch"
-            HorizontalAlignment="Stretch">
+          >
 
-            <ContentControl Content="{Binding SelectedViewModel}" />
+            <ContentControl Content="{Binding SelectedViewModel}"
+                            SnapsToDevicePixels="True"/>
 
         </StackPanel>
 
     </Grid>
+   
 
 
 </Window>

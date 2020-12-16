@@ -2,6 +2,7 @@
 using System.Collections.ObjectModel;
 using System.Windows;
 using System.Linq;
+using System.Windows.Markup;
 using AdminModule.Services;
 using DataLayer.Dtos;
 using Microsoft.Extensions.DependencyInjection;
@@ -10,24 +11,36 @@ namespace AdminModule.ViewModels
 {
     internal class ManageCustomerModel : BaseViewModel
     {
+
+        public int UserIDInput { get; set; } // PK
+        public string PasswordInput { get; set; } //Just for Convenience as this is part of the DB
+        public string AddressInput { get; set; }
+        public int PhoneNumberInput { get; set; }
+        public string EmailInput { get; set; }
+        public int UserStatusIDInput { get; set; } //FK
+        public string NameInput { get; set; }
+
+
         //Get Objects
         public ObservableCollection<UserReadDto> Users { get; set; }
         public IIntegrationService Api { get; set; }
 
-        public List<UserReadDto> users;
 
         public ManageCustomerModel(ServiceProvider serviceProvider)
         {
             Api = serviceProvider.GetService<IIntegrationService>();
+            
+            Users = new ObservableCollection<UserReadDto>();
+            Users.Clear();
 
             //HERE BE API TESTS: enjoy
 
-            putInTestValues(); //adding some tags into db for testing
-            testGetSingle();
+            //putInTestValues(); //adding some tags into db for testing
+            // testGetSingle();
             testGetTable();
-            testInsert();
-            testUpdate();
-            testDelete();
+            //testInsert();
+           //testUpdate();
+           //testDelete();
         }        
 
         void testGetSingle()
@@ -36,12 +49,14 @@ namespace AdminModule.ViewModels
             MessageBox.Show("TagID: " + tagDto.TagID + " TagTitle: " + tagDto.Title, "GetSingle test");
         }
 
+       
         void testGetTable()
         {
-            var tagList = Api.GetTable<TagReadDto>("tags");
-            foreach(TagReadDto tag in tagList) 
+            var entries = Api.GetTable<UserReadDto>("users");
+            foreach(UserReadDto tag in entries)
             {
-                MessageBox.Show("TagID: " + tag.TagID + " TagTitle: " + tag.Title, "GetTable test... just click through");
+                MessageBox.Show(tag.ToString());
+                Users.Add(tag);
             }
             
         }

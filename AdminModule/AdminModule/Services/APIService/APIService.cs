@@ -3,6 +3,8 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using Newtonsoft.Json;
 using System.Collections.Generic;
+using System.Text;
+using System.Windows;
 
 namespace AdminModule.Services
 {
@@ -46,10 +48,12 @@ namespace AdminModule.Services
             }
         }
 
-        public HttpResponseMessage Insert<Dto>(string table, Dto entry)
+        public HttpResponseMessage Insert<Dto>(string table,Dto entry)
         {
+            var data = new StringContent(JsonConvert.SerializeObject(entry),Encoding.UTF8,"application/json");
             using(var response = _httpClient.PostAsJsonAsync<Dto>($"api/{table}", entry))
             {
+                MessageBox.Show(response.Result.ToString());
                 return response.Result;
             }
         }

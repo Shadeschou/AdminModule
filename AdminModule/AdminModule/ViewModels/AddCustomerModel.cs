@@ -4,9 +4,12 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using AdminModule.Services;
+using AdminModule.utility;
 using AdminModule.Views;
 using DataLayer.Dtos;
+using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
 
 
@@ -22,49 +25,28 @@ namespace AdminModule.ViewModels
         public int UserStatusIDInput { get; set; } //FK
         public string NameInput { get; set; }
 
+        public IIntegrationService Api { get; set; }
+
         public AddCustomerModel()
         {
-           
-            //PostData();
-
+            this.AddressInput = "Enter Address";
+            this.NameInput = " Enter Name";
+            this.PhoneNumberInput = 128;
+            this.EmailInput = " Enter Mail ";
+            this.PasswordInput = "Enter PW ";
         }
-        public async Task PostData()
+       
+        public AddCustomerModel(ServiceProvider serviceProvider)
         {
-            
-            var customerToCreate = new UserCreateDto()
-            {
-                Address = "AddressInput",
-                Name = "NameInput",
-                PhoneNumber = 1234124,
-                Email = "EmailInput",
-                UserStatusID = 1
-
-            };
-
-            var serializedCustomer = JsonConvert.SerializeObject(customerToCreate);
-            var content = new StringContent(serializedCustomer,Encoding.UTF8,"application/json");
-            var response = await APIService._httpClient.PostAsync("api/users",content );
-            // var request = new HttpRequestMessage(HttpMethod.Post, "api/users");
-            //Returned object in a newly created response Body. 
-            /*
-            request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            request.Content = new StringContent(serializedCustomer);
-            request.Content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
-            */
-            //we call async to pass through the request
-            //we ensure success response.
-            response.EnsureSuccessStatusCode();
-            //We read Content
-            var contentReturn = await response.Content.ReadAsStringAsync();
-        
-
-            var createdUser = JsonConvert.DeserializeObject<UserCreateDto>(contentReturn);
-        
-
-
-
-
+            Api = serviceProvider.GetService<IIntegrationService>();
         }
+
+        public ICommand InsertCommand => new BaseCommand(() =>
+        {
+            var userToBeInserted = new UserCreateDto() { Name = "Name", Address = "Nice", Email = "NiceMail",Password = "NicePW", PhoneNumber = 1123123}; //NOT supplying primary key, db will auto increment itself
+            var insertResponse = Api.Insert<UserCreateDto>("tags", userToBeInserted);
+
+        });
 
 
     }

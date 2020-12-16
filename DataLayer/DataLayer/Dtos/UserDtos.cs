@@ -12,8 +12,8 @@ namespace DataLayer.Dtos
     }
     public class UserCreateDto : Dto
     {
-        public int UserID { get; set; }
-        public int UserStatusID { get; set; }
+        //public int UserID { get; set; }
+        //public int UserStatusID { get; set; }
         public string Name { get; set; }
         public string Address { get; set; }
         public int PhoneNumber { get; set; }

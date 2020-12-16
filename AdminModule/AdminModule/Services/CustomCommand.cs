@@ -26,7 +26,7 @@ namespace AdminModule.utility
             switch (parameter.ToString().ToLower())
             {
                 case "add customer":
-                    viewmodel.SelectedViewModel = new AddCustomerModel();
+                    viewmodel.SelectedViewModel = new AddCustomerModel(serviceProvider);
                     break;
                 case "delete customer":
                     viewmodel.SelectedViewModel = new DeleteCustomerModel();

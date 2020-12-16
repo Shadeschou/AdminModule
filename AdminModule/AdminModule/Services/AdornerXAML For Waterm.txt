@@ -1,0 +1,7 @@
+ <AdornerDecorator Grid.Row="1" Grid.Column="0">
+                <TextBox x:Name="NameInputField">
+                    <local:WatermarkService.Watermark>
+                        <TextBlock>Input Address</TextBlock>
+                    </local:WatermarkService.Watermark>
+                </TextBox>
+            </AdornerDecorator>
