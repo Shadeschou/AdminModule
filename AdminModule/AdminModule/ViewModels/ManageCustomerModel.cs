@@ -81,34 +81,31 @@ namespace AdminModule.ViewModels
         /// </summary>
         public ICommand ChangeEntry => new BaseCommand(() =>
         {
-            //  UserReadDto customer = (UserReadDto)SelectedRecord;
-            //var usersLocal = Api.GetTable<UserReadDto>("users");
-            //UserReadDto userToBeUpdated = usersLocal.Find(x => x.UserID == SelectedRecord.UserID);
-            //int tagId = 0;
-            //foreach (UserReadDto users in usersLocal)
-            //{
-            //    if (users.UserID > tagId) tagId = users.UserID;
-            //}
-            //if (tagId < 0) return;
 
-            //  //and now update the title
-            //  UserUpdateDto updatingTag = new UserUpdateDto()
-            //  { Address = SelectedRecord.Address, Email = SelectedRecord.Email, Name = SelectedRecord.Name, Password = SelectedRecord.Password, PhoneNumber = SelectedRecord.PhoneNumber}; //supplying primary key, so db knows which entry to update with rest of attributes
-            //  var tagUpdateResponse = Api.Update<UserUpdateDto>($"users/{SelectedRecord.UserID}", updatingTag);
-            //  Users = new ObservableCollection<UserReadDto>();
-            //  testGetTable();
-            //fetching newly created tag to update it with another title, since i just made it, it has to have the highest id
-            
-                //fetching newly created tag to update it with another title, since i just made it, it has to have the highest id
-                var tagList = Api.GetTable<TagReadDto>("tags");
-                TagReadDto tagToBeUpdated = tagList.Find(x => x.TagID == tagList.Max(t => t.TagID));
-                if (tagToBeUpdated == null) return;
+         UserReadDto customer = (UserReadDto)SelectedRecord;
+         var usersLocal = Api.GetTable<UserReadDto>("users");
+         UserReadDto userToBeUpdated = usersLocal.Find(x => x.UserID == SelectedRecord.UserID);
+         if (userToBeUpdated == null) return;
 
-                //and now update the title
-                TagUpdateDto updatingTag = new TagUpdateDto() { TagID = tagToBeUpdated.TagID, Title = "this just updated the title" }; //supplying primary key, so db knows which entry to update with rest of attributes
-                var tagUpdateResponse = Api.Update<TagUpdateDto>("tags", updatingTag);
-                MessageBox.Show("if this responds a 204: no content, that means it works! \b" + tagUpdateResponse.ToString(), "again too lazy to make this readable... but it worked!");
-            
+           //and now update the title
+           UserUpdateDto updatingTag = new UserUpdateDto()
+           {
+               Address = SelectedRecord.Address, Email = SelectedRecord.Email, Name = SelectedRecord.Name, Password = SelectedRecord.Password, PhoneNumber = SelectedRecord.PhoneNumber, UserID = SelectedRecord.UserID,UserStatusID = SelectedRecord.UserStatusID
+
+           }; //supplying primary key, so db knows which entry to update with rest of attributes
+           var tagUpdateResponse = Api.Update<UserUpdateDto>($"users/{SelectedRecord.UserID}", updatingTag);
+           MessageBox.Show(tagUpdateResponse.ToString());
+           //fetching newly created tag to update it with another title, since i just made it, it has to have the highest id
+
+           //       //fetching newly created tag to update it with another title, since i just made it, it has to have the highest id
+           //       var tagList = Api.GetTable<TagReadDto>("tags");
+           //       TagReadDto tagToBeUpdated = tagList.Find(x => x.TagID == tagList.Max(t => t.TagID));
+           //       if (tagToBeUpdated == null) return;
+
+           //       //and now update the title
+           //       TagUpdateDto updatingTag = new TagUpdateDto() { TagID = tagToBeUpdated.TagID, Title = "AHUGIZDASD" }; //supplying primary key, so db knows which entry to update with rest of attributes
+           //       var tagUpdateResponse = Api.Update<TagUpdateDto>("tags", updatingTag);
+
         });
 
 
