@@ -1,9 +1,7 @@
-﻿using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Windows;
+﻿using System.Collections.ObjectModel;
 using System.Linq;
+using System.Windows;
 using System.Windows.Input;
-using System.Windows.Markup;
 using AdminModule.Services;
 using DataLayer.Dtos;
 using Microsoft.Extensions.DependencyInjection;
@@ -12,6 +10,31 @@ namespace AdminModule.ViewModels
 {
     internal class ManageCustomerModel : BaseViewModel
     {
+        public UserReadDto selectedRecord;
+
+        public ManageCustomerModel()
+        {
+        }
+
+        /// <summary>
+        /// </summary>
+        /// <param name="serviceProvider"></param>
+        public ManageCustomerModel(ServiceProvider serviceProvider)
+        {
+            Api = serviceProvider.GetService<IIntegrationService>();
+
+            Users = new ObservableCollection<UserReadDto>();
+            Users.Clear();
+
+            //HERE BE API TESTS: enjoy
+
+            //putInTestValues(); //adding some tags into db for testing
+            // testGetSingle();
+            testGetTable();
+            //testInsert();
+            //testUpdate();
+            //testDelete();
+        }
 
         public int UserIDInput { get; set; } // PK
         public string PasswordInput { get; set; } //Just for Convenience as this is part of the DB
@@ -29,152 +52,119 @@ namespace AdminModule.ViewModels
         //tbItemSearch.Text = ItemSelection.AuthorName;
         //Get Objects
 
-       
+
         public ObservableCollection<UserReadDto> Users { get; set; }
         public IIntegrationService Api { get; set; }
 
-        public UserReadDto selectedRecord;
-
         public UserReadDto SelectedRecord
         {
-            get => this.selectedRecord;
+            get => selectedRecord;
 
             set
             {
-                if (value != this.selectedRecord)
+                if (value != selectedRecord)
                 {
-                    this.selectedRecord = value;
+                    selectedRecord = value;
                     OnPropertyChanged();
                 }
             }
-
-        }
-
-        public ManageCustomerModel()
-        {
-            
         }
 
         /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="serviceProvider"></param>
-        public ManageCustomerModel(ServiceProvider serviceProvider)
-        {
-            Api = serviceProvider.GetService<IIntegrationService>();
-            
-            Users = new ObservableCollection<UserReadDto>();
-            Users.Clear();
-
-            //HERE BE API TESTS: enjoy
-
-            //putInTestValues(); //adding some tags into db for testing
-            // testGetSingle();
-            testGetTable();
-            //testInsert();
-           //testUpdate();
-           //testDelete();
-        }
-
-        /// <summary>
-        /// The Command  to change the Database Entries through the DataGrid.
+        ///     The Command  to change the Database Entries through the DataGrid.
         /// </summary>
         public ICommand ChangeEntry => new BaseCommand(() =>
         {
+            var customer = SelectedRecord;
+            var usersLocal = Api.GetTable<UserReadDto>("users");
+            var userToBeUpdated = usersLocal.Find(x => x.UserID == SelectedRecord.UserID);
+            if (userToBeUpdated == null) return;
 
-         UserReadDto customer = (UserReadDto)SelectedRecord;
-         var usersLocal = Api.GetTable<UserReadDto>("users");
-         UserReadDto userToBeUpdated = usersLocal.Find(x => x.UserID == SelectedRecord.UserID);
-         if (userToBeUpdated == null) return;
-
-           //and now update the title
-           UserUpdateDto updatingTag = new UserUpdateDto()
-           {
-               Address = SelectedRecord.Address, Email = SelectedRecord.Email, Name = SelectedRecord.Name, Password = SelectedRecord.Password, PhoneNumber = SelectedRecord.PhoneNumber, UserID = SelectedRecord.UserID,UserStatusID = SelectedRecord.UserStatusID
-
-           }; //supplying primary key, so db knows which entry to update with rest of attributes
-           var tagUpdateResponse = Api.Update<UserUpdateDto>($"users/{SelectedRecord.UserID}", updatingTag);
-           MessageBox.Show(tagUpdateResponse.ToString());
-           //fetching newly created tag to update it with another title, since i just made it, it has to have the highest id
-
-           //       //fetching newly created tag to update it with another title, since i just made it, it has to have the highest id
-           //       var tagList = Api.GetTable<TagReadDto>("tags");
-           //       TagReadDto tagToBeUpdated = tagList.Find(x => x.TagID == tagList.Max(t => t.TagID));
-           //       if (tagToBeUpdated == null) return;
-
-           //       //and now update the title
-           //       TagUpdateDto updatingTag = new TagUpdateDto() { TagID = tagToBeUpdated.TagID, Title = "AHUGIZDASD" }; //supplying primary key, so db knows which entry to update with rest of attributes
-           //       var tagUpdateResponse = Api.Update<TagUpdateDto>("tags", updatingTag);
-
+            //and now update the title
+            var updatingUser = new UserUpdateDto
+            {
+                Address = SelectedRecord.Address,
+                Email = SelectedRecord.Email,
+                Name = SelectedRecord.Name,
+                Password = SelectedRecord.Password,
+                PhoneNumber = SelectedRecord.PhoneNumber,
+                UserID = SelectedRecord.UserID,
+                UserStatusID = SelectedRecord.UserStatusID
+            };
+            //supplying primary key, so db knows which entry to update with rest of attributes
+            var tagUpdateResponse = Api.Update("users", updatingUser);
+            MessageBox.Show(tagUpdateResponse.ToString());
         });
 
 
-
         #region TestMethods
+
         /// <summary>
-        /// Getting a single entry through the DTO
+        ///     Getting a single entry through the DTO
         /// </summary>
-        void testGetSingle()
+        private void testGetSingle()
         {
             var tagDto = Api.GetSingleEntryById<TagReadDto>("tags", 1);
             MessageBox.Show("TagID: " + tagDto.TagID + " TagTitle: " + tagDto.Title, "GetSingle test");
         }
 
         /// <summary>
-        /// Getting a table entry through the DTO
+        ///     Getting a table entry through the DTO
         /// </summary>
-        void testGetTable()
+        private void testGetTable()
         {
             var entries = Api.GetTable<UserReadDto>("users");
-            foreach (UserReadDto tag in entries)
-            {
-                Users.Add(tag);
-            }
-
+            foreach (var tag in entries) Users.Add(tag);
         }
+
         /// <summary>
-        /// Getting an insert entry through the DTO
+        ///     Getting an insert entry through the DTO
         /// </summary>
-        void testInsert()
+        private void testInsert()
         {
-            var tagToBeInserted = new TagCreateDto { Title = "this tag has just been inserted" }; //NOT supplying primary key, db will auto increment itself
-            var insertResponse = Api.Insert<TagCreateDto>("tags", tagToBeInserted);
+            var tagToBeInserted = new TagCreateDto
+                {Title = "this tag has just been inserted"}; //NOT supplying primary key, db will auto increment itself
+            var insertResponse = Api.Insert("tags", tagToBeInserted);
             MessageBox.Show(insertResponse.ToString(), "too lazy to make this readable... but it worked!");
         }
 
         /// <summary>
-        /// Updating through the DTO
+        ///     Updating through the DTO
         /// </summary>
-        void testUpdate()
+        private void testUpdate()
         {
             //fetching newly created tag to update it with another title, since i just made it, it has to have the highest id
             var tagList = Api.GetTable<TagReadDto>("tags");
-            TagReadDto tagToBeUpdated = tagList.Find(x => x.TagID == tagList.Max(t => t.TagID));
+            var tagToBeUpdated = tagList.Find(x => x.TagID == tagList.Max(t => t.TagID));
             if (tagToBeUpdated == null) return;
 
             //and now update the title
-            TagUpdateDto updatingTag = new TagUpdateDto() { TagID = tagToBeUpdated.TagID, Title = "this just updated the title" }; //supplying primary key, so db knows which entry to update with rest of attributes
-            var tagUpdateResponse = Api.Update<TagUpdateDto>("tags", updatingTag);
-            MessageBox.Show("if this responds a 204: no content, that means it works! \b" + tagUpdateResponse.ToString(), "again too lazy to make this readable... but it worked!");
+            var updatingTag = new TagUpdateDto
+            {
+                TagID = tagToBeUpdated.TagID, Title = "this just updated the title"
+            }; //supplying primary key, so db knows which entry to update with rest of attributes
+            var tagUpdateResponse = Api.Update("tags", updatingTag);
+            MessageBox.Show("if this responds a 204: no content, that means it works! \b" + tagUpdateResponse,
+                "again too lazy to make this readable... but it worked!");
         }
 
         /// <summary>
-        /// Deleting via DTO
+        ///     Deleting via DTO
         /// </summary>
-        void testDelete()
+        private void testDelete()
         {
             //fetching newly created tag's id to delete it
             var tagCollection = Api.GetTable<TagReadDto>("tags");
-            int tagId = 0;
-            foreach (TagReadDto tag in tagCollection)
-            {
-                if (tag.TagID > tagId) tagId = tag.TagID;
-            }
+            var tagId = 0;
+            foreach (var tag in tagCollection)
+                if (tag.TagID > tagId)
+                    tagId = tag.TagID;
             if (tagId < 1) return;
 
             //and now delete it
             var tagDeletionResponseMessage = Api.Delete("tags", tagId);
-            MessageBox.Show("if this responds a 204: no content, that means it works! \b" + tagDeletionResponseMessage.ToString(), "Make this readable? hell naw");
+            MessageBox.Show("if this responds a 204: no content, that means it works! \b" + tagDeletionResponseMessage,
+                "Make this readable? hell naw");
         }
 
         #endregion
