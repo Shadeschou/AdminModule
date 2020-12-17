@@ -24,7 +24,7 @@
             Margin="12,12,0,0"
             AlternatingRowBackground="CornflowerBlue"
             ItemsSource="{Binding Path=Users}"
-            IsSynchronizedWithCurrentItem="False" />
+            SelectedItem="{Binding Path=SelectedRecord, Mode=TwoWay }"/>
 
 
         <Button

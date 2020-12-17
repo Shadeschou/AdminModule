@@ -33,6 +33,40 @@ namespace AdminModule.ViewModels
         public ObservableCollection<UserReadDto> Users { get; set; }
         public IIntegrationService Api { get; set; }
 
+        public UserReadDto selectedRecord;
+
+        public UserReadDto SelectedRecord
+        {
+            get => this.selectedRecord;
+
+            set
+            {
+                if (value != this.selectedRecord)
+                {
+                    this.selectedRecord = value;
+                    OnPropertyChanged();
+                }
+            }
+
+        }
+        public UserReadDto cellRecord;
+
+        public UserReadDto CellRecord
+        {
+            get => this.cellRecord;
+
+            set
+            {
+                if (value != this.cellRecord)
+                {
+                    this.cellRecord = value;
+                    OnPropertyChanged();
+                }
+            }
+
+        }
+
+
         public ManageCustomerModel()
         {
             
@@ -58,16 +92,14 @@ namespace AdminModule.ViewModels
         public ICommand ChangeEntry => new BaseCommand(() =>
         {
             UserReadDto customer = (UserReadDto)SelectedRecord;
-            var userCollectionLocal = Api.GetTable<UserReadDto>("users");
-            int tagId = 0;
-            foreach (UserReadDto users in userCollectionLocal)
-            {
-                if (users.UserID > tagId) tagId = users.UserID;
-            }
-            if (tagId < 0) return;
+          var tagList = Api.GetTable<UserReadDto>("users");
+          UserReadDto tagToBeUpdated = tagList.Find(x => x.UserID == tagList.Max(t => t.UserID));
+            if (tagToBeUpdated == null) return;
 
-            //and now delete it
-            var tagDeletionResponseMessage = Api.Delete("users", SelectedRecord.UserID);
+            //and now update the title
+            UserUpdateDto updatingTag = new UserUpdateDto()
+            {Address = SelectedRecord.Address, Email = SelectedRecord.Email, Name = SelectedRecord.Name, Password = SelectedRecord.Password, PhoneNumber = SelectedRecord.PhoneNumber}; //supplying primary key, so db knows which entry to update with rest of attributes
+            var tagUpdateResponse = Api.Update<UserUpdateDto>("users", updatingTag);
             Users = new ObservableCollection<UserReadDto>();
             testGetTable();
         });
