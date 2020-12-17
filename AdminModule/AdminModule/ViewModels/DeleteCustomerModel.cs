@@ -14,18 +14,47 @@ namespace AdminModule.ViewModels
 {
     public class DeleteCustomerModel : BaseViewModel
     {
-       
-        public int UserIDInput { get; set; } // PK
-        public string PasswordInput { get; set; } //Just for Convenience as this is part of the DB
-        public string AddressInput { get; set; }
-        public int PhoneNumberInput { get; set; }
-        public string EmailInput { get; set; }
-        public int UserStatusIDInput { get; set; } //FK
-        public string NameInput { get; set; }
+
+        public UserReadDto selectedRecord;
+
+        public UserReadDto SelectedRecord
+        {
+            get => this.selectedRecord;
+
+            set
+            {
+                if (value != this.selectedRecord)
+                {
+                    this.selectedRecord = value;
+                    OnPropertyChanged();
+                }
+            }
+
+        }
+
+        private CustomCommand cm;
 
         public ObservableCollection<UserReadDto> Users { get; set;  }
 
         public IIntegrationService Api { get; set; }
+
+
+        public ICommand DeleteEntry => new BaseCommand(() =>
+        {
+            UserReadDto customer = (UserReadDto)SelectedRecord;
+            var userCollectionLocal = Api.GetTable<UserReadDto>("users");
+            int tagId = 0;
+            foreach (UserReadDto users in userCollectionLocal)
+            {
+                if (users.UserID > tagId) tagId = users.UserID;
+            }
+            if (tagId < 0) return;
+
+            //and now delete it
+            var tagDeletionResponseMessage = Api.Delete("users", SelectedRecord.UserID);
+            Users = new ObservableCollection<UserReadDto>();
+            testGetTable();
+        });
 
         public DeleteCustomerModel()
         {
@@ -34,10 +63,10 @@ namespace AdminModule.ViewModels
         public DeleteCustomerModel(ServiceProvider serviceProvider)
         {
             Api = serviceProvider.GetService<IIntegrationService>();
-
+           
             Users = new ObservableCollection<UserReadDto>();
             Users.Clear();
-             testGetTable();
+            testGetTable();
 
         }
 

@@ -5,21 +5,14 @@
     xmlns:ViewModels="clr-namespace:AdminModule.ViewModels"
     xmlns:adorners="http://gu.se/Adorners"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:local="clr-namespace:AdminModule.ViewModels"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:services="clr-namespace:AdminModule.Services"
     xmlns:views="clr-namespace:AdminModule.Views"
-    xmlns:converter="clr-namespace:AdminModule.ViewModels"
     d:DesignHeight="720"
     d:DesignWidth="1280"
     mc:Ignorable="d">
 
-    <UserControl.Resources>
-
-        <local:FallbackConverter x:Key="FallbackConverter "/>
-        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
-
-    </UserControl.Resources>
+<UserControl.Resources></UserControl.Resources>
     <StackPanel Background="#FFF">
 
 
@@ -46,51 +39,61 @@
             </Grid.RowDefinitions>
 
             <!--  Input Field Labes -> These are made to match the DB  -->
-            <Label Grid.Column="0" Content="Name" />
-            <Label Grid.Column="1" Content="Address" />
-            <Label Grid.Column="2" Content="Phone" />
-            <Label Grid.Column="3" Content="Mail" />
-            <Label Grid.Column="4" Content="Password" />
+            <Label Grid.Column="0" Content="Name" 
+                   Visibility="Visible"/>
+            <Label Grid.Column="1" Content="Address"
+                   Visibility="Visible"/>
+            <Label Grid.Column="2" Content="Phone"
+                   Visibility="Visible"/>
+            <Label Grid.Column="3" Content="Mail"
+                   Visibility="Visible"/>
+            <Label Grid.Column="4" Content="Password" 
+                   Visibility="Visible"/>
 
             <!--  Input Fields  -->
             <TextBox
                 
+                adorners:Watermark.Text="Input Name"
                 Grid.Row="1"
                  Background="Transparent"
-                Text="{Binding PhoneNumberInput, Mode=TwoWay, Converter={StaticResource FallbackConverter}}" >
+                Text="{Binding NameInput, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" >
                 
                 
             </TextBox>
 
                 <TextBox
+                    adorners:Watermark.Text="Input Address"
                 Name="AddressInputField"
                 Grid.Row="1"
                 Grid.Column="1"
                 Background="Transparent"
-                Text="{Binding AddressInput, Mode=TwoWay, Converter={StaticResource FallbackConverter}}"
+                Text="{Binding AddressInput, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                 />
             <TextBox
+                adorners:Watermark.Text="Input PhoneNumber"
                 Name="PhoneNoInputField"
                 Grid.Row="1"
                 Grid.Column="2"
                 Background="Transparent"
-                Text="{Binding PhoneNumberInput, Mode=TwoWay, Converter={StaticResource FallbackConverter}}" />
+                Text="{Binding PhoneNumberInput, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
 
             <TextBox
+                adorners:Watermark.Text="Input Email"
                 Name="MailInputField"
                 Grid.Row="1"
                 Grid.Column="3"
                 Background="Transparent"
-                Text="{Binding EmailInput,  Mode=TwoWay, Converter={StaticResource FallbackConverter}}" />
+                Text="{Binding EmailInput,  Mode=TwoWay, UpdateSourceTrigger=PropertyChanged }" />
 
 
             <TextBox
+                adorners:Watermark.Text="Input Password aka Private Token"
                 Name="PasswordInputField"
                 Grid.Row="1"
                 Grid.Column="4"
                   Background="Transparent"
-                Text="{Binding PasswordInput,  Mode=TwoWay, Converter={StaticResource FallbackConverter}}" />
+                Text="{Binding PasswordInput,  Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
             <Grid Grid.Row="2" Grid.ColumnSpan="5">
                 <Grid.ColumnDefinitions>
@@ -113,16 +116,15 @@
                     Grid.Column="0"
                     Grid.ColumnSpan="2"
                     Content="Add"
-                    HorizontalAlignment="Stretch"
                     Command="{Binding InsertCommand}"
                     Style="{StaticResource ButtonStyle}" />
                 <Button
                     x:Name="ResetButton"
                     Grid.Row="1"
                     Grid.Column="2"
-                    Grid.ColumnSpan="3"
+                    Grid.ColumnSpan="2"
                     Content="Reset"
-                    HorizontalAlignment="Stretch"
+                
                     Command="{Binding ClearAllFields}"
                     Style="{StaticResource ButtonStyle}" />
             </Grid>

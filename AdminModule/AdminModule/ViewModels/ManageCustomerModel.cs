@@ -2,6 +2,7 @@
 using System.Collections.ObjectModel;
 using System.Windows;
 using System.Linq;
+using System.Windows.Input;
 using System.Windows.Markup;
 using AdminModule.Services;
 using DataLayer.Dtos;
@@ -20,11 +21,22 @@ namespace AdminModule.ViewModels
         public int UserStatusIDInput { get; set; } //FK
         public string NameInput { get; set; }
 
+        //clsItemsBL objItem = new clsItemBL();
+        //dgItemSearch.ItemsSource = objItem.GetAllItems();
+        //Than in the code of the form where you DataGrid is you can do tha casting like this (usually this is done in the selected item changed for that DataGrid).  This way than you can acces each property of the selected item in the DataGrid.
 
+        //    clsItemBL ItemSelection = (clsItemBL) dgItemSearch.SelectedItem;
+        //tbItemSearch.Text = ItemSelection.AuthorName;
         //Get Objects
+
+       
         public ObservableCollection<UserReadDto> Users { get; set; }
         public IIntegrationService Api { get; set; }
 
+        public ManageCustomerModel()
+        {
+            
+        }
 
         public ManageCustomerModel(ServiceProvider serviceProvider)
         {
@@ -41,23 +53,43 @@ namespace AdminModule.ViewModels
             //testInsert();
            //testUpdate();
            //testDelete();
-        }        
+        }
 
+        public ICommand ChangeEntry => new BaseCommand(() =>
+        {
+            UserReadDto customer = (UserReadDto)SelectedRecord;
+            var userCollectionLocal = Api.GetTable<UserReadDto>("users");
+            int tagId = 0;
+            foreach (UserReadDto users in userCollectionLocal)
+            {
+                if (users.UserID > tagId) tagId = users.UserID;
+            }
+            if (tagId < 0) return;
+
+            //and now delete it
+            var tagDeletionResponseMessage = Api.Delete("users", SelectedRecord.UserID);
+            Users = new ObservableCollection<UserReadDto>();
+            testGetTable();
+        });
+
+
+
+        #region TestMethods
         void testGetSingle()
         {
             var tagDto = Api.GetSingleEntryById<TagReadDto>("tags", 1);
             MessageBox.Show("TagID: " + tagDto.TagID + " TagTitle: " + tagDto.Title, "GetSingle test");
         }
 
-       
+
         void testGetTable()
         {
             var entries = Api.GetTable<UserReadDto>("users");
-            foreach(UserReadDto tag in entries)
+            foreach (UserReadDto tag in entries)
             {
                 Users.Add(tag);
             }
-            
+
         }
 
         void testInsert()
@@ -77,7 +109,7 @@ namespace AdminModule.ViewModels
             //and now update the title
             TagUpdateDto updatingTag = new TagUpdateDto() { TagID = tagToBeUpdated.TagID, Title = "this just updated the title" }; //supplying primary key, so db knows which entry to update with rest of attributes
             var tagUpdateResponse = Api.Update<TagUpdateDto>("tags", updatingTag);
-            MessageBox.Show("if this responds a 204: no content, that means it works! \b" + tagUpdateResponse.ToString() , "again too lazy to make this readable... but it worked!");
+            MessageBox.Show("if this responds a 204: no content, that means it works! \b" + tagUpdateResponse.ToString(), "again too lazy to make this readable... but it worked!");
         }
 
         void testDelete()
@@ -85,7 +117,7 @@ namespace AdminModule.ViewModels
             //fetching newly created tag's id to delete it
             var tagCollection = Api.GetTable<TagReadDto>("tags");
             int tagId = 0;
-            foreach(TagReadDto tag in tagCollection)
+            foreach (TagReadDto tag in tagCollection)
             {
                 if (tag.TagID > tagId) tagId = tag.TagID;
             }
@@ -101,6 +133,7 @@ namespace AdminModule.ViewModels
             Api.Insert<TagCreateDto>("tags", new TagCreateDto() { Title = "first testTag" });
             Api.Insert<TagCreateDto>("tags", new TagCreateDto() { Title = "second testTag" });
             Api.Insert<TagCreateDto>("tags", new TagCreateDto() { Title = "third testTag" });
-        }
+        } 
+        #endregion
     }
 }

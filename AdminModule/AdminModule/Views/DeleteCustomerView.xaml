@@ -44,8 +44,10 @@
                 HorizontalContentAlignment="Center"
                 VerticalContentAlignment="Center"
                 AlternatingRowBackground="CornflowerBlue"
+                
+                SelectedItem="{Binding Path=SelectedRecord, Mode=TwoWay }"
                 ItemsSource="{Binding Path=Users}"
-                Style="{DynamicResource DataGridStyle1}" />
+              />
 
             <Button
                 Grid.Row="4"
@@ -53,7 +55,7 @@
                 Grid.ColumnSpan="4"
                 HorizontalAlignment="Stretch"
                 VerticalAlignment="Center"
-                Command="{Binding GetDataCommand}"
+                Command="{Binding DeleteEntry}"
                 Content="Confirm Deletion"
                 Style="{DynamicResource ButtonStyle}" />
 

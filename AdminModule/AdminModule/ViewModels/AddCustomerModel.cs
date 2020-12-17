@@ -16,14 +16,80 @@ namespace AdminModule.ViewModels
 
         #region public fields
 
-        public string InputPassword;
-        public string PasswordInput { get; set; } //Just for Convenience as this is part of the DB
+        private string passwordInput;
+        public string PasswordInput {
+            get => this.passwordInput;
+            set
+            {
+                if (value != this.passwordInput)
+                {
+                    this.passwordInput = value;
+                    OnPropertyChanged();
+                }
+            }
 
-       public string AddressInput { set; get; }
+        }//Just for Convenience as this is part of the DB
 
-        public int PhoneNumberInput { get; set; }
-        public string EmailInput { get; set; }
-        public string NameInput { get; set; }
+        private string addressInput;
+       public string AddressInput {
+           get => this.addressInput;
+           set
+           {
+               if (value != this.addressInput)
+               {
+                   this.addressInput = value;
+                   OnPropertyChanged();
+               }
+           }
+
+       }
+
+        private int phoneNumberInput; 
+       public int PhoneNumberInput
+       {
+           get => this.phoneNumberInput;
+           set
+           {
+               if (value != this.PhoneNumberInput)
+               {
+                   phoneNumberInput = value;
+                   OnPropertyChanged();
+               }
+            }
+          
+       }
+
+       public string emailInput;
+        public string EmailInput
+       {
+           get => this.emailInput;
+           set
+           {
+               if (value != this.EmailInput)
+               {
+                   this.emailInput = value;
+                   OnPropertyChanged();
+               }
+           }
+
+       }
+
+       public string nameInput;
+
+       public string NameInput
+       {
+           get => this.nameInput;
+
+           set
+           {
+               if (value != this.nameInput)
+               {
+                   this.nameInput = value;
+                   OnPropertyChanged();
+               }
+            }
+          
+       }
         public IIntegrationService Api { get; set; }
         
         #endregion
