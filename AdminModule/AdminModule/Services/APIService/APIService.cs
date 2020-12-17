@@ -7,6 +7,7 @@ using Newtonsoft.Json;
 
 namespace AdminModule.Services
 {
+    #region interface IntegrationService
     public interface IIntegrationService
     {
         Dto GetSingleEntryById<Dto>(string table, int id);
@@ -14,17 +15,23 @@ namespace AdminModule.Services
         HttpResponseMessage Insert<Dto>(string table, Dto entry);
         HttpResponseMessage Update<Dto>(string table, Dto dtoToUpdate);
         HttpResponseMessage Delete(string table, int id);
-    }
+    } 
+    #endregion
 
     public class APIService : IIntegrationService
     {
+        #region Constructor
         public APIService()
         {
             InitClient();
         }
+        #endregion
 
+        #region Fields
         public static HttpClient _httpClient { get; set; }
+        #endregion
 
+        #region Methods
         public Dto GetSingleEntryById<Dto>(string table, int id)
         {
             using (var response = _httpClient.GetAsync($"api/{table}/{id}").Result.Content.ReadAsStringAsync())
@@ -45,7 +52,6 @@ namespace AdminModule.Services
         {
             using (var response = _httpClient.PostAsJsonAsync($"api/{table}", entry))
             {
-                MessageBox.Show(response.Result.ToString());
                 return response.Result;
             }
         }
@@ -68,8 +74,9 @@ namespace AdminModule.Services
 
         public void InitClient()
         {
-            _httpClient = new HttpClient {BaseAddress = new Uri("http://localhost:46897/")};
+            _httpClient = new HttpClient { BaseAddress = new Uri("http://localhost:46897/") };
             _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-        }
+        } 
+        #endregion
     }
 }

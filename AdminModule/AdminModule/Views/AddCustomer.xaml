@@ -5,25 +5,27 @@
     xmlns:ViewModels="clr-namespace:AdminModule.ViewModels"
     xmlns:adorners="http://gu.se/Adorners"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:local="clr-namespace:AdminModule.Services"
+    xmlns:local="clr-namespace:AdminModule.ViewModels"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:services="clr-namespace:AdminModule.Services"
+    xmlns:views="clr-namespace:AdminModule.Views"
+    xmlns:converter="clr-namespace:AdminModule.ViewModels"
     d:DesignHeight="720"
     d:DesignWidth="1280"
     mc:Ignorable="d">
 
     <UserControl.Resources>
 
+        <local:FallbackConverter x:Key="FallbackConverter "/>
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
 
     </UserControl.Resources>
-    <StackPanel Background="#FFF" DataContext="{Binding AddCustomerModel}">
+    <StackPanel Background="#FFF">
 
 
         <Grid Height="900">
-            <Grid.DataContext>
-                <ViewModels:AddCustomerModel />
-            </Grid.DataContext>
+            
+
             <Grid.ColumnDefinitions>
 
                 <ColumnDefinition Width="291*" />
@@ -44,56 +46,51 @@
             </Grid.RowDefinitions>
 
             <!--  Input Field Labes -> These are made to match the DB  -->
-            <Label Grid.Column="0" Content="Add Name" />
-            <Label Grid.Column="1" Content="Add Address" />
+            <Label Grid.Column="0" Content="Name" />
+            <Label Grid.Column="1" Content="Address" />
             <Label Grid.Column="2" Content="Phone" />
             <Label Grid.Column="3" Content="Mail" />
             <Label Grid.Column="4" Content="Password" />
 
             <!--  Input Fields  -->
             <TextBox
+                
                 Grid.Row="1"
-                adorners:Watermark.Text="Input Name here"
-                adorners:Watermark.VisibleWhen="EmptyAndNotKeyboardFocused"
-                Background="Transparent"
-                Text="{Binding NameInput}" />
+                 Background="Transparent"
+                Text="{Binding PhoneNumberInput, Mode=TwoWay, Converter={StaticResource FallbackConverter}}" >
+                
+                
+            </TextBox>
 
-            <TextBox
+                <TextBox
                 Name="AddressInputField"
                 Grid.Row="1"
                 Grid.Column="1"
-                adorners:Watermark.Text="Input Address Here"
-                adorners:Watermark.VisibleWhen="EmptyAndNotKeyboardFocused"
                 Background="Transparent"
-                Text="{Binding AddressInput}" />
+                Text="{Binding AddressInput, Mode=TwoWay, Converter={StaticResource FallbackConverter}}"
+                />
             <TextBox
                 Name="PhoneNoInputField"
                 Grid.Row="1"
                 Grid.Column="2"
-                adorners:Watermark.Text="Input Phone Number Here"
-                adorners:Watermark.VisibleWhen="EmptyAndNotKeyboardFocused"
                 Background="Transparent"
-                Text="{Binding PhoneNumberInput}" />
+                Text="{Binding PhoneNumberInput, Mode=TwoWay, Converter={StaticResource FallbackConverter}}" />
 
 
             <TextBox
                 Name="MailInputField"
                 Grid.Row="1"
                 Grid.Column="3"
-                adorners:Watermark.Text="Input MailAddress Here"
-                adorners:Watermark.VisibleWhen="EmptyAndNotKeyboardFocused"
                 Background="Transparent"
-                Text="{Binding EmailInput}" />
+                Text="{Binding EmailInput,  Mode=TwoWay, Converter={StaticResource FallbackConverter}}" />
 
 
             <TextBox
                 Name="PasswordInputField"
                 Grid.Row="1"
                 Grid.Column="4"
-                adorners:Watermark.Text="Input Password Here"
-                adorners:Watermark.VisibleWhen="EmptyAndNotKeyboardFocused"
-                Background="Transparent"
-                Text="{Binding PasswordInput}" />
+                  Background="Transparent"
+                Text="{Binding PasswordInput,  Mode=TwoWay, Converter={StaticResource FallbackConverter}}" />
 
             <Grid Grid.Row="2" Grid.ColumnSpan="5">
                 <Grid.ColumnDefinitions>
@@ -115,18 +112,18 @@
                     Grid.Row="1"
                     Grid.Column="0"
                     Grid.ColumnSpan="2"
+                    Content="Add"
                     HorizontalAlignment="Stretch"
                     Command="{Binding InsertCommand}"
-                    Content="Add"
                     Style="{StaticResource ButtonStyle}" />
                 <Button
                     x:Name="ResetButton"
                     Grid.Row="1"
                     Grid.Column="2"
                     Grid.ColumnSpan="3"
+                    Content="Reset"
                     HorizontalAlignment="Stretch"
                     Command="{Binding ClearAllFields}"
-                    Content="Reset"
                     Style="{StaticResource ButtonStyle}" />
             </Grid>
         </Grid>

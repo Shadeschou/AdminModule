@@ -1,4 +1,5 @@
 ﻿using System.Windows.Controls;
+using AdminModule.ViewModels;
 
 namespace AdminModule.Views
 {
@@ -10,6 +11,7 @@ namespace AdminModule.Views
         public AddCustomer()
         {
             InitializeComponent();
+      
         }
     }
 }

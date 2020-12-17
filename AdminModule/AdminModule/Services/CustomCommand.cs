@@ -3,19 +3,37 @@ using System.Windows.Input;
 using AdminModule.ViewModels;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace AdminModule.utility
+namespace AdminModule.Services
 {
+    /// <summary>
+    /// The Command to be implemented the different
+    /// 
+    /// </summary>
     public class CustomCommand : ICommand
     {
+        #region Private Fields
         private readonly MainWindowViewModel viewmodel;
+        #endregion
+        #region Public fields
         public ServiceProvider serviceProvider;
+        public event EventHandler CanExecuteChanged;
+        internal AddCustomerModel addModel;
+        internal DeleteCustomerModel deleteModel;
+        internal ManageCustomerModel manageModel;
+        #endregion
 
+        #region Constructor
         public CustomCommand(MainWindowViewModel viewmodel, ServiceProvider serviceProvider)
         {
             this.serviceProvider = serviceProvider;
             this.viewmodel = viewmodel;
+            addModel = new AddCustomerModel(serviceProvider);
+            deleteModel = new DeleteCustomerModel(serviceProvider);
+            manageModel = new ManageCustomerModel(serviceProvider);
         }
+        #endregion
 
+        #region Methods
         public bool CanExecute(object parameter)
         {
             return true;
@@ -26,17 +44,18 @@ namespace AdminModule.utility
             switch (parameter.ToString().ToLower())
             {
                 case "add customer":
-                    viewmodel.SelectedViewModel = new AddCustomerModel(serviceProvider);
+                    viewmodel.SelectedViewModel = addModel;
                     break;
                 case "delete customer":
-                    viewmodel.SelectedViewModel = new DeleteCustomerModel(serviceProvider);
+                    viewmodel.SelectedViewModel = deleteModel;
                     break;
                 case "manage customer":
-                    viewmodel.SelectedViewModel = new ManageCustomerModel(serviceProvider);
+                    viewmodel.SelectedViewModel = manageModel;
                     break;
             }
-        }
+        } 
+        #endregion
 
-        public event EventHandler CanExecuteChanged;
+        
     }
 }
