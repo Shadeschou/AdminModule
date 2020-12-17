@@ -14,6 +14,7 @@ namespace DataLayer.Dtos
         public DateTime CreationDate { get; set; }
         public DateTime LastDateTimeEdited { get; set; }
     }
+
     public class IdeaInteractionCreateDto : Dto
     {
         public int IdeaInteractionID { get; set; }
@@ -26,6 +27,7 @@ namespace DataLayer.Dtos
         public DateTime CreationDate { get; set; }
         public DateTime LastDateTimeEdited { get; set; }
     }
+
     public class IdeaInteractionUpdateDto : Dto
     {
         public int IdeaInteractionID { get; set; }

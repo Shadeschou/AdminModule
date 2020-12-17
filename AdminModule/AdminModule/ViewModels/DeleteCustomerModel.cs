@@ -37,27 +37,18 @@ namespace AdminModule.ViewModels
 
             Users = new ObservableCollection<UserReadDto>();
             Users.Clear();
-            testGetTable();
+             testGetTable();
+
         }
 
         void testGetTable()
         {
             var entries = Api.GetTable<UserReadDto>("users");
-            foreach (UserReadDto user in entries)
+            foreach (UserReadDto tag in entries)
             {
-            
-                Users.Add(user);
+                Users.Add(tag);
             }
 
         }
-        public ICommand DeleteCommand => new BaseCommand(() =>
-        {
-            
-            return; 
-          
-
-            //and now delete it
-           
-        });
     }
 }

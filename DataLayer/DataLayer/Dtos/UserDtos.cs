@@ -1,7 +1,7 @@
 namespace DataLayer.Dtos
 {
     public class UserReadDto : Dto
-    { 
+    {
         public int UserID { get; set; }
         public int UserStatusID { get; set; }
         public string Name { get; set; }
@@ -10,6 +10,7 @@ namespace DataLayer.Dtos
         public string Email { get; set; }
         public string Password { get; set; }
     }
+
     public class UserCreateDto : Dto
     {
         //public int UserID { get; set; }
@@ -20,6 +21,7 @@ namespace DataLayer.Dtos
         public string Email { get; set; }
         public string Password { get; set; }
     }
+
     public class UserUpdateDto : Dto
     {
         public int UserID { get; set; }

@@ -55,7 +55,6 @@ namespace AdminModule.ViewModels
             var entries = Api.GetTable<UserReadDto>("users");
             foreach(UserReadDto tag in entries)
             {
-                MessageBox.Show(tag.ToString());
                 Users.Add(tag);
             }
             

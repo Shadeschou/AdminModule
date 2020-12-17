@@ -29,7 +29,7 @@ namespace AdminModule.utility
                     viewmodel.SelectedViewModel = new AddCustomerModel(serviceProvider);
                     break;
                 case "delete customer":
-                    viewmodel.SelectedViewModel = new DeleteCustomerModel();
+                    viewmodel.SelectedViewModel = new DeleteCustomerModel(serviceProvider);
                     break;
                 case "manage customer":
                     viewmodel.SelectedViewModel = new ManageCustomerModel(serviceProvider);

@@ -1,19 +1,13 @@
 ﻿using System;
 using System.Windows.Input;
 
-namespace AdminModule.utility
+namespace AdminModule.Services
 {
     public class BaseCommand : ICommand
     {
-        public event EventHandler CanExecuteChanged
-        {
-            add { CommandManager.RequerySuggested += value; }
-            remove { CommandManager.RequerySuggested -= value; }
-        }
+        private readonly Func<bool> canExecuteEvaluator;
 
-        private Action methodToExecute;
-
-        private Func<bool> canExecuteEvaluator;
+        private readonly Action methodToExecute;
 
         public BaseCommand(Action methodToExecute, Func<bool> canExecuteEvaluator)
         {
@@ -26,22 +20,26 @@ namespace AdminModule.utility
         {
         }
 
+        public event EventHandler CanExecuteChanged
+        {
+            add => CommandManager.RequerySuggested += value;
+            remove => CommandManager.RequerySuggested -= value;
+        }
+
         public bool CanExecute(object parameter)
         {
-            if (this.canExecuteEvaluator == null)
+            if (canExecuteEvaluator == null)
             {
                 return true;
             }
-            else
-            {
-                bool result = this.canExecuteEvaluator.Invoke();
-                return result;
-            }
+
+            var result = canExecuteEvaluator.Invoke();
+            return result;
         }
 
         public void Execute(object parameter)
         {
-            this.methodToExecute.Invoke();
+            methodToExecute.Invoke();
         }
     }
 }

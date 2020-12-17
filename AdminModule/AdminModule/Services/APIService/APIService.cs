@@ -1,10 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using Newtonsoft.Json;
-using System.Collections.Generic;
-using System.Text;
 using System.Windows;
+using Newtonsoft.Json;
 
 namespace AdminModule.Services
 {
@@ -19,18 +18,12 @@ namespace AdminModule.Services
 
     public class APIService : IIntegrationService
     {
-        public static HttpClient _httpClient { get; set; }
-
         public APIService()
         {
             InitClient();
         }
 
-        public void InitClient()
-        {
-            _httpClient = new HttpClient { BaseAddress = new Uri("http://localhost:46897/") };
-            _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-        }        
+        public static HttpClient _httpClient { get; set; }
 
         public Dto GetSingleEntryById<Dto>(string table, int id)
         {
@@ -48,10 +41,9 @@ namespace AdminModule.Services
             }
         }
 
-        public HttpResponseMessage Insert<Dto>(string table,Dto entry)
+        public HttpResponseMessage Insert<Dto>(string table, Dto entry)
         {
-            var data = new StringContent(JsonConvert.SerializeObject(entry),Encoding.UTF8,"application/json");
-            using(var response = _httpClient.PostAsJsonAsync<Dto>($"api/{table}", entry))
+            using (var response = _httpClient.PostAsJsonAsync($"api/{table}", entry))
             {
                 MessageBox.Show(response.Result.ToString());
                 return response.Result;
@@ -60,7 +52,7 @@ namespace AdminModule.Services
 
         public HttpResponseMessage Update<Dto>(string table, Dto dtoToUpdate)
         {
-            using (var response = _httpClient.PutAsJsonAsync<Dto>($"api/{table}", dtoToUpdate))
+            using (var response = _httpClient.PutAsJsonAsync($"api/{table}", dtoToUpdate))
             {
                 return response.Result;
             }
@@ -68,11 +60,16 @@ namespace AdminModule.Services
 
         public HttpResponseMessage Delete(string table, int id)
         {
-            using(var response = _httpClient.DeleteAsync($"api/{table}/{id}"))
+            using (var response = _httpClient.DeleteAsync($"api/{table}/{id}"))
             {
                 return response.Result;
             }
         }
+
+        public void InitClient()
+        {
+            _httpClient = new HttpClient {BaseAddress = new Uri("http://localhost:46897/")};
+            _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+        }
     }
 }
-

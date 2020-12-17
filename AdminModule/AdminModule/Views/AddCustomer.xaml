@@ -3,29 +3,27 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:ViewModels="clr-namespace:AdminModule.ViewModels"
+    xmlns:adorners="http://gu.se/Adorners"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:AdminModule.Services"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:services="clr-namespace:AdminModule.Services"
-    xmlns:adorners="http://gu.se/Adorners"
     d:DesignHeight="720"
     d:DesignWidth="1280"
     mc:Ignorable="d">
 
     <UserControl.Resources>
-        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
-        <services:TextInputToVisibilityConverter x:Key="TextInputToVisibilityConverter" />
 
-        <Style x:Key="EntryFieldStyle" TargetType="Grid">
-            <Setter Property="HorizontalAlignment" Value="Stretch" />
-            <Setter Property="VerticalAlignment" Value="Center" />
-            <Setter Property="Margin" Value="20,0" />
-        </Style>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+
     </UserControl.Resources>
-    <StackPanel Background="#FFF">
+    <StackPanel Background="#FFF" DataContext="{Binding AddCustomerModel}">
 
 
         <Grid Height="900">
+            <Grid.DataContext>
+                <ViewModels:AddCustomerModel />
+            </Grid.DataContext>
             <Grid.ColumnDefinitions>
 
                 <ColumnDefinition Width="291*" />
@@ -53,72 +51,51 @@
             <Label Grid.Column="4" Content="Password" />
 
             <!--  Input Fields  -->
-
-
-
-
-                <TextBox
-                adorners:Watermark.Text="Write something here"
-               
-                adorners:Watermark.VisibleWhen="EmptyAndNotKeyboardFocused"
-                Focusable="True"
-                Name="NameInputField"
+            <TextBox
                 Grid.Row="1"
+                adorners:Watermark.Text="Input Name here"
+                adorners:Watermark.VisibleWhen="EmptyAndNotKeyboardFocused"
                 Background="Transparent"
                 Text="{Binding NameInput}" />
-                <TextBox
-                    adorners:Watermark.Text="Write something here"
-               
-                    adorners:Watermark.VisibleWhen="EmptyAndNotKeyboardFocused"
-                Focusable="True"
+
+            <TextBox
                 Name="AddressInputField"
                 Grid.Row="1"
                 Grid.Column="1"
+                adorners:Watermark.Text="Input Address Here"
+                adorners:Watermark.VisibleWhen="EmptyAndNotKeyboardFocused"
                 Background="Transparent"
-                Text="{Binding Ad}" />
-                <TextBox
-                    adorners:Watermark.Text="Write something here"
-               
-                    adorners:Watermark.VisibleWhen="EmptyAndNotKeyboardFocused"
-                Focusable="True"
+                Text="{Binding AddressInput}" />
+            <TextBox
                 Name="PhoneNoInputField"
                 Grid.Row="1"
                 Grid.Column="2"
+                adorners:Watermark.Text="Input Phone Number Here"
+                adorners:Watermark.VisibleWhen="EmptyAndNotKeyboardFocused"
                 Background="Transparent"
-                Text="{Binding NameInput}" />
+                Text="{Binding PhoneNumberInput}" />
 
 
-                <TextBox
-                    adorners:Watermark.Text="Write something here"
-               
-                    adorners:Watermark.VisibleWhen="EmptyAndNotKeyboardFocused"
-                Focusable="True"
+            <TextBox
                 Name="MailInputField"
                 Grid.Row="1"
                 Grid.Column="3"
-                Background="Transparent"
-                Text="{Binding NameInput}" />
-
-
-                <TextBox
-                
-                adorners:Watermark.Text="Write something here"
+                adorners:Watermark.Text="Input MailAddress Here"
                 adorners:Watermark.VisibleWhen="EmptyAndNotKeyboardFocused"
+                Background="Transparent"
+                Text="{Binding EmailInput}" />
+
+
+            <TextBox
                 Name="PasswordInputField"
                 Grid.Row="1"
                 Grid.Column="4"
+                adorners:Watermark.Text="Input Password Here"
+                adorners:Watermark.VisibleWhen="EmptyAndNotKeyboardFocused"
                 Background="Transparent"
-                Text="{Binding NameInput}" />
+                Text="{Binding PasswordInput}" />
 
-
-
-
-
-
-
-
-
-                <Grid Grid.Row="2" Grid.ColumnSpan="5">
+            <Grid Grid.Row="2" Grid.ColumnSpan="5">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="2*" />
                     <ColumnDefinition Width="*" />
@@ -148,6 +125,7 @@
                     Grid.Column="2"
                     Grid.ColumnSpan="3"
                     HorizontalAlignment="Stretch"
+                    Command="{Binding ClearAllFields}"
                     Content="Reset"
                     Style="{StaticResource ButtonStyle}" />
             </Grid>

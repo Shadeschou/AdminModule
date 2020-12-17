@@ -7,10 +7,8 @@
     Title="MainWindow"
     Width="1280"
     Height="720"
-    mc:Ignorable="d"
     WindowStartupLocation="CenterScreen"
-    
-    >
+    mc:Ignorable="d">
 
 
     <Grid>
@@ -35,7 +33,6 @@
 
         <Button
             Grid.Column="1"
-         
             Command="{Binding CustomCommand}"
             CommandParameter="delete customer"
             Content="Delete"
@@ -43,7 +40,6 @@
 
         <Button
             Grid.Column="2"
-         
             Command="{Binding CustomCommand}"
             CommandParameter="manage customer"
             Content="Manage"
@@ -53,16 +49,14 @@
             Grid.Row="1"
             Grid.RowSpan="2"
             Grid.Column="0"
-            Grid.ColumnSpan="3"
-          >
+            Grid.ColumnSpan="3">
 
-            <ContentControl Content="{Binding SelectedViewModel}"
-                            SnapsToDevicePixels="True"/>
+            <ContentControl Content="{Binding SelectedViewModel}" SnapsToDevicePixels="True" />
 
         </StackPanel>
 
     </Grid>
-   
+
 
 
 </Window>

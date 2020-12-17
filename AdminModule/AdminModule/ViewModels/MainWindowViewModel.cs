@@ -7,6 +7,12 @@ namespace AdminModule.ViewModels
     public class MainWindowViewModel : BaseViewModel
     {
         private BaseViewModel _selectedViewModel;
+
+        public MainWindowViewModel()
+        {
+            Startup();
+        }
+
         public ServiceProvider serviceProvider { get; set; }
         public CustomCommand CustomCommand { get; set; }
 
@@ -20,11 +26,6 @@ namespace AdminModule.ViewModels
             }
         }
 
-        public MainWindowViewModel()
-        {
-            Startup();            
-        }
-        
         public void Startup()
         {
             var serviceCollection = new ServiceCollection();
