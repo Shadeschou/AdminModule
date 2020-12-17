@@ -1,9 +1,9 @@
-using AutoMapper;
-using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using AutoMapper;
+using DataLayer.Dtos;
+using Microsoft.AspNetCore.Mvc;
 using Qdea.API.Data;
 using Qdea.API.Domain;
-using DataLayer.Dtos;
 
 namespace Qdea.API.Controllers
 {
@@ -11,8 +11,8 @@ namespace Qdea.API.Controllers
     [ApiController]
     public class UserStatusesController : ControllerBase
     {
-        private readonly IUserStatus _repository;
         private readonly IMapper _mapper;
+        private readonly IUserStatus _repository;
 
         public UserStatusesController(IUserStatus repository, IMapper mapper)
         {
@@ -32,13 +32,8 @@ namespace Qdea.API.Controllers
         {
             var UserStatusItem = _repository.GetUserStatusById(id);
             if (UserStatusItem != null)
-            {
                 return Ok(_mapper.Map<UserStatusReadDto>(UserStatusItem));
-            }
-            else
-            {
-                return NotFound();
-            }
+            return NotFound();
         }
 
         [HttpPost]
@@ -48,7 +43,7 @@ namespace Qdea.API.Controllers
             _repository.CreateUserStatus(UserStatusModel);
             _repository.SaveChanges();
             var outPut = _mapper.Map<UserStatusReadDto>(UserStatusModel);
-            return CreatedAtRoute(nameof(GetUserStatusById), new { ID = outPut.UserStatusID }, outPut);
+            return CreatedAtRoute(nameof(GetUserStatusById), new {ID = outPut.UserStatusID}, outPut);
             //return Ok(_mapper.Map<UserStatusReadDto>(UserStatusModel));
         }
 

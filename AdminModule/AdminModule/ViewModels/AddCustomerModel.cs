@@ -98,6 +98,21 @@ namespace AdminModule.ViewModels
                 }
             }
         }
+        public int statusInput;
+
+        public int StatusInput
+        {
+            get => statusInput;
+
+            set
+            {
+                if (value != statusInput)
+                {
+                    statusInput = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
 
         public IIntegrationService Api { get; set; }
 
@@ -111,9 +126,9 @@ namespace AdminModule.ViewModels
             var userToBeInserted = new UserCreateDto
             {
                 Address = AddressInput, Email = EmailInput, Name = NameInput, Password = PasswordInput,
-                PhoneNumber = PhoneNumberInput
+                PhoneNumber = PhoneNumberInput,UserStatusID = StatusInput
             }; //NOT supplying primary key, db will auto increment itself
-            var insertResponse = Api.Insert("users", userToBeInserted);
+            var insertResponse = Api.Insert<UserCreateDto>("users", userToBeInserted);
             Clearfields();
 
         });
@@ -129,6 +144,9 @@ namespace AdminModule.ViewModels
             PhoneNumberInput = 0;
             EmailInput = " ";
             PasswordInput = " ";
+            StatusInput = 0;
+
+
         }
         #endregion
     }

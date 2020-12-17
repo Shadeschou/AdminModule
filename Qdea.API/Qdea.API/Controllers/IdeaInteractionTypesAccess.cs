@@ -1,9 +1,9 @@
-using AutoMapper;
-using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using AutoMapper;
+using DataLayer.Dtos;
+using Microsoft.AspNetCore.Mvc;
 using Qdea.API.Data;
 using Qdea.API.Domain;
-using DataLayer.Dtos;
 
 namespace Qdea.API.Controllers
 {
@@ -11,8 +11,8 @@ namespace Qdea.API.Controllers
     [ApiController]
     public class IdeaInteractionTypesController : ControllerBase
     {
-        private readonly IIdeaInteractionType _repository;
         private readonly IMapper _mapper;
+        private readonly IIdeaInteractionType _repository;
 
         public IdeaInteractionTypesController(IIdeaInteractionType repository, IMapper mapper)
         {
@@ -32,30 +32,27 @@ namespace Qdea.API.Controllers
         {
             var IdeaInteractionTypeItem = _repository.GetIdeaInteractionTypeById(id);
             if (IdeaInteractionTypeItem != null)
-            {
                 return Ok(_mapper.Map<IdeaInteractionTypeReadDto>(IdeaInteractionTypeItem));
-            }
-            else
-            {
-                return NotFound();
-            }
+            return NotFound();
         }
 
         [HttpPost]
-        public ActionResult<IdeaInteractionTypeReadDto> CreateIdeaInteractionType(IdeaInteractionTypeCreateDto IdeaInteractionTypeCreateDto)
+        public ActionResult<IdeaInteractionTypeReadDto> CreateIdeaInteractionType(
+            IdeaInteractionTypeCreateDto IdeaInteractionTypeCreateDto)
         {
             var IdeaInteractionTypeModel = _mapper.Map<IdeaInteractionType>(IdeaInteractionTypeCreateDto);
             _repository.CreateIdeaInteractionType(IdeaInteractionTypeModel);
             _repository.SaveChanges();
             var outPut = _mapper.Map<IdeaInteractionTypeReadDto>(IdeaInteractionTypeModel);
-            return CreatedAtRoute(nameof(GetIdeaInteractionTypeById), new { ID = outPut.IdeaInteractionTypeID }, outPut);
+            return CreatedAtRoute(nameof(GetIdeaInteractionTypeById), new {ID = outPut.IdeaInteractionTypeID}, outPut);
             //return Ok(_mapper.Map<CompanyReadDto>(CompanyModel));
         }
 
         [HttpPut]
         public ActionResult UpdateIdeaInteractionType(IdeaInteractionTypeUpdateDto IdeaInteractionTypeUpdateDto)
         {
-            var IdeaInteractionTypeModel = _repository.GetIdeaInteractionTypeById(IdeaInteractionTypeUpdateDto.IdeaInteractionTypeID);
+            var IdeaInteractionTypeModel =
+                _repository.GetIdeaInteractionTypeById(IdeaInteractionTypeUpdateDto.IdeaInteractionTypeID);
             if (IdeaInteractionTypeModel == null) return NotFound();
             _mapper.Map(IdeaInteractionTypeUpdateDto, IdeaInteractionTypeModel);
             _repository.UpdateIdeaInteractionType(IdeaInteractionTypeModel);

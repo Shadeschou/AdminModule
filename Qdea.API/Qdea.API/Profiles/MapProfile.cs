@@ -1,6 +1,6 @@
 using AutoMapper;
-using Qdea.API.Domain;
 using DataLayer.Dtos;
+using Qdea.API.Domain;
 
 namespace Qdea.API.Profiles
 {

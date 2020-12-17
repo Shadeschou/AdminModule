@@ -8,365 +8,344 @@ namespace Qdea.API.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Efforts",
-                columns: table => new
+                "Efforts",
+                table => new
                 {
-                    EffortID = table.Column<int>(type: "int", nullable: false)
+                    EffortID = table.Column<int>("int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Description = table.Column<string>("nvarchar(max)", nullable: true)
                 },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Efforts", x => x.EffortID);
-                });
+                constraints: table => { table.PrimaryKey("PK_Efforts", x => x.EffortID); });
 
             migrationBuilder.CreateTable(
-                name: "IdeaInteractionTypes",
-                columns: table => new
+                "IdeaInteractionTypes",
+                table => new
                 {
-                    IdeaInteractionTypeID = table.Column<int>(type: "int", nullable: false)
+                    IdeaInteractionTypeID = table.Column<int>("int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Description = table.Column<string>("nvarchar(max)", nullable: true)
                 },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_IdeaInteractionTypes", x => x.IdeaInteractionTypeID);
-                });
+                constraints: table => { table.PrimaryKey("PK_IdeaInteractionTypes", x => x.IdeaInteractionTypeID); });
 
             migrationBuilder.CreateTable(
-                name: "IdeaStatuses",
-                columns: table => new
+                "IdeaStatuses",
+                table => new
                 {
-                    IdeaStatusID = table.Column<int>(type: "int", nullable: false)
+                    IdeaStatusID = table.Column<int>("int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Description = table.Column<string>("nvarchar(max)", nullable: true)
                 },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_IdeaStatuses", x => x.IdeaStatusID);
-                });
+                constraints: table => { table.PrimaryKey("PK_IdeaStatuses", x => x.IdeaStatusID); });
 
             migrationBuilder.CreateTable(
-                name: "Impacts",
-                columns: table => new
+                "Impacts",
+                table => new
                 {
-                    ImpactID = table.Column<int>(type: "int", nullable: false)
+                    ImpactID = table.Column<int>("int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Description = table.Column<string>("nvarchar(max)", nullable: true)
                 },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Impacts", x => x.ImpactID);
-                });
+                constraints: table => { table.PrimaryKey("PK_Impacts", x => x.ImpactID); });
 
             migrationBuilder.CreateTable(
-                name: "Priorities",
-                columns: table => new
+                "Priorities",
+                table => new
                 {
-                    PriorityID = table.Column<int>(type: "int", nullable: false)
+                    PriorityID = table.Column<int>("int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Description = table.Column<string>("nvarchar(max)", nullable: true)
                 },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Priorities", x => x.PriorityID);
-                });
+                constraints: table => { table.PrimaryKey("PK_Priorities", x => x.PriorityID); });
 
             migrationBuilder.CreateTable(
-                name: "Tags",
-                columns: table => new
+                "Tags",
+                table => new
                 {
-                    TagID = table.Column<int>(type: "int", nullable: false)
+                    TagID = table.Column<int>("int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Title = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Title = table.Column<string>("nvarchar(max)", nullable: true)
                 },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Tags", x => x.TagID);
-                });
+                constraints: table => { table.PrimaryKey("PK_Tags", x => x.TagID); });
 
             migrationBuilder.CreateTable(
-                name: "UserStatuses",
-                columns: table => new
+                "UserStatuses",
+                table => new
                 {
-                    UserStatusID = table.Column<int>(type: "int", nullable: false)
+                    UserStatusID = table.Column<int>("int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Description = table.Column<string>("nvarchar(max)", nullable: true)
                 },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_UserStatuses", x => x.UserStatusID);
-                });
+                constraints: table => { table.PrimaryKey("PK_UserStatuses", x => x.UserStatusID); });
 
             migrationBuilder.CreateTable(
-                name: "Users",
-                columns: table => new
+                "Users",
+                table => new
                 {
-                    UserID = table.Column<int>(type: "int", nullable: false)
+                    UserID = table.Column<int>("int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    UserStatusID = table.Column<int>(type: "int", nullable: true),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Address = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    PhoneNumber = table.Column<int>(type: "int", nullable: true),
-                    Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Password = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    UserStatusID = table.Column<int>("int", nullable: true),
+                    Name = table.Column<string>("nvarchar(max)", nullable: true),
+                    Address = table.Column<string>("nvarchar(max)", nullable: true),
+                    PhoneNumber = table.Column<int>("int", nullable: true),
+                    Email = table.Column<string>("nvarchar(max)", nullable: true),
+                    Password = table.Column<string>("nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Users", x => x.UserID);
                     table.ForeignKey(
-                        name: "FK_Users_UserStatuses_UserStatusID",
-                        column: x => x.UserStatusID,
-                        principalTable: "UserStatuses",
-                        principalColumn: "UserStatusID",
+                        "FK_Users_UserStatuses_UserStatusID",
+                        x => x.UserStatusID,
+                        "UserStatuses",
+                        "UserStatusID",
                         onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Ideas",
-                columns: table => new
+                "Ideas",
+                table => new
                 {
-                    IdeaID = table.Column<int>(type: "int", nullable: false)
+                    IdeaID = table.Column<int>("int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    UserID = table.Column<int>(type: "int", nullable: true),
-                    PriorityID = table.Column<int>(type: "int", nullable: true),
-                    IdeaStatusID = table.Column<int>(type: "int", nullable: true),
-                    ImpactID = table.Column<int>(type: "int", nullable: true),
-                    EffortID = table.Column<int>(type: "int", nullable: true),
-                    Title = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Text = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    DateCreated = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    DateLastEdited = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    UserID = table.Column<int>("int", nullable: true),
+                    PriorityID = table.Column<int>("int", nullable: true),
+                    IdeaStatusID = table.Column<int>("int", nullable: true),
+                    ImpactID = table.Column<int>("int", nullable: true),
+                    EffortID = table.Column<int>("int", nullable: true),
+                    Title = table.Column<string>("nvarchar(max)", nullable: true),
+                    Description = table.Column<string>("nvarchar(max)", nullable: true),
+                    Text = table.Column<string>("nvarchar(max)", nullable: true),
+                    DateCreated = table.Column<DateTime>("datetime2", nullable: false),
+                    DateLastEdited = table.Column<DateTime>("datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Ideas", x => x.IdeaID);
                     table.ForeignKey(
-                        name: "FK_Ideas_Efforts_EffortID",
-                        column: x => x.EffortID,
-                        principalTable: "Efforts",
-                        principalColumn: "EffortID",
+                        "FK_Ideas_Efforts_EffortID",
+                        x => x.EffortID,
+                        "Efforts",
+                        "EffortID",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Ideas_IdeaStatuses_IdeaStatusID",
-                        column: x => x.IdeaStatusID,
-                        principalTable: "IdeaStatuses",
-                        principalColumn: "IdeaStatusID",
+                        "FK_Ideas_IdeaStatuses_IdeaStatusID",
+                        x => x.IdeaStatusID,
+                        "IdeaStatuses",
+                        "IdeaStatusID",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Ideas_Impacts_ImpactID",
-                        column: x => x.ImpactID,
-                        principalTable: "Impacts",
-                        principalColumn: "ImpactID",
+                        "FK_Ideas_Impacts_ImpactID",
+                        x => x.ImpactID,
+                        "Impacts",
+                        "ImpactID",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Ideas_Priorities_PriorityID",
-                        column: x => x.PriorityID,
-                        principalTable: "Priorities",
-                        principalColumn: "PriorityID",
+                        "FK_Ideas_Priorities_PriorityID",
+                        x => x.PriorityID,
+                        "Priorities",
+                        "PriorityID",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Ideas_Users_UserID",
-                        column: x => x.UserID,
-                        principalTable: "Users",
-                        principalColumn: "UserID",
+                        "FK_Ideas_Users_UserID",
+                        x => x.UserID,
+                        "Users",
+                        "UserID",
                         onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
-                name: "AddedUsers",
-                columns: table => new
+                "AddedUsers",
+                table => new
                 {
-                    AddedUserID = table.Column<int>(type: "int", nullable: false)
+                    AddedUserID = table.Column<int>("int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    UserID = table.Column<int>(type: "int", nullable: true),
-                    IdeaID = table.Column<int>(type: "int", nullable: true)
+                    UserID = table.Column<int>("int", nullable: true),
+                    IdeaID = table.Column<int>("int", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AddedUsers", x => x.AddedUserID);
                     table.ForeignKey(
-                        name: "FK_AddedUsers_Ideas_IdeaID",
-                        column: x => x.IdeaID,
-                        principalTable: "Ideas",
-                        principalColumn: "IdeaID",
+                        "FK_AddedUsers_Ideas_IdeaID",
+                        x => x.IdeaID,
+                        "Ideas",
+                        "IdeaID",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_AddedUsers_Users_UserID",
-                        column: x => x.UserID,
-                        principalTable: "Users",
-                        principalColumn: "UserID",
+                        "FK_AddedUsers_Users_UserID",
+                        x => x.UserID,
+                        "Users",
+                        "UserID",
                         onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
-                name: "IdeaInteractions",
-                columns: table => new
+                "IdeaInteractions",
+                table => new
                 {
-                    IdeaInteractionID = table.Column<int>(type: "int", nullable: false)
+                    IdeaInteractionID = table.Column<int>("int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    IdeaID = table.Column<int>(type: "int", nullable: true),
-                    IdeaInteractionTypeID = table.Column<int>(type: "int", nullable: true),
-                    UserID = table.Column<int>(type: "int", nullable: true),
-                    Title = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    TextContent = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CreationDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    LastDateTimeEdited = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    IdeaID = table.Column<int>("int", nullable: true),
+                    IdeaInteractionTypeID = table.Column<int>("int", nullable: true),
+                    UserID = table.Column<int>("int", nullable: true),
+                    Title = table.Column<string>("nvarchar(max)", nullable: true),
+                    Description = table.Column<string>("nvarchar(max)", nullable: true),
+                    TextContent = table.Column<string>("nvarchar(max)", nullable: true),
+                    CreationDate = table.Column<DateTime>("datetime2", nullable: false),
+                    LastDateTimeEdited = table.Column<DateTime>("datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_IdeaInteractions", x => x.IdeaInteractionID);
                     table.ForeignKey(
-                        name: "FK_IdeaInteractions_IdeaInteractionTypes_IdeaInteractionTypeID",
-                        column: x => x.IdeaInteractionTypeID,
-                        principalTable: "IdeaInteractionTypes",
-                        principalColumn: "IdeaInteractionTypeID",
+                        "FK_IdeaInteractions_IdeaInteractionTypes_IdeaInteractionTypeID",
+                        x => x.IdeaInteractionTypeID,
+                        "IdeaInteractionTypes",
+                        "IdeaInteractionTypeID",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_IdeaInteractions_Ideas_IdeaID",
-                        column: x => x.IdeaID,
-                        principalTable: "Ideas",
-                        principalColumn: "IdeaID",
+                        "FK_IdeaInteractions_Ideas_IdeaID",
+                        x => x.IdeaID,
+                        "Ideas",
+                        "IdeaID",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_IdeaInteractions_Users_UserID",
-                        column: x => x.UserID,
-                        principalTable: "Users",
-                        principalColumn: "UserID",
+                        "FK_IdeaInteractions_Users_UserID",
+                        x => x.UserID,
+                        "Users",
+                        "UserID",
                         onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
-                name: "TagIdeas",
-                columns: table => new
+                "TagIdeas",
+                table => new
                 {
-                    TagListID = table.Column<int>(type: "int", nullable: false)
+                    TagListID = table.Column<int>("int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    IdeaID = table.Column<int>(type: "int", nullable: true),
-                    TagID = table.Column<int>(type: "int", nullable: true)
+                    IdeaID = table.Column<int>("int", nullable: true),
+                    TagID = table.Column<int>("int", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_TagIdeas", x => x.TagListID);
                     table.ForeignKey(
-                        name: "FK_TagIdeas_Ideas_IdeaID",
-                        column: x => x.IdeaID,
-                        principalTable: "Ideas",
-                        principalColumn: "IdeaID",
+                        "FK_TagIdeas_Ideas_IdeaID",
+                        x => x.IdeaID,
+                        "Ideas",
+                        "IdeaID",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_TagIdeas_Tags_TagID",
-                        column: x => x.TagID,
-                        principalTable: "Tags",
-                        principalColumn: "TagID",
+                        "FK_TagIdeas_Tags_TagID",
+                        x => x.TagID,
+                        "Tags",
+                        "TagID",
                         onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_AddedUsers_IdeaID",
-                table: "AddedUsers",
-                column: "IdeaID");
+                "IX_AddedUsers_IdeaID",
+                "AddedUsers",
+                "IdeaID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_AddedUsers_UserID",
-                table: "AddedUsers",
-                column: "UserID");
+                "IX_AddedUsers_UserID",
+                "AddedUsers",
+                "UserID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_IdeaInteractions_IdeaID",
-                table: "IdeaInteractions",
-                column: "IdeaID");
+                "IX_IdeaInteractions_IdeaID",
+                "IdeaInteractions",
+                "IdeaID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_IdeaInteractions_IdeaInteractionTypeID",
-                table: "IdeaInteractions",
-                column: "IdeaInteractionTypeID");
+                "IX_IdeaInteractions_IdeaInteractionTypeID",
+                "IdeaInteractions",
+                "IdeaInteractionTypeID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_IdeaInteractions_UserID",
-                table: "IdeaInteractions",
-                column: "UserID");
+                "IX_IdeaInteractions_UserID",
+                "IdeaInteractions",
+                "UserID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Ideas_EffortID",
-                table: "Ideas",
-                column: "EffortID");
+                "IX_Ideas_EffortID",
+                "Ideas",
+                "EffortID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Ideas_IdeaStatusID",
-                table: "Ideas",
-                column: "IdeaStatusID");
+                "IX_Ideas_IdeaStatusID",
+                "Ideas",
+                "IdeaStatusID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Ideas_ImpactID",
-                table: "Ideas",
-                column: "ImpactID");
+                "IX_Ideas_ImpactID",
+                "Ideas",
+                "ImpactID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Ideas_PriorityID",
-                table: "Ideas",
-                column: "PriorityID");
+                "IX_Ideas_PriorityID",
+                "Ideas",
+                "PriorityID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Ideas_UserID",
-                table: "Ideas",
-                column: "UserID");
+                "IX_Ideas_UserID",
+                "Ideas",
+                "UserID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_TagIdeas_IdeaID",
-                table: "TagIdeas",
-                column: "IdeaID");
+                "IX_TagIdeas_IdeaID",
+                "TagIdeas",
+                "IdeaID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_TagIdeas_TagID",
-                table: "TagIdeas",
-                column: "TagID");
+                "IX_TagIdeas_TagID",
+                "TagIdeas",
+                "TagID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Users_UserStatusID",
-                table: "Users",
-                column: "UserStatusID");
+                "IX_Users_UserStatusID",
+                "Users",
+                "UserStatusID");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "AddedUsers");
+                "AddedUsers");
 
             migrationBuilder.DropTable(
-                name: "IdeaInteractions");
+                "IdeaInteractions");
 
             migrationBuilder.DropTable(
-                name: "TagIdeas");
+                "TagIdeas");
 
             migrationBuilder.DropTable(
-                name: "IdeaInteractionTypes");
+                "IdeaInteractionTypes");
 
             migrationBuilder.DropTable(
-                name: "Ideas");
+                "Ideas");
 
             migrationBuilder.DropTable(
-                name: "Tags");
+                "Tags");
 
             migrationBuilder.DropTable(
-                name: "Efforts");
+                "Efforts");
 
             migrationBuilder.DropTable(
-                name: "IdeaStatuses");
+                "IdeaStatuses");
 
             migrationBuilder.DropTable(
-                name: "Impacts");
+                "Impacts");
 
             migrationBuilder.DropTable(
-                name: "Priorities");
+                "Priorities");
 
             migrationBuilder.DropTable(
-                name: "Users");
+                "Users");
 
             migrationBuilder.DropTable(
-                name: "UserStatuses");
+                "UserStatuses");
         }
     }
 }

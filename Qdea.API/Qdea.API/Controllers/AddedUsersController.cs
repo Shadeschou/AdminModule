@@ -1,8 +1,8 @@
-using AutoMapper;
-using Microsoft.AspNetCore.Mvc;
-using DataLayer.Dtos;
-using Qdea.API.Data;
 using System.Collections.Generic;
+using AutoMapper;
+using DataLayer.Dtos;
+using Microsoft.AspNetCore.Mvc;
+using Qdea.API.Data;
 using Qdea.API.Domain;
 
 namespace Qdea.API.Controllers
@@ -11,8 +11,8 @@ namespace Qdea.API.Controllers
     [ApiController]
     public class AddedUsersController : ControllerBase
     {
-        private readonly IAddedUser _repository;
         private readonly IMapper _mapper;
+        private readonly IAddedUser _repository;
 
         public AddedUsersController(IAddedUser repository, IMapper mapper)
         {
@@ -32,13 +32,8 @@ namespace Qdea.API.Controllers
         {
             var AddedUserItem = _repository.GetAddedUserById(id);
             if (AddedUserItem != null)
-            {
                 return Ok(_mapper.Map<AddedUserReadDto>(AddedUserItem));
-            }
-            else
-            {
-                return NotFound();
-            }
+            return NotFound();
         }
 
         [HttpPost]
@@ -48,7 +43,7 @@ namespace Qdea.API.Controllers
             _repository.CreateAddedUser(AddedUserModel);
             _repository.SaveChanges();
             var outPut = _mapper.Map<AddedUserReadDto>(AddedUserModel);
-            return CreatedAtRoute(nameof(GetAddedUserById), new { ID = outPut.AddedUserID }, outPut);
+            return CreatedAtRoute(nameof(GetAddedUserById), new {ID = outPut.AddedUserID}, outPut);
             //return Ok(_mapper.Map<CompanyReadDto>(CompanyModel));
         }
 

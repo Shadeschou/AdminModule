@@ -5,8 +5,7 @@ namespace Qdea.API.Domain
 {
     public class IdeaInteraction
     {
-        [Key]
-        public int IdeaInteractionID { get; set; }
+        [Key] public int IdeaInteractionID { get; set; }
 
         public int? IdeaID { get; set; }
         public Idea Idea { get; set; }

@@ -1,9 +1,9 @@
-using AutoMapper;
-using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using AutoMapper;
+using DataLayer.Dtos;
+using Microsoft.AspNetCore.Mvc;
 using Qdea.API.Data;
 using Qdea.API.Domain;
-using DataLayer.Dtos;
 
 namespace Qdea.API.Controllers
 {
@@ -11,8 +11,8 @@ namespace Qdea.API.Controllers
     [ApiController]
     public class PrioritiesController : ControllerBase
     {
-        private readonly IPriority _repository;
         private readonly IMapper _mapper;
+        private readonly IPriority _repository;
 
         public PrioritiesController(IPriority repository, IMapper mapper)
         {
@@ -32,13 +32,8 @@ namespace Qdea.API.Controllers
         {
             var PriorityItem = _repository.GetPriorityById(id);
             if (PriorityItem != null)
-            {
                 return Ok(_mapper.Map<PriorityReadDto>(PriorityItem));
-            }
-            else
-            {
-                return NotFound();
-            }
+            return NotFound();
         }
 
         [HttpPost]
@@ -48,7 +43,7 @@ namespace Qdea.API.Controllers
             _repository.CreatePriority(PriorityModel);
             _repository.SaveChanges();
             var outPut = _mapper.Map<PriorityReadDto>(PriorityModel);
-            return CreatedAtRoute(nameof(GetPriorityById), new { ID = outPut.PriorityID }, outPut);
+            return CreatedAtRoute(nameof(GetPriorityById), new {ID = outPut.PriorityID}, outPut);
             //return Ok(_mapper.Map<PriorityReadDto>(PriorityModel));
         }
 

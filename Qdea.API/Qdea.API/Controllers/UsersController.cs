@@ -1,9 +1,9 @@
-using AutoMapper;
-using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using AutoMapper;
+using DataLayer.Dtos;
+using Microsoft.AspNetCore.Mvc;
 using Qdea.API.Data;
 using Qdea.API.Domain;
-using DataLayer.Dtos;
 
 namespace Qdea.API.Controllers
 {
@@ -11,8 +11,8 @@ namespace Qdea.API.Controllers
     [ApiController]
     public class UsersController : ControllerBase
     {
-        private readonly IUser _repository;
         private readonly IMapper _mapper;
+        private readonly IUser _repository;
 
         public UsersController(IUser repository, IMapper mapper)
         {
@@ -32,13 +32,8 @@ namespace Qdea.API.Controllers
         {
             var UserItem = _repository.GetUserById(id);
             if (UserItem != null)
-            {
                 return Ok(_mapper.Map<UserReadDto>(UserItem));
-            }
-            else
-            {
-                return NotFound();
-            }
+            return NotFound();
         }
 
         [HttpPost]
@@ -48,7 +43,7 @@ namespace Qdea.API.Controllers
             _repository.CreateUser(UserModel);
             _repository.SaveChanges();
             var outPut = _mapper.Map<UserReadDto>(UserModel);
-            return CreatedAtRoute(nameof(GetUserById), new { ID = outPut.UserID }, outPut);
+            return CreatedAtRoute(nameof(GetUserById), new {ID = outPut.UserID}, outPut);
             //return Ok(_mapper.Map<UserReadDto>(UserModel));
         }
 

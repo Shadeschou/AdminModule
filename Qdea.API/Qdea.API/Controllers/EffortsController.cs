@@ -1,9 +1,9 @@
-using AutoMapper;
-using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using AutoMapper;
+using DataLayer.Dtos;
+using Microsoft.AspNetCore.Mvc;
 using Qdea.API.Data;
 using Qdea.API.Domain;
-using DataLayer.Dtos;
 
 namespace Qdea.API.Controllers
 {
@@ -11,8 +11,8 @@ namespace Qdea.API.Controllers
     [ApiController]
     public class EffortsController : ControllerBase
     {
-        private readonly IEffort _repository;
         private readonly IMapper _mapper;
+        private readonly IEffort _repository;
 
         public EffortsController(IEffort repository, IMapper mapper)
         {
@@ -32,13 +32,8 @@ namespace Qdea.API.Controllers
         {
             var EffortItem = _repository.GetEffortById(id);
             if (EffortItem != null)
-            {
                 return Ok(_mapper.Map<EffortReadDto>(EffortItem));
-            }
-            else
-            {
-                return NotFound();
-            }
+            return NotFound();
         }
 
         [HttpPost]
@@ -48,7 +43,7 @@ namespace Qdea.API.Controllers
             _repository.CreateEffort(EffortModel);
             _repository.SaveChanges();
             var outPut = _mapper.Map<EffortReadDto>(EffortModel);
-            return CreatedAtRoute(nameof(GetEffortById), new { ID = outPut.EffortID }, outPut);
+            return CreatedAtRoute(nameof(GetEffortById), new {ID = outPut.EffortID}, outPut);
             //return Ok(_mapper.Map<CompanyReadDto>(CompanyModel));
         }
 

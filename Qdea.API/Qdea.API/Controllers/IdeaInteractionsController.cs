@@ -1,9 +1,9 @@
-using AutoMapper;
-using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using AutoMapper;
+using DataLayer.Dtos;
+using Microsoft.AspNetCore.Mvc;
 using Qdea.API.Data;
 using Qdea.API.Domain;
-using DataLayer.Dtos;
 
 namespace Qdea.API.Controllers
 {
@@ -11,8 +11,8 @@ namespace Qdea.API.Controllers
     [ApiController]
     public class IdeaInteractionsController : ControllerBase
     {
-        private readonly IIdeaInteraction _repository;
         private readonly IMapper _mapper;
+        private readonly IIdeaInteraction _repository;
 
         public IdeaInteractionsController(IIdeaInteraction repository, IMapper mapper)
         {
@@ -32,23 +32,19 @@ namespace Qdea.API.Controllers
         {
             var IdeaInteractionItem = _repository.GetIdeaInteractionById(id);
             if (IdeaInteractionItem != null)
-            {
                 return Ok(_mapper.Map<IdeaInteractionReadDto>(IdeaInteractionItem));
-            }
-            else
-            {
-                return NotFound();
-            }
+            return NotFound();
         }
 
         [HttpPost]
-        public ActionResult<IdeaInteractionReadDto> CreateIdeaInteraction(IdeaInteractionCreateDto IdeaInteractionCreateDto)
+        public ActionResult<IdeaInteractionReadDto> CreateIdeaInteraction(
+            IdeaInteractionCreateDto IdeaInteractionCreateDto)
         {
             var IdeaInteractionModel = _mapper.Map<IdeaInteraction>(IdeaInteractionCreateDto);
             _repository.CreateIdeaInteraction(IdeaInteractionModel);
             _repository.SaveChanges();
             var outPut = _mapper.Map<IdeaInteractionReadDto>(IdeaInteractionModel);
-            return CreatedAtRoute(nameof(GetIdeaInteractionById), new { ID = outPut.IdeaInteractionID }, outPut);
+            return CreatedAtRoute(nameof(GetIdeaInteractionById), new {ID = outPut.IdeaInteractionID}, outPut);
             //return Ok(_mapper.Map<CompanyReadDto>(CompanyModel));
         }
 

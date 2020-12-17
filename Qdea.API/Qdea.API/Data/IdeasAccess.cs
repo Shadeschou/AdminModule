@@ -28,10 +28,7 @@ namespace Qdea.API.Data
 
         public void CreateIdea(Idea cmd)
         {
-            if (cmd == null)
-            {
-                throw new ArgumentNullException(nameof(cmd));
-            }
+            if (cmd == null) throw new ArgumentNullException(nameof(cmd));
 
             _access.Ideas.Add(cmd);
         }
@@ -53,12 +50,12 @@ namespace Qdea.API.Data
 
         public bool SaveChanges()
         {
-            return (_access.SaveChanges() >= 0);
+            return _access.SaveChanges() >= 0;
         }
 
         public void UpdateIdea(Idea idea)
         {
-             _access.Update(idea);
+            _access.Update(idea);
         }
     }
 }

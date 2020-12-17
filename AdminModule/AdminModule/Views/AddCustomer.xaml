@@ -26,6 +26,7 @@
                 <ColumnDefinition Width="291*" />
                 <ColumnDefinition Width="291*" />
                 <ColumnDefinition Width="291*" />
+                <ColumnDefinition Width="291*" />
 
 
             </Grid.ColumnDefinitions>
@@ -70,7 +71,6 @@
                 Text="{Binding AddressInput, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                 />
             <TextBox
-                adorners:Watermark.Text="Input PhoneNumber"
                 Name="PhoneNoInputField"
                 Grid.Row="1"
                 Grid.Column="2"
@@ -94,6 +94,14 @@
                 Grid.Column="4"
                   Background="Transparent"
                 Text="{Binding PasswordInput,  Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+
+            <TextBox
+                Name="UserStatusInputField"
+                Grid.Row="1"
+                Grid.Column="5"
+                Background="Transparent"
+                Text="{Binding StatusInput, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+            />
 
             <Grid Grid.Row="2" Grid.ColumnSpan="5">
                 <Grid.ColumnDefinitions>

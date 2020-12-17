@@ -1,6 +1,6 @@
 using System;
-using System.Linq;
 using System.Collections.Generic;
+using System.Linq;
 using Qdea.API.Domain;
 using Qdea.API.Models;
 
@@ -28,10 +28,7 @@ namespace Qdea.API.Data
 
         public void CreateUser(User cmd)
         {
-            if (cmd == null)
-            {
-                throw new ArgumentNullException(nameof(cmd));
-            }
+            if (cmd == null) throw new ArgumentNullException(nameof(cmd));
 
             _access.Users.Add(cmd);
         }
@@ -53,7 +50,7 @@ namespace Qdea.API.Data
 
         public bool SaveChanges()
         {
-            return (_access.SaveChanges() >= 0);
+            return _access.SaveChanges() >= 0;
         }
 
         public void UpdateUser(User user)

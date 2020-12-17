@@ -1,9 +1,9 @@
-using AutoMapper;
-using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using AutoMapper;
+using DataLayer.Dtos;
+using Microsoft.AspNetCore.Mvc;
 using Qdea.API.Data;
 using Qdea.API.Domain;
-using DataLayer.Dtos;
 
 namespace Qdea.API.Controllers
 {
@@ -11,8 +11,8 @@ namespace Qdea.API.Controllers
     [ApiController]
     public class TagsController : ControllerBase
     {
-        private readonly ITag _repository;
         private readonly IMapper _mapper;
+        private readonly ITag _repository;
 
         public TagsController(ITag repository, IMapper mapper)
         {
@@ -32,13 +32,8 @@ namespace Qdea.API.Controllers
         {
             var TagItem = _repository.GetTagById(id);
             if (TagItem != null)
-            {
                 return Ok(_mapper.Map<TagReadDto>(TagItem));
-            }
-            else
-            {
-                return NotFound();
-            }
+            return NotFound();
         }
 
         [HttpPost]
@@ -48,7 +43,7 @@ namespace Qdea.API.Controllers
             _repository.CreateTag(TagModel);
             _repository.SaveChanges();
             var outPut = _mapper.Map<TagReadDto>(TagModel);
-            return CreatedAtRoute(nameof(GetTagById), new { ID = outPut.TagID }, outPut);
+            return CreatedAtRoute(nameof(GetTagById), new {ID = outPut.TagID}, outPut);
             //return Ok(_mapper.Map<TagReadDto>(TagModel));
         }
 

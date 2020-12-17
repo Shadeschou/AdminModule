@@ -1,19 +1,18 @@
-using System.ComponentModel.DataAnnotations;
 using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace Qdea.API.Domain
 {
     public class Idea
     {
-        [Key]
-        public int IdeaID { get; set; }
+        [Key] public int IdeaID { get; set; }
 
         public int? UserID { get; set; }
         public User User { get; set; }
 
         public int? PriorityID { get; set; }
         public Priority Priority { get; set; }
-        
+
         public int? IdeaStatusID { get; set; }
         public IdeaStatus IdeaStatus { get; set; }
 

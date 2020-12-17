@@ -1,9 +1,9 @@
-using AutoMapper;
-using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using AutoMapper;
+using DataLayer.Dtos;
+using Microsoft.AspNetCore.Mvc;
 using Qdea.API.Data;
 using Qdea.API.Domain;
-using DataLayer.Dtos;
 
 namespace Qdea.API.Controllers
 {
@@ -11,8 +11,8 @@ namespace Qdea.API.Controllers
     [ApiController]
     public class IdeaStatusesController : ControllerBase
     {
-        private readonly IIdeaStatus _repository;
         private readonly IMapper _mapper;
+        private readonly IIdeaStatus _repository;
 
         public IdeaStatusesController(IIdeaStatus repository, IMapper mapper)
         {
@@ -32,13 +32,8 @@ namespace Qdea.API.Controllers
         {
             var IdeaStatusItem = _repository.GetIdeaStatusById(id);
             if (IdeaStatusItem != null)
-            {
                 return Ok(_mapper.Map<IdeaStatusReadDto>(IdeaStatusItem));
-            }
-            else
-            {
-                return NotFound();
-            }
+            return NotFound();
         }
 
         [HttpPost]
@@ -48,7 +43,7 @@ namespace Qdea.API.Controllers
             _repository.CreateIdeaStatus(IdeaStatusModel);
             _repository.SaveChanges();
             var outPut = _mapper.Map<IdeaStatusReadDto>(IdeaStatusModel);
-            return CreatedAtRoute(nameof(GetIdeaStatusById), new { ID = outPut.IdeaStatusID }, outPut);
+            return CreatedAtRoute(nameof(GetIdeaStatusById), new {ID = outPut.IdeaStatusID}, outPut);
             //return Ok(_mapper.Map<IdeaStatusReadDto>(IdeaStatusModel));
         }
 

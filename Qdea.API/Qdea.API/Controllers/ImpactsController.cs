@@ -1,9 +1,9 @@
-using AutoMapper;
-using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using AutoMapper;
+using DataLayer.Dtos;
+using Microsoft.AspNetCore.Mvc;
 using Qdea.API.Data;
 using Qdea.API.Domain;
-using DataLayer.Dtos;
 
 namespace Qdea.API.Controllers
 {
@@ -11,8 +11,8 @@ namespace Qdea.API.Controllers
     [ApiController]
     public class ImpactsController : ControllerBase
     {
-        private readonly IImpact _repository;
         private readonly IMapper _mapper;
+        private readonly IImpact _repository;
 
         public ImpactsController(IImpact repository, IMapper mapper)
         {
@@ -32,13 +32,8 @@ namespace Qdea.API.Controllers
         {
             var ImpactItem = _repository.GetImpactById(id);
             if (ImpactItem != null)
-            {
                 return Ok(_mapper.Map<ImpactReadDto>(ImpactItem));
-            }
-            else
-            {
-                return NotFound();
-            }
+            return NotFound();
         }
 
         [HttpPost]
@@ -48,7 +43,7 @@ namespace Qdea.API.Controllers
             _repository.CreateImpact(ImpactModel);
             _repository.SaveChanges();
             var outPut = _mapper.Map<ImpactReadDto>(ImpactModel);
-            return CreatedAtRoute(nameof(GetImpactById), new { ID = outPut.ImpactID }, outPut);
+            return CreatedAtRoute(nameof(GetImpactById), new {ID = outPut.ImpactID}, outPut);
             //return Ok(_mapper.Map<CompanyReadDto>(CompanyModel));
         }
 
