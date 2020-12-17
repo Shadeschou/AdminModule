@@ -49,23 +49,6 @@ namespace AdminModule.ViewModels
             }
 
         }
-        public UserReadDto cellRecord;
-
-        public UserReadDto CellRecord
-        {
-            get => this.cellRecord;
-
-            set
-            {
-                if (value != this.cellRecord)
-                {
-                    this.cellRecord = value;
-                    OnPropertyChanged();
-                }
-            }
-
-        }
-
 
         public ManageCustomerModel()
         {
