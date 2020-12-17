@@ -55,6 +55,10 @@ namespace AdminModule.ViewModels
             
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="serviceProvider"></param>
         public ManageCustomerModel(ServiceProvider serviceProvider)
         {
             Api = serviceProvider.GetService<IIntegrationService>();
@@ -72,31 +76,56 @@ namespace AdminModule.ViewModels
            //testDelete();
         }
 
+        /// <summary>
+        /// The Command  to change the Database Entries through the DataGrid.
+        /// </summary>
         public ICommand ChangeEntry => new BaseCommand(() =>
         {
-            UserReadDto customer = (UserReadDto)SelectedRecord;
-          var tagList = Api.GetTable<UserReadDto>("users");
-          UserReadDto tagToBeUpdated = tagList.Find(x => x.UserID == tagList.Max(t => t.UserID));
-            if (tagToBeUpdated == null) return;
+            //  UserReadDto customer = (UserReadDto)SelectedRecord;
+            //var usersLocal = Api.GetTable<UserReadDto>("users");
+            //UserReadDto userToBeUpdated = usersLocal.Find(x => x.UserID == SelectedRecord.UserID);
+            //int tagId = 0;
+            //foreach (UserReadDto users in usersLocal)
+            //{
+            //    if (users.UserID > tagId) tagId = users.UserID;
+            //}
+            //if (tagId < 0) return;
 
-            //and now update the title
-            UserUpdateDto updatingTag = new UserUpdateDto()
-            {Address = SelectedRecord.Address, Email = SelectedRecord.Email, Name = SelectedRecord.Name, Password = SelectedRecord.Password, PhoneNumber = SelectedRecord.PhoneNumber}; //supplying primary key, so db knows which entry to update with rest of attributes
-            var tagUpdateResponse = Api.Update<UserUpdateDto>("users", updatingTag);
-            Users = new ObservableCollection<UserReadDto>();
-            testGetTable();
+            //  //and now update the title
+            //  UserUpdateDto updatingTag = new UserUpdateDto()
+            //  { Address = SelectedRecord.Address, Email = SelectedRecord.Email, Name = SelectedRecord.Name, Password = SelectedRecord.Password, PhoneNumber = SelectedRecord.PhoneNumber}; //supplying primary key, so db knows which entry to update with rest of attributes
+            //  var tagUpdateResponse = Api.Update<UserUpdateDto>($"users/{SelectedRecord.UserID}", updatingTag);
+            //  Users = new ObservableCollection<UserReadDto>();
+            //  testGetTable();
+            //fetching newly created tag to update it with another title, since i just made it, it has to have the highest id
+            
+                //fetching newly created tag to update it with another title, since i just made it, it has to have the highest id
+                var tagList = Api.GetTable<TagReadDto>("tags");
+                TagReadDto tagToBeUpdated = tagList.Find(x => x.TagID == tagList.Max(t => t.TagID));
+                if (tagToBeUpdated == null) return;
+
+                //and now update the title
+                TagUpdateDto updatingTag = new TagUpdateDto() { TagID = tagToBeUpdated.TagID, Title = "this just updated the title" }; //supplying primary key, so db knows which entry to update with rest of attributes
+                var tagUpdateResponse = Api.Update<TagUpdateDto>("tags", updatingTag);
+                MessageBox.Show("if this responds a 204: no content, that means it works! \b" + tagUpdateResponse.ToString(), "again too lazy to make this readable... but it worked!");
+            
         });
 
 
 
         #region TestMethods
+        /// <summary>
+        /// Getting a single entry through the DTO
+        /// </summary>
         void testGetSingle()
         {
             var tagDto = Api.GetSingleEntryById<TagReadDto>("tags", 1);
             MessageBox.Show("TagID: " + tagDto.TagID + " TagTitle: " + tagDto.Title, "GetSingle test");
         }
 
-
+        /// <summary>
+        /// Getting a table entry through the DTO
+        /// </summary>
         void testGetTable()
         {
             var entries = Api.GetTable<UserReadDto>("users");
@@ -106,7 +135,9 @@ namespace AdminModule.ViewModels
             }
 
         }
-
+        /// <summary>
+        /// Getting an insert entry through the DTO
+        /// </summary>
         void testInsert()
         {
             var tagToBeInserted = new TagCreateDto { Title = "this tag has just been inserted" }; //NOT supplying primary key, db will auto increment itself
@@ -114,6 +145,9 @@ namespace AdminModule.ViewModels
             MessageBox.Show(insertResponse.ToString(), "too lazy to make this readable... but it worked!");
         }
 
+        /// <summary>
+        /// Updating through the DTO
+        /// </summary>
         void testUpdate()
         {
             //fetching newly created tag to update it with another title, since i just made it, it has to have the highest id
@@ -127,6 +161,9 @@ namespace AdminModule.ViewModels
             MessageBox.Show("if this responds a 204: no content, that means it works! \b" + tagUpdateResponse.ToString(), "again too lazy to make this readable... but it worked!");
         }
 
+        /// <summary>
+        /// Deleting via DTO
+        /// </summary>
         void testDelete()
         {
             //fetching newly created tag's id to delete it
@@ -143,12 +180,6 @@ namespace AdminModule.ViewModels
             MessageBox.Show("if this responds a 204: no content, that means it works! \b" + tagDeletionResponseMessage.ToString(), "Make this readable? hell naw");
         }
 
-        void putInTestValues()
-        {
-            Api.Insert<TagCreateDto>("tags", new TagCreateDto() { Title = "first testTag" });
-            Api.Insert<TagCreateDto>("tags", new TagCreateDto() { Title = "second testTag" });
-            Api.Insert<TagCreateDto>("tags", new TagCreateDto() { Title = "third testTag" });
-        } 
         #endregion
     }
 }

@@ -12,7 +12,6 @@ namespace AdminModule.ViewModels
         public MainWindowViewModel()
         {
             Startup();
-            
         }
 
         public ServiceProvider serviceProvider { get; set; }
@@ -26,14 +25,11 @@ namespace AdminModule.ViewModels
             {
                 _selectedViewModel = value;
                 OnPropertyChanged(nameof(SelectedViewModel));
-               
             }
-
         } 
 
         public void Startup()
         {
-           
             var serviceCollection = new ServiceCollection();
             ConfigureServices(serviceCollection);
             serviceProvider = serviceCollection.BuildServiceProvider();

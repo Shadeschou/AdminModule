@@ -14,6 +14,7 @@ namespace AdminModule.Services
         #region Private Fields
         private readonly MainWindowViewModel viewmodel;
         #endregion
+
         #region Public fields
         public ServiceProvider serviceProvider;
         public event EventHandler CanExecuteChanged;
@@ -39,6 +40,11 @@ namespace AdminModule.Services
             return true;
         }
 
+        /// <summary>
+        /// The switch execution given the button press from the MainWindow
+        /// This will take the CommandParameter and change the ContentControl inside the MainWindow
+        /// </summary>
+        /// <param name="parameter"></param>
         public void Execute(object parameter)
         {
             switch (parameter.ToString().ToLower())

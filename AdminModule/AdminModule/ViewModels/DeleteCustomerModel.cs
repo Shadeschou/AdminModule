@@ -52,7 +52,7 @@ namespace AdminModule.ViewModels
 
             //and now delete it
             var tagDeletionResponseMessage = Api.Delete("users", SelectedRecord.UserID);
-            Users = new ObservableCollection<UserReadDto>();
+            Users.Remove(selectedRecord);
             testGetTable();
         });
 

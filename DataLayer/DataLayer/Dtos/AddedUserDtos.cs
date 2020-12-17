@@ -1,5 +1,6 @@
 namespace DataLayer.Dtos
 {
+   
     public class AddedUserReadDto : Dto
     {
         public int AddedUserID { get; set; }
