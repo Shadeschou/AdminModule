@@ -18,13 +18,18 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <DataGrid
+        <DataGrid 
             Name="dataGrid"
+           ColumnWidth="*"
             Grid.Row="1"
             Margin="12,12,0,0"
             AlternatingRowBackground="CornflowerBlue"
             ItemsSource="{Binding Path=Users}"
-            SelectedItem="{Binding Path=SelectedRecord, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            SelectedItem="{Binding Path=SelectedRecord, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+            
+        </DataGrid>
+
+       
 
 
         <Button

@@ -34,7 +34,7 @@
             <Label Grid.Column="0" Grid.ColumnSpan="4" />
 
             <DataGrid
-                
+                ColumnWidth="*"
                 Name="dataGrid1"
                 Grid.Row="1"
                 Grid.RowSpan="3"
