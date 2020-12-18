@@ -29,9 +29,11 @@ namespace AdminModule.Services
         {
             this.serviceProvider = serviceProvider;
             this.viewmodel = viewmodel;
+            //Making sure the models will be able to fire their commands and recognise the API 
             addModel = new AddCustomerModel(serviceProvider);
             deleteModel = new DeleteCustomerModel(serviceProvider);
             manageModel = new ManageCustomerModel(serviceProvider);
+            //Empowering more intuitive DataGrids 
             deleteModel.Api.GetTable<UserReadDto>("users");
             manageModel.Api.GetTable<UserReadDto>("users");
         }

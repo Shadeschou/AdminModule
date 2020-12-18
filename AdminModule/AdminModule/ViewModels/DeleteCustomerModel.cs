@@ -31,9 +31,6 @@ namespace AdminModule.ViewModels
             }
 
         }
-
-        private CustomCommand cm;
-
         public ObservableCollection<UserReadDto> Users { get; set;  }
 
         public IIntegrationService Api { get; set; }
