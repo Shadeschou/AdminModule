@@ -25,7 +25,7 @@ namespace AdminModule.ViewModels
 
             Users = new ObservableCollection<UserReadDto>();
             Users.Clear();
-            testGetTable();
+            GetTable();
           
         }
 
@@ -79,7 +79,13 @@ namespace AdminModule.ViewModels
             //supplying primary key, so db knows which entry to update with rest of attributes
             var tagUpdateResponse = Api.Update("users", updatingUser);
             Users.Clear();
-            testGetTable();
+            GetTable();
+        });
+
+        public ICommand RefreshCommand => new BaseCommand(() =>
+        {
+            Users.Clear();
+            GetTable();
         });
 
 
@@ -88,7 +94,7 @@ namespace AdminModule.ViewModels
         /// <summary>
         ///     Getting a single entry through the DTO
         /// </summary>
-        private void testGetSingle()
+        private void GetSingleEntry()
         {
             var tagDto = Api.GetSingleEntryById<TagReadDto>("tags", 1);
             MessageBox.Show("TagID: " + tagDto.TagID + " TagTitle: " + tagDto.Title, "GetSingle test");
@@ -97,7 +103,7 @@ namespace AdminModule.ViewModels
         /// <summary>
         ///     Getting a table entry through the DTO
         /// </summary>
-        private void testGetTable()
+        private void GetTable()
         {
             var entries = Api.GetTable<UserReadDto>("users");
             foreach (var tag in entries) Users.Add(tag);
@@ -106,7 +112,7 @@ namespace AdminModule.ViewModels
         /// <summary>
         ///     Getting an insert entry through the DTO
         /// </summary>
-        private void testInsert()
+        private void InsertToTable()
         {
             var tagToBeInserted = new TagCreateDto
                 {Title = "this tag has just been inserted"}; //NOT supplying primary key, db will auto increment itself
@@ -117,7 +123,7 @@ namespace AdminModule.ViewModels
         /// <summary>
         ///     Updating through the DTO
         /// </summary>
-        private void testUpdate()
+        private void UpdateTable()
         {
             //fetching newly created tag to update it with another title, since i just made it, it has to have the highest id
             var tagList = Api.GetTable<TagReadDto>("tags");
@@ -136,7 +142,7 @@ namespace AdminModule.ViewModels
         /// <summary>
         ///     Deleting via DTO
         /// </summary>
-        private void testDelete()
+        private void DeleteEntries()
         {
             //fetching newly created tag's id to delete it
             var tagCollection = Api.GetTable<TagReadDto>("tags");

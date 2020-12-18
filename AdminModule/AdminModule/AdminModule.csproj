@@ -277,9 +277,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Models\Add-icon.png" />
-    <Resource Include="Models\iconfinder_plus_1814113.png" />
+  </ItemGroup>
+  <ItemGroup>
     <Resource Include="Models\iconfinder_undo-back-arrow_2931166.png" />
-    <Content Include="Models\undo.svg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

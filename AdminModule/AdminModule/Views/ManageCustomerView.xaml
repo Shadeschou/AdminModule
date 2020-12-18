@@ -11,15 +11,19 @@
 
 
     <Grid>
-
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
         <DataGrid 
             Name="dataGrid"
+            Grid.ColumnSpan="2"
            ColumnWidth="*"
             Grid.Row="1"
             Margin="12,12,0,0"
@@ -29,8 +33,16 @@
             
         </DataGrid>
 
-       
 
+        <Button
+            Grid.Row="2"
+            Grid.RowSpan="1"
+            Grid.Column="1"
+            VerticalAlignment="Stretch"
+            Command="{Binding RefreshCommand}"
+            CommandParameter="add customer"
+            Content="RefreshTable"
+            Style="{DynamicResource ButtonStyle}" />
 
         <Button
             Grid.Row="2"

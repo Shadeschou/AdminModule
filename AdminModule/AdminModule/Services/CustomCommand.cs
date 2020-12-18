@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Input;
 using AdminModule.ViewModels;
+using DataLayer.Dtos;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace AdminModule.Services
@@ -31,6 +32,8 @@ namespace AdminModule.Services
             addModel = new AddCustomerModel(serviceProvider);
             deleteModel = new DeleteCustomerModel(serviceProvider);
             manageModel = new ManageCustomerModel(serviceProvider);
+            deleteModel.Api.GetTable<UserReadDto>("users");
+            manageModel.Api.GetTable<UserReadDto>("users");
         }
         #endregion
 
@@ -51,7 +54,7 @@ namespace AdminModule.Services
             {
                 case "add customer":
                     viewmodel.SelectedViewModel = addModel;
-                    break;
+                   break;
                 case "delete customer":
                     viewmodel.SelectedViewModel = deleteModel;
                     break;
