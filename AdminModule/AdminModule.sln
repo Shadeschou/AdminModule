@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdminModule", "AdminModule\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataLayer", "..\DataLayer\DataLayer\DataLayer.csproj", "{6ACE9A31-33E1-4B65-87AD-60634F60B1A4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "UnitTests\UnitTests.csproj", "{D5C40BC6-094C-488E-8FD7-54CB02C5B49F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{6ACE9A31-33E1-4B65-87AD-60634F60B1A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6ACE9A31-33E1-4B65-87AD-60634F60B1A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6ACE9A31-33E1-4B65-87AD-60634F60B1A4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D5C40BC6-094C-488E-8FD7-54CB02C5B49F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D5C40BC6-094C-488E-8FD7-54CB02C5B49F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D5C40BC6-094C-488E-8FD7-54CB02C5B49F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D5C40BC6-094C-488E-8FD7-54CB02C5B49F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
