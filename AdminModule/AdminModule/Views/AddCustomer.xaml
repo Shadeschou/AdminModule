@@ -12,28 +12,28 @@
     d:DesignWidth="1280"
     mc:Ignorable="d">
 
-<UserControl.Resources></UserControl.Resources>
-    <StackPanel Background="#FFF">
+    <UserControl.Resources></UserControl.Resources>
+    <StackPanel  Background="#FFF">
 
 
-        <Grid Height="900">
-            
+        <Grid >
+
 
             <Grid.ColumnDefinitions>
 
-                <ColumnDefinition Width="291*" />
-                <ColumnDefinition Width="292*" />
-                <ColumnDefinition Width="291*" />
-                <ColumnDefinition Width="291*" />
-                <ColumnDefinition Width="291*" />
-                <ColumnDefinition Width="291*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
 
 
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
 
-                <RowDefinition Height="0.25*" />
                 <RowDefinition Height="0.5*" />
+                <RowDefinition Height="*" />
                 <RowDefinition Height="*" />
                 <RowDefinition Height="*" />
                 <RowDefinition Height="*" />
@@ -41,14 +41,18 @@
 
             <!--  Input Field Labes -> These are made to match the DB  -->
             <Label Grid.Column="0" Content="Name" 
-                   Visibility="Visible"/>
-            <Label Grid.Column="1" Content="Address"
-                   Visibility="Visible"/>
+                   HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+                   
+                  />
+            <Label Grid.Column="1"
+                Content="Address"></Label>
             <Label Grid.Column="2" Content="Phone"
                    Visibility="Visible"/>
             <Label Grid.Column="3" Content="Mail"
                    Visibility="Visible"/>
             <Label Grid.Column="4" Content="Password" 
+                   Visibility="Visible"/>
+            <Label Grid.Column="5" Content="UserStatusID"
                    Visibility="Visible"/>
 
             <!--  Input Fields  -->
@@ -58,11 +62,11 @@
                 Grid.Row="1"
                  Background="Transparent"
                 Text="{Binding NameInput, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" >
-                
-                
+
+
             </TextBox>
 
-                <TextBox
+            <TextBox
                     adorners:Watermark.Text="Input Address"
                 Name="AddressInputField"
                 Grid.Row="1"
@@ -103,38 +107,47 @@
                 Text="{Binding StatusInput, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
             />
 
-            <Grid Grid.Row="2" Grid.ColumnSpan="5">
+            <Grid Grid.Row="2" Grid.ColumnSpan="6">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="2*" />
                     <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="2*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
+                    <RowDefinition Height="2*" />
                     <RowDefinition Height="*" />
-                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*"/>
                     <RowDefinition Height="*" />
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
 
                 <!--  Buttons  -->
+                <Label Grid.Column="3" Content="Undo Written" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="1,1,1,0.667"></Label>
+                <Label Grid.Column="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Content="Add Entry" Margin="1,1,1,0.667">
+                </Label>
                 <Button
+                    Height="50"
                     x:Name="AddButton"
                     Grid.Row="1"
-                    Grid.Column="0"
-                    Grid.ColumnSpan="2"
-                    Content="Add"
+                    Grid.Column="1"
                     Command="{Binding InsertCommand}"
-                    Style="{StaticResource ButtonStyle}" />
+                    Style="{StaticResource ButtonStyle}"  >
+                    <Image Source="/Models/Add-icon.png" />
+
+                </Button>
                 <Button
                     x:Name="ResetButton"
+                    Height="50"
                     Grid.Row="1"
-                    Grid.Column="2"
-                    Grid.ColumnSpan="2"
-                    Content="Reset"
-                
+                    Grid.Column="3"
                     Command="{Binding ClearAllFields}"
-                    Style="{StaticResource ButtonStyle}" />
+                    Style="{StaticResource ButtonStyle}"   >
+                    <Image Source="/Models/iconfinder_undo-back-arrow_2931166.png" />
+
+
+                </Button>
             </Grid>
         </Grid>
     </StackPanel>

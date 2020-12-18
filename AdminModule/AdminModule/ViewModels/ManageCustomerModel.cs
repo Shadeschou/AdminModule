@@ -25,32 +25,17 @@ namespace AdminModule.ViewModels
 
             Users = new ObservableCollection<UserReadDto>();
             Users.Clear();
-
-            //HERE BE API TESTS: enjoy
-
-            //putInTestValues(); //adding some tags into db for testing
-            // testGetSingle();
             testGetTable();
-            //testInsert();
-            //testUpdate();
-            //testDelete();
+          
         }
 
-        public int UserIDInput { get; set; } // PK
-        public string PasswordInput { get; set; } //Just for Convenience as this is part of the DB
+        public int UserIDInput { get; set; } 
+        public string PasswordInput { get; set; } 
         public string AddressInput { get; set; }
         public int PhoneNumberInput { get; set; }
         public string EmailInput { get; set; }
-        public int UserStatusIDInput { get; set; } //FK
+        public int UserStatusIDInput { get; set; } 
         public string NameInput { get; set; }
-
-        //clsItemsBL objItem = new clsItemBL();
-        //dgItemSearch.ItemsSource = objItem.GetAllItems();
-        //Than in the code of the form where you DataGrid is you can do tha casting like this (usually this is done in the selected item changed for that DataGrid).  This way than you can acces each property of the selected item in the DataGrid.
-
-        //    clsItemBL ItemSelection = (clsItemBL) dgItemSearch.SelectedItem;
-        //tbItemSearch.Text = ItemSelection.AuthorName;
-        //Get Objects
 
 
         public ObservableCollection<UserReadDto> Users { get; set; }
@@ -93,7 +78,8 @@ namespace AdminModule.ViewModels
             };
             //supplying primary key, so db knows which entry to update with rest of attributes
             var tagUpdateResponse = Api.Update("users", updatingUser);
-            MessageBox.Show(tagUpdateResponse.ToString());
+            Users.Clear();
+            testGetTable();
         });
 
 
@@ -125,7 +111,7 @@ namespace AdminModule.ViewModels
             var tagToBeInserted = new TagCreateDto
                 {Title = "this tag has just been inserted"}; //NOT supplying primary key, db will auto increment itself
             var insertResponse = Api.Insert("tags", tagToBeInserted);
-            MessageBox.Show(insertResponse.ToString(), "too lazy to make this readable... but it worked!");
+            MessageBox.Show(insertResponse.ToString());
         }
 
         /// <summary>
@@ -144,8 +130,7 @@ namespace AdminModule.ViewModels
                 TagID = tagToBeUpdated.TagID, Title = "this just updated the title"
             }; //supplying primary key, so db knows which entry to update with rest of attributes
             var tagUpdateResponse = Api.Update("tags", updatingTag);
-            MessageBox.Show("if this responds a 204: no content, that means it works! \b" + tagUpdateResponse,
-                "again too lazy to make this readable... but it worked!");
+            MessageBox.Show("if this responds a 204: no content, that means it works! \b" + tagUpdateResponse);
         }
 
         /// <summary>
@@ -163,8 +148,7 @@ namespace AdminModule.ViewModels
 
             //and now delete it
             var tagDeletionResponseMessage = Api.Delete("tags", tagId);
-            MessageBox.Show("if this responds a 204: no content, that means it works! \b" + tagDeletionResponseMessage,
-                "Make this readable? hell naw");
+            MessageBox.Show("if this responds a 204: no content, that means it works! \b" + tagDeletionResponseMessage);
         }
 
         #endregion
